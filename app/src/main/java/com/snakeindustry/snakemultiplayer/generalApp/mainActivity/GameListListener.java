@@ -20,17 +20,11 @@ public class GameListListener implements AdapterView.OnItemClickListener {
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        //ListView listView = (ListView) view;
         Game game = (Game) parent.getItemAtPosition(position);
         AppSingleton.getInstance().setCurrentGame(game);
 
         Intent myIntent = new Intent(view.getContext(), NetworkModeAndGameSettings.class);
         view.getContext().startActivity(myIntent);
 
-        /*
-        Toast.makeText(view.getContext(),
-                "game :" + name, Toast.LENGTH_LONG)
-                .show();
-*/
     }
 }

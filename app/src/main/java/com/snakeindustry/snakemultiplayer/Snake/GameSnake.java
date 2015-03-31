@@ -2,6 +2,7 @@ package com.snakeindustry.snakemultiplayer.Snake;
 
 import android.view.View;
 
+import com.snakeindustry.snakemultiplayer.R;
 import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
 
 /**
@@ -21,6 +22,11 @@ public class GameSnake implements Game {
     @Override
     public String getName() {
         return name;
+    }
+
+    @Override
+    public int getIdIcon() {
+        return R.drawable.snake_icon;
     }
 
     @Override

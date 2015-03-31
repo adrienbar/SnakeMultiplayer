@@ -4,6 +4,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.snakeindustry.snakemultiplayer.R;
@@ -17,8 +18,11 @@ public class NetworkModeAndGameSettings extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_network_mode_and_game_settings);
 
-        TextView titre = (TextView) findViewById(R.id.gametitle);
-        titre.setText(AppSingleton.getInstance().getCurrentGame().getName());
+        TextView gameTitle = (TextView) findViewById(R.id.titlenetworkandsettings);
+        gameTitle.setText(AppSingleton.getInstance().getCurrentGame().getName());
+
+        ImageView gameIcon =  (ImageView) findViewById((R.id.gameiconnetworkandsettings));
+        gameIcon.setImageResource(AppSingleton.getInstance().getCurrentGame().getIdIcon());
     }
 
     @Override

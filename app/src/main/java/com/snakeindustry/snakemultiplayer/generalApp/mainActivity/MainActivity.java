@@ -6,24 +6,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.snakeindustry.snakemultiplayer.R;
-import com.snakeindustry.snakemultiplayer.Snake.GameSnake;
+import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
 import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
 import com.snakeindustry.snakemultiplayer.generalApp.player.ProfileActivity;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 
 public class MainActivity extends ActionBarActivity {
-
-    /**
-     * List of instanced available games
-     */
-    public final static List<Game> AVAILABLE_GAMES = new ArrayList<Game>(Arrays.asList(new GameSnake()));
 
 
     private ListView listView;
@@ -39,17 +32,16 @@ public class MainActivity extends ActionBarActivity {
 
 
         //Profile Button
-        Button profile = (Button) findViewById(R.id.buttonProfile);
-        profile.setOnClickListener(new ButtonController(ProfileActivity.class));
+        //Button profile = (Button) findViewById(R.id.buttonProfile);
 
-        //TextView textView= (TextView) findViewById(R.id.)
+        LinearLayout profile = (LinearLayout) findViewById(R.id.profile);
+       // TextView textView= (TextView) findViewById(R.id.profile);
+        profile.setOnClickListener(new ButtonController(ProfileActivity.class));
 
         //list of available games
         ListView listView = (ListView) findViewById(R.id.listView);
-        //ArrayAdapter<Game> adapter = new ArrayAdapter<Game>(this, android.R.layout.simple_list_item_1, android.R.id.text1, AVAILABLE_GAMES);
+        ArrayAdapter<Game> adapter = new GameListAdaptateur(this, AppSingleton.getInstance().getAvailabeGames());
 
-       // ArrayAdapter<Game> adapter = new ArrayAdapter<Game>(this,  R.layout.textgamelist, AVAILABLE_GAMES);
-        ArrayAdapter<Game> adapter = new GameListAdaptateur(this, AVAILABLE_GAMES);
         // Assign adapter to ListView
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new GameListListener());

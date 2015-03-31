@@ -7,12 +7,9 @@ import com.snakeindustry.snakemultiplayer.R;
 import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
 
 
-
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -53,21 +50,14 @@ public class GameListAdaptateur extends ArrayAdapter<Game> {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.textgamelist, parent, false);
 
-        TextView textView = (TextView) rowView.findViewById(R.id.label);
+        TextView textView = (TextView) rowView.findViewById(R.id.profile);
 
         ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
 
         textView.setText(this.getGameList().get(position).getName());
 
         // Change the icon for Windows and iPhone
-/*
-        String s = values[position];
-        if (s.startsWith("Windows7") || s.startsWith("iPhone")
-                || s.startsWith("Solaris")) {
-            imageView.setImageResource(R.drawable.no);
-        } else {
-            imageView.setImageResource(R.drawable.ok);
-        }*/
+        imageView.setImageResource(this.getGameList().get(position).getIdIcon());
 
         return rowView;
     }

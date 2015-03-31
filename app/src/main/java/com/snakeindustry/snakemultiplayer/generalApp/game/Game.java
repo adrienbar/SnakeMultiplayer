@@ -1,6 +1,7 @@
 package com.snakeindustry.snakemultiplayer.generalApp.game;
 
 import android.app.Activity;
+import android.media.Image;
 import android.view.View;
 
 /**
@@ -9,6 +10,7 @@ import android.view.View;
 public interface Game {
 
 public String getName();
+public int getIdIcon();
 
     //type View should be discussed, and more generally the Settings of a game
 public View getSettings();
