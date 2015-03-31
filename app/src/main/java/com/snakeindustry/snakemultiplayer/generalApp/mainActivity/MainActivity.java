@@ -30,12 +30,11 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        AppSingleton.getInstance().loadProfile();
 
-        //Profile Button
-        //Button profile = (Button) findViewById(R.id.buttonProfile);
-
+        //Profile Buttons
         LinearLayout profile = (LinearLayout) findViewById(R.id.profile);
-       // TextView textView= (TextView) findViewById(R.id.profile);
+        //TextView textView= (TextView) findViewById(R.id.profile);
         profile.setOnClickListener(new ButtonController(ProfileActivity.class));
 
         //list of available games
@@ -56,6 +55,14 @@ public class MainActivity extends ActionBarActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        AppSingleton.getInstance().saveProfile();
+}
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

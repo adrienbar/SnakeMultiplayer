@@ -4,11 +4,16 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.snakeindustry.snakemultiplayer.R;
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
+import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
+import com.snakeindustry.snakemultiplayer.generalApp.mainActivity.GameListAdaptateur;
 
 public class ProfileActivity extends ActionBarActivity {
 
@@ -16,6 +21,18 @@ public class ProfileActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        TextView name = (TextView) findViewById(R.id.name);
+        name.setText(AppSingleton.getInstance().getPlayer().getName());
+
+        Button editName = (Button) findViewById((R.id.editname));
+
+        ListView listView = (ListView) findViewById(R.id.liststats);
+        ArrayAdapter<Game> adapter = new StatsListAdaptateur(this,AppSingleton.getInstance().getPlayer().getStats() );
+        listView.setAdapter(adapter);
+
+
+
     }
 
 

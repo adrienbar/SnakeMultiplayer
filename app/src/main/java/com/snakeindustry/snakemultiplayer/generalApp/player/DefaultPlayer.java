@@ -5,7 +5,11 @@ package com.snakeindustry.snakemultiplayer.generalApp.player;
  */
 public class DefaultPlayer extends Player {
 
-    protected DefaultPlayer(Stats stats, String name) {
+    public DefaultPlayer(Stats stats, String name) {
         super(stats, name);
+    }
+
+    public DefaultPlayer() {
+        this(null,"");
     }
 }

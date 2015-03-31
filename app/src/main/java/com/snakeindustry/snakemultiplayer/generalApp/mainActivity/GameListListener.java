@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
 import com.snakeindustry.snakemultiplayer.generalApp.NetworkModeAndGameSettings;
 import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
+import com.snakeindustry.snakemultiplayer.generalApp.game.GameThread;
 
 /**
  * Created by Adrien on 31/03/15.
@@ -25,6 +26,5 @@ public class GameListListener implements AdapterView.OnItemClickListener {
 
         Intent myIntent = new Intent(view.getContext(), NetworkModeAndGameSettings.class);
         view.getContext().startActivity(myIntent);
-
     }
 }

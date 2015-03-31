@@ -56,7 +56,6 @@ public class GameListAdaptateur extends ArrayAdapter<Game> {
 
         textView.setText(this.getGameList().get(position).getName());
 
-        // Change the icon for Windows and iPhone
         imageView.setImageResource(this.getGameList().get(position).getIdIcon());
 
         return rowView;
