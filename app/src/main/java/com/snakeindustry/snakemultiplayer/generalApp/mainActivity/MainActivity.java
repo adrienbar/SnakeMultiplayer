@@ -47,8 +47,9 @@ public class MainActivity extends ActionBarActivity {
         //list of available games
         ListView listView = (ListView) findViewById(R.id.listView);
         //ArrayAdapter<Game> adapter = new ArrayAdapter<Game>(this, android.R.layout.simple_list_item_1, android.R.id.text1, AVAILABLE_GAMES);
-        ArrayAdapter<Game> adapter = new ArrayAdapter<Game>(this,  R.layout.textgamelist, AVAILABLE_GAMES);
 
+       // ArrayAdapter<Game> adapter = new ArrayAdapter<Game>(this,  R.layout.textgamelist, AVAILABLE_GAMES);
+        ArrayAdapter<Game> adapter = new GameListAdaptateur(this, AVAILABLE_GAMES);
         // Assign adapter to ListView
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new GameListListener());
