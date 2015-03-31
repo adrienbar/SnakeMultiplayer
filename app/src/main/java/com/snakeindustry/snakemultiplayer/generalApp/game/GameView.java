@@ -1,4 +1,4 @@
-package com.snakeindustry.snakemultiplayer.generalApp;
+package com.snakeindustry.snakemultiplayer.generalApp.game;
 
 /**
  * Created by Adrien on 28/03/15.

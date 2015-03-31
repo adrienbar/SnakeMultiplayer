@@ -1,4 +1,6 @@
-package com.snakeindustry.snakemultiplayer.generalApp;
+package com.snakeindustry.snakemultiplayer.generalApp.game;
+
+import com.snakeindustry.snakemultiplayer.generalApp.player.Player;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.snakeindustry.snakemultiplayer.generalApp;
+package com.snakeindustry.snakemultiplayer.generalApp.player;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -7,20 +7,19 @@ import android.view.MenuItem;
 
 import com.snakeindustry.snakemultiplayer.R;
 
-
-public class MainActivity extends ActionBarActivity {
+public class ProfileActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_profile);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_profile, menu);
         return true;
     }
 

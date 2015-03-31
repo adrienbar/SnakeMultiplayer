@@ -1,6 +1,6 @@
 package com.snakeindustry.snakemultiplayer.Snake.model;
 
-import com.snakeindustry.snakemultiplayer.generalApp.GameState;
+import com.snakeindustry.snakemultiplayer.generalApp.game.GameState;
 import com.snakeindustry.snakemultiplayer.Snake.model.eatableObject.SnakeBonus;
 
 import java.util.List;
