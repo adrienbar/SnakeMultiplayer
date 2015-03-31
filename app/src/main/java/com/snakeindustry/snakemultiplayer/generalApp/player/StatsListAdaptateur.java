@@ -28,7 +28,6 @@ public class StatsListAdaptateur extends ArrayAdapter<Game> {
         super(context, android.R.layout.simple_list_item_2,stats.getGameWithStats());
         this.context=context;
         this.stats=stats;
-        System.out.println("AAAAA" + " Statlist adpatateur cree");
     }
 
     @Override
@@ -64,9 +63,6 @@ public class StatsListAdaptateur extends ArrayAdapter<Game> {
 
         ImageView gameIcon = (ImageView) rowView.findViewById(R.id.gameicon);
         gameIcon.setImageResource(game.getIdIcon());
-
-        System.out.println("AAAAA" + this.getStats().getGameWithStats().size());
-
 
         return rowView;
     }

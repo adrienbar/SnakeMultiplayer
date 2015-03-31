@@ -1,5 +1,7 @@
 package com.snakeindustry.snakemultiplayer.Snake;
 
+import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.view.View;
 
 import com.snakeindustry.snakemultiplayer.R;
@@ -10,18 +12,21 @@ import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
  */
 public class GameSnake implements Game {
 
-    public final static String name ="Multiplayer Snake";
+    public static final String ID_NAME="MULTIPLAYER_SNAKE";
 
+    private String name;
 
+    public GameSnake() {
+        this.name="Multilayer Snake";
+    }
 
-
-
-
-
+    public void setName(String name) {
+        this.name = name;
+    }
 
     @Override
     public String getName() {
-        return name;
+        return this.name;
     }
 
     @Override

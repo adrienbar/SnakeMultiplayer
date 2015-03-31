@@ -18,6 +18,7 @@ import java.util.List;
 public class AppSingleton {
 
 
+
     /**
      * List of instanced available games
      */
@@ -26,15 +27,15 @@ public class AppSingleton {
     private List<Game> availabeGames;
     private Game currentGame;
     private Player player;
-
-    private HashMap<Game,Integer> gameToId;
-
-
+    private HashMap<String,Game> gameFromId;
 
     //APPLICATION'S PARAMETERS
         private AppSingleton() {
         this.availabeGames=new ArrayList<Game>(Arrays.asList(new GameSnake()));
         this.player=new DefaultPlayer();
+        this.gameFromId=new HashMap<>();
+            this.gameFromId.put(GameSnake.ID_NAME,new GameSnake());
+
     }
 
 
@@ -50,12 +51,16 @@ public class AppSingleton {
      */
     public void loadProfile() {
 
-        System.out.println("AAAAAAAA" + " load profil");
-        //TESTS Stats
+      //  System.out.println("AAAAAAAA" + " load profil");
 
+
+        //TESTS Stats
+        this.getPlayer().setName("Test name");
         this.setCurrentGame(this.getAvailabeGames().get(0));
         Stats statsForTest = new StatsHashmap();
         statsForTest.addAPlay(this.getCurrentGame());
+        statsForTest.addPlayedTime(this.getCurrentGame(),2);
+        statsForTest.addFriend(new DefaultPlayer(new StatsHashmap(), "tintin"),this.getCurrentGame());
 
         this.getPlayer().setStats(statsForTest);
 
@@ -65,6 +70,8 @@ public class AppSingleton {
      * save the profile in the database
      */
     public void saveProfile() {
+
+
 
     }
 
