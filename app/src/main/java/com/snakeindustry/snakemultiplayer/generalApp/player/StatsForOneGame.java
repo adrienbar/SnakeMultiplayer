@@ -19,6 +19,10 @@ public class StatsForOneGame {
         this.friends = friends;
     }
 
+    public StatsForOneGame(){
+        this(0,0,new HashMap<Player, Integer>());
+    }
+
     public void addPlayedTime(double hour) {
         this.setPlayedTime(this.getPlayedTime()+hour);
     }

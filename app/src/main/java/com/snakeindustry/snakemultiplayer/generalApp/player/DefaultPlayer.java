@@ -10,6 +10,6 @@ public class DefaultPlayer extends Player {
     }
 
     public DefaultPlayer() {
-        this(null,"");
+        this(new StatsHashmap(),"unammed");
     }
 }

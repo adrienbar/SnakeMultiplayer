@@ -27,32 +27,25 @@ public class AppSingleton {
     private List<Game> availabeGames;
     private Game currentGame;
     private Player player;
-    private HashMap<String,Game> gameFromId;
+
 
     //APPLICATION'S PARAMETERS
-        private AppSingleton() {
-        this.availabeGames=new ArrayList<Game>(Arrays.asList(new GameSnake()));
+    private AppSingleton() {
         this.player=new DefaultPlayer();
-        this.gameFromId=new HashMap<>();
-            this.gameFromId.put(GameSnake.ID_NAME,new GameSnake());
+        this.availabeGames=new ArrayList<Game>();
+        this.availabeGames.add(new GameSnake());
+
+        //System.out.println("AAAAAAAA "+this.getAvailabeGames());
 
     }
 
-
-
-
-
-
-
-    //METHODES
-
     /**
-     * retrieve the profile from the database
+     * Create Stats for new games
      */
-    public void loadProfile() {
-
-      //  System.out.println("AAAAAAAA" + " load profil");
-
+    public void checkStats() {
+       for(Game game : this.getAvailabeGames()) {
+           this.getPlayer().getStats().createStatsIfNothing(game);
+      }
 
         //TESTS Stats
         this.getPlayer().setName("Test name");
@@ -61,17 +54,25 @@ public class AppSingleton {
         statsForTest.addAPlay(this.getCurrentGame());
         statsForTest.addPlayedTime(this.getCurrentGame(),2);
         statsForTest.addFriend(new DefaultPlayer(new StatsHashmap(), "tintin"),this.getCurrentGame());
-
         this.getPlayer().setStats(statsForTest);
+
+
+    }
+
+    //METHODES
+
+    /**
+     * retrieve the profile from the database
+     */
+    public void loadProfile() {
 
     }
 
     /**
      * save the profile in the database
      */
+
     public void saveProfile() {
-
-
 
     }
 

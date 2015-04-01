@@ -49,19 +49,22 @@ public class StatsHashmap implements Stats {
     @Override
     public void addAPlay(Game game) {
 
+        System.out.println("AAAAAAA "+ "addPlay");
         StatsForOneGame tmp = this.getStats().get(game.getName());
         if(tmp!=null) {
+            System.out.println("AAAAAAA "+ "addPlay IF");
             tmp.addAPlay();
         }
         else {
-            this.getStats().put(game.getName(),new StatsForOneGame(1,0,new HashMap<Player, Integer>()));
+            this.getStats().put(game.getName(),new StatsForOneGame());
+            this.getStats().get(game.getName()).addAPlay();
         }
         AppSingleton.getInstance().saveProfile();
     }
 
     @Override
     public int getNbPlay(Game game) {
-        return this.getNbPlay(game);
+        return this.getStats().get(game.getName()).getNbPlay();
     }
 
     @Override
@@ -92,5 +95,23 @@ public class StatsHashmap implements Stats {
 
         }
         return list;
+    }
+
+    @Override
+    public int getBestScore() {
+        return 0;
+    }
+
+    @Override
+    public void createStatsIfNothing(Game game) {
+        StatsForOneGame tmp = this.getStats().get(game.getName());
+        if(tmp==null) {
+            this.getStats().put(game.getName(),game.createStats());
+        }
+    }
+
+    @Override
+    public void resetStats(Game game) {
+        this.getStats().put(game.getName(),game.createStats());
     }
 }

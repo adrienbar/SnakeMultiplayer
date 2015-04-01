@@ -22,15 +22,13 @@ public class MainActivity extends ActionBarActivity {
     private ListView listView;
 
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         AppSingleton.getInstance().loadProfile();
+        AppSingleton.getInstance().checkStats();
 
         //Profile Buttons
         LinearLayout profile = (LinearLayout) findViewById(R.id.profile);

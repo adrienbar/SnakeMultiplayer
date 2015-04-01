@@ -16,6 +16,10 @@ public interface Stats {
     public int getNbPlay(Game game);
     public void addFriend(Player player,Game game);
     public List<Game> getGameWithStats();
+    public int getBestScore();
+
+    public void createStatsIfNothing(Game game);
+    public void resetStats(Game game);
 
 
 

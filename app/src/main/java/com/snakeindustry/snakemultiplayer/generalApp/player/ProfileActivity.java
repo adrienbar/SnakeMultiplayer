@@ -28,6 +28,7 @@ public class ProfileActivity extends ActionBarActivity {
         Button editName = (Button) findViewById((R.id.editname));
 
         ListView listView = (ListView) findViewById(R.id.liststats);
+        System.out.println("AAAAAAA "+AppSingleton.getInstance().getPlayer().getName());
         ArrayAdapter<Game> adapter = new StatsListAdaptateur(this,AppSingleton.getInstance().getPlayer().getStats() );
         listView.setAdapter(adapter);
 
