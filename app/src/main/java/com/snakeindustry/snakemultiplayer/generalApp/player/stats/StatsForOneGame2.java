@@ -108,7 +108,7 @@ public class StatsForOneGame2 implements OneGameStats {
     public void reset() {
         this.getNbPlay().reset();
         this.getPlayedTime().reset();
-        this.setFriends(new HashMap<String, Integer>());
+        this.getFriends().clear();
         this.getBestScore().reset();
     }
 

@@ -15,6 +15,8 @@ import com.snakeindustry.snakemultiplayer.R;
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
 import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
 
+import java.util.List;
+
 public class GameStatsActivity extends ActionBarActivity {
 
     @Override
@@ -38,8 +40,9 @@ public class GameStatsActivity extends ActionBarActivity {
         final ArrayAdapter<OneStats> adapter = new OneStatsListAdapter(this, AppSingleton.getInstance().getPlayer().getStats().getStatsForOneGame(currentGame).getAllStats());
         listView.setAdapter(adapter);
 
-        ListView topFriends = (ListView)findViewById(R.id.topFriendsList);
-        final ArrayAdapter<OneStats> adapter2 = new OneStatsListAdapter(this, AppSingleton.getInstance().getPlayer().getStats().getStatsForOneGame(currentGame).getStatsFriends());
+        final ListView topFriends = (ListView)findViewById(R.id.topFriendsList);
+        List<OneStats> friendsList = AppSingleton.getInstance().getPlayer().getStats().getStatsForOneGame(currentGame).getStatsFriends();
+        ArrayAdapter<OneStats> adapter2 = new OneStatsListAdapter(this, friendsList);
         topFriends.setAdapter(adapter2);
 
         Button reset = (Button) findViewById(R.id.resetForOneGame);
@@ -47,7 +50,9 @@ public class GameStatsActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 AppSingleton.getInstance().getPlayer().getStats().resetStats(currentGame);
-                adapter2.notifyDataSetChanged();
+                ArrayAdapter<OneStats> a = new OneStatsListAdapter(v.getContext(), AppSingleton.getInstance().getPlayer().getStats().getStatsForOneGame(currentGame).getStatsFriends());
+                topFriends.setAdapter(a);
+
                 adapter.notifyDataSetChanged();
 
             }
