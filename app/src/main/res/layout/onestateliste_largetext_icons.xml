@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:id="@+id/statsicon"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:textSize="20sp"
+        android:layout_height="wrap_content"
+        android:id="@+id/statsdescription"
+        android:text="Stats description"
+        android:layout_alignTop="@+id/statsunit"
+        android:layout_toRightOf="@+id/statsicon"
+        android:layout_toEndOf="@+id/statsicon"
+        android:layout_marginRight="5dp"
+        android:layout_centerVertical="true">
+    </TextView>
+
+    <TextView
+        android:id="@+id/statsvalue"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="value"
+        android:layout_alignTop="@+id/statsunit"
+        android:layout_toLeftOf="@+id/statsunit"
+        android:layout_toStartOf="@+id/statsunit"
+        android:layout_marginRight="5dp"
+        android:layout_centerVertical="true">
+    </TextView>
+
+    <TextView
+        android:id="@+id/statsunit"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="unit"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true">
+    </TextView>
+
+</RelativeLayout>

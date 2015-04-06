@@ -1,4 +1,4 @@
-package com.snakeindustry.snakemultiplayer.generalApp.player.stats;
+package com.snakeindustry.snakemultiplayer.generalApp.player.stats.old;
 
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
 import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
@@ -11,8 +11,9 @@ import java.util.List;
 /**
  * Created by Adrien on 31/03/15.
  */
-public class StatsHashmap implements Stats {
-
+public class StatsHashmap //implements Stats {
+{
+    /*
     private HashMap<String,StatsForOneGame> stats;
 
 
@@ -115,4 +116,5 @@ public class StatsHashmap implements Stats {
     public void resetStats(Game game) {
         this.getStats().put(game.getName(),game.createStats());
     }
+    */
 }

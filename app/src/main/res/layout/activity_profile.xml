@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Stats"
-        android:id="@+id/stats"
+        android:id="@+id/statsbutton"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
@@ -21,12 +21,12 @@
         android:layout_height="wrap_content"
         android:id="@+id/liststats"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/stats" />
+        android:layout_below="@+id/statsbutton" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="edit"
+        android:text="Edit Name"
         android:id="@+id/editname"
         android:layout_below="@+id/name"
         android:layout_centerHorizontal="true" />

@@ -4,8 +4,8 @@ import com.snakeindustry.snakemultiplayer.Snake.GameSnake;
 import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
 import com.snakeindustry.snakemultiplayer.generalApp.player.DefaultPlayer;
 import com.snakeindustry.snakemultiplayer.generalApp.player.Player;
-import com.snakeindustry.snakemultiplayer.generalApp.player.stats.Stats;
-import com.snakeindustry.snakemultiplayer.generalApp.player.stats.StatsHashmap;
+import com.snakeindustry.snakemultiplayer.generalApp.player.stats.model.Stats;
+import com.snakeindustry.snakemultiplayer.generalApp.player.stats.model.StatsGlobalHashmap;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +37,18 @@ public class AppSingleton {
 
     }
 
+
+
+    public static Game getGameFromName(String gameName) {
+        Game game=null;
+        for (Game g : AppSingleton.getInstance().getAvailabeGames()) {
+            if(g.getName().equals(gameName)) {
+                game=g;
+            }
+        }
+        return game;
+    }
+
     /**
      * Create Stats for new games
      */
@@ -48,12 +60,12 @@ public class AppSingleton {
         //TESTS Stats
         this.getPlayer().setName("Test name");
         this.setCurrentGame(this.getAvailabeGames().get(0));
-        Stats statsForTest = new StatsHashmap();
+        Stats statsForTest = new StatsGlobalHashmap();
+        statsForTest.createStatsIfNothing(this.getCurrentGame());
         statsForTest.addAPlay(this.getCurrentGame());
-        statsForTest.addPlayedTime(this.getCurrentGame(),2);
-        statsForTest.addFriend(new DefaultPlayer(new StatsHashmap(), "tintin"),this.getCurrentGame());
+        statsForTest.addPlayedTime(this.getCurrentGame(),5);
+        statsForTest.addFriend("tintin", this.getCurrentGame());
         this.getPlayer().setStats(statsForTest);
-
 
     }
 

@@ -4,11 +4,13 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.snakeindustry.snakemultiplayer.R;
-import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
+import com.snakeindustry.snakemultiplayer.generalApp.mainActivity.ButtonController;
+import com.snakeindustry.snakemultiplayer.generalApp.player.stats.StatsOneGameActivity;
 
 public class NetworkModeAndGameSettings extends ActionBarActivity {
 
@@ -23,6 +25,10 @@ public class NetworkModeAndGameSettings extends ActionBarActivity {
 
         ImageView gameIcon =  (ImageView) findViewById((R.id.gameiconnetworkandsettings));
         gameIcon.setImageResource(AppSingleton.getInstance().getCurrentGame().getIdIcon());
+
+        Button stats= (Button) findViewById(R.id.statsbutton);
+        stats.setOnClickListener(new ButtonController(StatsOneGameActivity.class));
+
     }
 
     @Override

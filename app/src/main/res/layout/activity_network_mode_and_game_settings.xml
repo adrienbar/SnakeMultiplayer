@@ -10,12 +10,12 @@
 
 
 
-<LinearLayout
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_centerHorizontal="true"
-    android:id="@+id/linearLayout">
+        android:id="@+id/linearLayout">
         <ImageView
             android:id="@+id/gameiconnetworkandsettings"
             android:background="@color/material_blue_grey_800"
@@ -31,9 +31,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="25dp"
-           android:textColor="@color/material_blue_grey_900">
+            android:textColor="@color/material_blue_grey_900">
         </TextView>
-</LinearLayout>
+    </LinearLayout>
 
 
 
@@ -51,7 +51,7 @@
         android:layout_alignParentEnd="true" />
 
     <Button
-         android:id="@+id/joinagame"
+        android:id="@+id/joinagame"
         android:text="Join a game"
         android:drawableLeft="@drawable/ic_action_arrow_right"
 
@@ -62,6 +62,17 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
+    <Button
+        android:id="@+id/statsbutton"
+        android:text="Game Settings"
+        android:drawableLeft="@drawable/ic_action_line_chart"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawablePadding="16dp"
+        android:layout_above="@+id/settings"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 
     <Button
