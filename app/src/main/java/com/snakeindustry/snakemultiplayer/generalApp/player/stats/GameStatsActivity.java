@@ -22,6 +22,7 @@ public class GameStatsActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_stats);
 
+
         final Game currentGame=AppSingleton.getInstance().getCurrentGame();
 
         TextView title =(TextView) findViewById(R.id.titlegamestats);
