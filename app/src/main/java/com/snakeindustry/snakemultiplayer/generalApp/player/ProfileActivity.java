@@ -30,6 +30,13 @@ public class ProfileActivity extends ActionBarActivity {
         name.setText(AppSingleton.getInstance().getPlayer().getName());
 
         Button editName = (Button) findViewById((R.id.editname));
+        editName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(v.getContext(), EditName.class);
+                v.getContext().startActivity(myIntent);
+            }
+        });
 
         ListView listView = (ListView) findViewById(R.id.liststats);
 
@@ -55,6 +62,12 @@ public class ProfileActivity extends ActionBarActivity {
 
 
 
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        TextView name = (TextView) findViewById(R.id.name);
+        name.setText(AppSingleton.getInstance().getPlayer().getName());
     }
 
 

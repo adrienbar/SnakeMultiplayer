@@ -6,4 +6,6 @@
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="title_activity_network_mode_and_game_settings">NetworkModeAndGameSettings</string>
     <string name="title_activity_game_stats">GameStatsActivity</string>
+    <string name="title_activity_edit_name">EditName</string>
+
 </resources>
