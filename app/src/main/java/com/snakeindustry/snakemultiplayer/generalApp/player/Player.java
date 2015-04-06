@@ -1,5 +1,7 @@
 package com.snakeindustry.snakemultiplayer.generalApp.player;
 
+import com.snakeindustry.snakemultiplayer.generalApp.player.stats.Stats;
+
 /**
  * Created by Adrien on 28/03/15.
  */

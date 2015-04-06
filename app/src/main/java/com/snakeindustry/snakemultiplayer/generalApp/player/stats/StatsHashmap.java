@@ -1,7 +1,8 @@
-package com.snakeindustry.snakemultiplayer.generalApp.player;
+package com.snakeindustry.snakemultiplayer.generalApp.player.stats;
 
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
 import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
+import com.snakeindustry.snakemultiplayer.generalApp.player.Player;
 
 import java.util.ArrayList;
 import java.util.HashMap;

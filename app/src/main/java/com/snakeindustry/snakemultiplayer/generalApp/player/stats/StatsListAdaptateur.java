@@ -1,4 +1,4 @@
-package com.snakeindustry.snakemultiplayer.generalApp.player;
+package com.snakeindustry.snakemultiplayer.generalApp.player.stats;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,15 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.snakeindustry.snakemultiplayer.R;
 import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
-
-import java.lang.reflect.Array;
-import java.util.HashMap;
-import java.util.List;
 
 /**
  * Created by Adrien on 31/03/15.

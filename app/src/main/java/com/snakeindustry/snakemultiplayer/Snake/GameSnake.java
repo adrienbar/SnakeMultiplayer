@@ -1,7 +1,5 @@
 package com.snakeindustry.snakemultiplayer.Snake;
 
-import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.view.View;
 
 import com.snakeindustry.snakemultiplayer.R;
@@ -10,7 +8,7 @@ import com.snakeindustry.snakemultiplayer.Snake.viewAndControl.SnakeViewTouchCon
 import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameState;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameView;
-import com.snakeindustry.snakemultiplayer.generalApp.player.StatsForOneGame;
+import com.snakeindustry.snakemultiplayer.generalApp.player.stats.StatsForOneGame;
 
 /**
  * Created by Adrien on 28/03/15.

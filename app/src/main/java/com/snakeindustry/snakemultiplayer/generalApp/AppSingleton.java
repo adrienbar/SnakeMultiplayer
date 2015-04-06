@@ -4,12 +4,10 @@ import com.snakeindustry.snakemultiplayer.Snake.GameSnake;
 import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
 import com.snakeindustry.snakemultiplayer.generalApp.player.DefaultPlayer;
 import com.snakeindustry.snakemultiplayer.generalApp.player.Player;
-import com.snakeindustry.snakemultiplayer.generalApp.player.Stats;
-import com.snakeindustry.snakemultiplayer.generalApp.player.StatsHashmap;
+import com.snakeindustry.snakemultiplayer.generalApp.player.stats.Stats;
+import com.snakeindustry.snakemultiplayer.generalApp.player.stats.StatsHashmap;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 /**

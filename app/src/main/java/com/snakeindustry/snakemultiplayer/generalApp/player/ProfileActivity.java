@@ -6,14 +6,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.snakeindustry.snakemultiplayer.R;
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
 import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
-import com.snakeindustry.snakemultiplayer.generalApp.mainActivity.GameListAdaptateur;
+import com.snakeindustry.snakemultiplayer.generalApp.player.stats.StatsListAdaptateur;
 
 public class ProfileActivity extends ActionBarActivity {
 

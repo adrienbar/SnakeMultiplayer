@@ -1,7 +1,7 @@
 package com.snakeindustry.snakemultiplayer.Snake;
 
 import com.snakeindustry.snakemultiplayer.generalApp.player.Player;
-import com.snakeindustry.snakemultiplayer.generalApp.player.StatsForOneGame;
+import com.snakeindustry.snakemultiplayer.generalApp.player.stats.StatsForOneGame;
 
 import java.util.HashMap;
 

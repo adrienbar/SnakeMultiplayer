@@ -1,10 +1,8 @@
 package com.snakeindustry.snakemultiplayer.generalApp.game;
 
-import android.app.Activity;
-import android.media.Image;
 import android.view.View;
 
-import com.snakeindustry.snakemultiplayer.generalApp.player.StatsForOneGame;
+import com.snakeindustry.snakemultiplayer.generalApp.player.stats.StatsForOneGame;
 
 /**
  * Created by Adrien on 28/03/15.
