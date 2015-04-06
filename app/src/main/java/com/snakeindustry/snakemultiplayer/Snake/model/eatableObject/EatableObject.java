@@ -7,6 +7,7 @@ public abstract class  EatableObject {
 
     private double x,y,width,height;
 
+
     protected EatableObject(double x, double y, double width, double height) {
         this.x = x;
         this.y = y;
@@ -45,4 +46,6 @@ public abstract class  EatableObject {
     public void setHeight(double height) {
         this.height = height;
     }
+
+
 }

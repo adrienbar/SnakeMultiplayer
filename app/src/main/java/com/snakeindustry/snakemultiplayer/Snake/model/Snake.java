@@ -1,5 +1,8 @@
 package com.snakeindustry.snakemultiplayer.Snake.model;
 
+import com.snakeindustry.snakemultiplayer.Snake.model.eatableObject.EatableObject;
+import com.snakeindustry.snakemultiplayer.Snake.model.eatableObject.Food;
+import com.snakeindustry.snakemultiplayer.Snake.model.eatableObject.SnakeBonus;
 import com.snakeindustry.snakemultiplayer.Snake.model.state.NormalState;
 import com.snakeindustry.snakemultiplayer.Snake.model.state.State;
 
@@ -15,6 +18,7 @@ public class Snake {
     private int width; //Cell width
     private int length; // Cell length
     private LinkedList<SnakeCell> body;
+    private int growing;//Will be used to count the number of cells that have to grow
     private enum direction {
         up, down, left, right, none
     }
@@ -25,14 +29,37 @@ public class Snake {
     {
         this.state= new NormalState();
         this.body=new LinkedList<SnakeCell>();
+        growing=0;
 
+    }
+
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+    public void setLength(int length) {
+        this.length = length;
     }
 
     private void moveCurrentDirection()
     {
         addSquareToHead();
         if (body.size() > 1) {
-            body.removeLast();
+            if(growing==0){
+                body.removeLast();
+            }
+            else{
+                growing--;
+            }
         }
 
     }
@@ -113,21 +140,14 @@ public class Snake {
     }
 
 
-    public int getWidth() {
-        return width;
+
+    public void grow(int amount){
+        growing+=amount;
     }
 
-    public void setWidth(int width) {
-        this.width = width;
-    }
 
-    public int getLength() {
-        return length;
-    }
 
-    public void setLength(int length) {
-        this.length = length;
-    }
+
 
 
 }
