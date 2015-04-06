@@ -21,10 +21,9 @@ public class OneStats {
     }
 
 
-    public void increaseBy(double value){
+    public void add(double value){
       this.setValue(this.getValue()+value);
     }
-
 
 
 

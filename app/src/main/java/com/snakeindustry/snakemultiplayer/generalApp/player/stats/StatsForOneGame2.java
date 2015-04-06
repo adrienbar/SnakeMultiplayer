@@ -1,9 +1,6 @@
 package com.snakeindustry.snakemultiplayer.generalApp.player.stats;
 
-import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
-import com.snakeindustry.snakemultiplayer.generalApp.player.Player;
-import com.snakeindustry.snakemultiplayer.generalApp.player.stats.OneStats;
-
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -31,29 +28,61 @@ public class StatsForOneGame2 implements OneGameStats {
 
 
     @Override
-    public double getPlayedTime() {
-     return 0;
+    public double getPlayedTimeValue() {
+     return this.getPlayedTime().getValue();
     }
 
     @Override
-    public int getNbPlay() {
-        return 0;
+    public int getNbPlayValue() {
+        return (int) this.getNbPlay().getValue();
     }
 
     @Override
-    public String getBestScore() {
-        return null;
+    public String getBestScoreAsAString() {
+        return ""+this.getBestScore();
     }
 
     @Override
-    public List<String> getFriends() {
-        return null;
+    public List<String> getFriendsList() {
+        List<String> list = new ArrayList<>();
+        for (String s : this.getFriends().keySet()) {
+            list.add(s);
+        }
+        return list;
     }
 
+    @Override
+    public void addPlayedTime(double hour) {
+        this.getPlayedTime().add(hour);
+    }
+
+    @Override
+    public void addAPlay() {
+        this.getNbPlay().add(1);
+    }
 
 
     //GETTERS and SETTERS
 
+
+
+
+
+    public HashMap<String, Integer> getFriends() {
+        return friends;
+    }
+
+    public OneStats getPlayedTime() {
+        return playedTime;
+    }
+
+    public OneStats getNbPlay() {
+        return nbPlay;
+    }
+
+    public double getBestScore() {
+        return bestScore;
+    }
 
     public void setPlayedTime(OneStats playedTime) {
         this.playedTime = playedTime;
@@ -70,4 +99,7 @@ public class StatsForOneGame2 implements OneGameStats {
     public void setFriends(HashMap<String, Integer> friends) {
         this.friends = friends;
     }
+
+
+
 }

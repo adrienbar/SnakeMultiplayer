@@ -9,9 +9,15 @@ import java.util.List;
  */
 public interface OneGameStats {
 
-    public double getPlayedTime();
-    public int getNbPlay();
-    public String getBestScore();
-    public List<String> getFriends();
+    public double getPlayedTimeValue();
+    public int getNbPlayValue();
+
+    //This may have returned an in or a double but a string is enough, because comparing the score between different games does not make much sens.
+    //and a string allows different format of scores
+    public String getBestScoreAsAString();
+    public List<String> getFriendsList();
+
+    public void addPlayedTime(double hour);
+    public void addAPlay();
 
 }

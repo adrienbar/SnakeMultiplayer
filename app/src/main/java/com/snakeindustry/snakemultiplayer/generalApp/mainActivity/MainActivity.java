@@ -14,6 +14,7 @@ import com.snakeindustry.snakemultiplayer.R;
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
 import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
 import com.snakeindustry.snakemultiplayer.generalApp.player.ProfileActivity;
+import com.snakeindustry.snakemultiplayer.generalApp.player.stats.OneStats;
 
 
 public class MainActivity extends ActionBarActivity {
