@@ -1,4 +1,4 @@
-package com.snakeindustry.snakemultiplayer.generalApp.player.stats;
+package com.snakeindustry.snakemultiplayer.generalApp.player.stats.old;
 
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
 import com.snakeindustry.snakemultiplayer.generalApp.game.Game;

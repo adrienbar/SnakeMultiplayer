@@ -1,8 +1,7 @@
 package com.snakeindustry.snakemultiplayer.generalApp.player;
 
-import com.snakeindustry.snakemultiplayer.generalApp.player.stats.Stats;
-import com.snakeindustry.snakemultiplayer.generalApp.player.stats.StatsHashmap;
-import com.snakeindustry.snakemultiplayer.generalApp.player.stats.StatsHashmap2;
+import com.snakeindustry.snakemultiplayer.generalApp.player.stats.model.Stats;
+import com.snakeindustry.snakemultiplayer.generalApp.player.stats.model.StatsGlobalHashmap;
 
 /**
  * Created by Adrien on 28/03/15.
@@ -14,6 +13,6 @@ public class DefaultPlayer extends Player {
     }
 
     public DefaultPlayer() {
-        this(new StatsHashmap2(),"unammed");
+        this(new StatsGlobalHashmap(),"unammed");
     }
 }

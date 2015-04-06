@@ -1,9 +1,6 @@
 package com.snakeindustry.snakemultiplayer.generalApp.player.stats;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.PictureDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,17 +11,18 @@ import android.widget.TextView;
 import com.snakeindustry.snakemultiplayer.R;
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
 import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
+import com.snakeindustry.snakemultiplayer.generalApp.player.stats.model.SimpleStats;
 
 import java.util.List;
 
 /**
  * Created by Adrien on 06/04/15.
  */
-public class OneStatsListAdapter extends ArrayAdapter<OneStats> {
+public class OneStatsListAdapter extends ArrayAdapter<SimpleStats> {
     private Context context;
-    private List<OneStats> statsList;
+    private List<SimpleStats> statsList;
 
-    public OneStatsListAdapter(Context context, List<OneStats> statsList) {
+    public OneStatsListAdapter(Context context, List<SimpleStats> statsList) {
         super(context, R.layout.onestatslist, statsList);
         this.context=context;
         this.statsList=statsList;
@@ -41,9 +39,6 @@ public class OneStatsListAdapter extends ArrayAdapter<OneStats> {
         TextView statsGameName = (TextView) rowView.findViewById(R.id.statsdescription);
         TextView value = (TextView) rowView.findViewById(R.id.statsvalue);
         TextView unit = (TextView )rowView.findViewById(R.id.statsunit);
-
-
-
 
         icon.setImageBitmap(this.getStatsList().get(position).getIcon());
         //put icon in case of the description is the name of a game
@@ -83,11 +78,11 @@ public class OneStatsListAdapter extends ArrayAdapter<OneStats> {
         this.context = context;
     }
 
-    public List<OneStats> getStatsList() {
+    public List<SimpleStats> getStatsList() {
         return statsList;
     }
 
-    public void setStatsList(List<OneStats> statsList) {
+    public void setStatsList(List<SimpleStats> statsList) {
         this.statsList = statsList;
     }
 }

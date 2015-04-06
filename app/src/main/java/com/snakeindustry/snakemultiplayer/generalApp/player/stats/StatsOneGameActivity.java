@@ -14,10 +14,11 @@ import android.widget.TextView;
 import com.snakeindustry.snakemultiplayer.R;
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
 import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
+import com.snakeindustry.snakemultiplayer.generalApp.player.stats.model.SimpleStats;
 
 import java.util.List;
 
-public class GameStatsActivity extends ActionBarActivity {
+public class StatsOneGameActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +38,12 @@ public class GameStatsActivity extends ActionBarActivity {
 
 
         ListView listView = (ListView)findViewById(R.id.listViewDetailedStats);
-        final ArrayAdapter<OneStats> adapter = new OneStatsListAdapter(this, AppSingleton.getInstance().getPlayer().getStats().getStatsForOneGame(currentGame).getAllStats());
+        final ArrayAdapter<SimpleStats> adapter = new OneStatsListAdapter(this, AppSingleton.getInstance().getPlayer().getStats().getStatsForOneGame(currentGame).getAllStats());
         listView.setAdapter(adapter);
 
         final ListView topFriends = (ListView)findViewById(R.id.topFriendsList);
-        List<OneStats> friendsList = AppSingleton.getInstance().getPlayer().getStats().getStatsForOneGame(currentGame).getStatsFriends();
-        ArrayAdapter<OneStats> adapter2 = new OneStatsListAdapter(this, friendsList);
+        List<SimpleStats> friendsList = AppSingleton.getInstance().getPlayer().getStats().getStatsForOneGame(currentGame).getStatsFriends();
+        ArrayAdapter<SimpleStats> adapter2 = new OneStatsListAdapter(this, friendsList);
         topFriends.setAdapter(adapter2);
 
         Button reset = (Button) findViewById(R.id.resetForOneGame);
@@ -50,7 +51,7 @@ public class GameStatsActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 AppSingleton.getInstance().getPlayer().getStats().resetStats(currentGame);
-                ArrayAdapter<OneStats> a = new OneStatsListAdapter(v.getContext(), AppSingleton.getInstance().getPlayer().getStats().getStatsForOneGame(currentGame).getStatsFriends());
+                ArrayAdapter<SimpleStats> a = new OneStatsListAdapter(v.getContext(), AppSingleton.getInstance().getPlayer().getStats().getStatsForOneGame(currentGame).getStatsFriends());
                 topFriends.setAdapter(a);
 
                 adapter.notifyDataSetChanged();

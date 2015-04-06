@@ -2,8 +2,7 @@ package com.snakeindustry.snakemultiplayer.generalApp.game;
 
 import android.view.View;
 
-import com.snakeindustry.snakemultiplayer.generalApp.player.stats.OneGameStats;
-import com.snakeindustry.snakemultiplayer.generalApp.player.stats.StatsForOneGame;
+import com.snakeindustry.snakemultiplayer.generalApp.player.stats.model.GameStats;
 
 /**
  * Created by Adrien on 28/03/15.
@@ -14,7 +13,7 @@ public String getName();
 public int getIdIcon();
 
 public GameView getGameView();
-public OneGameStats createStats();
+public GameStats createStats();
 public GameState getGameState();
 
     //type View should be discussed, and more generally the Settings of a game

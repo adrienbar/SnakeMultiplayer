@@ -1,9 +1,7 @@
-package com.snakeindustry.snakemultiplayer.generalApp.player.stats;
+package com.snakeindustry.snakemultiplayer.generalApp.player.stats.model;
 
 import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
-import com.snakeindustry.snakemultiplayer.generalApp.player.Player;
 
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -21,13 +19,13 @@ public interface Stats {
 
     //Friends
     public void addFriend(String friendName,Game game);
-    public List<OneStats> getStatsFriends();
+    public List<SimpleStats> getStatsFriends();
 
 
     //
     // public List<Game> getGameWithStats();
-     public List<OneStats> GamesStatsNbPlay();
-     public OneGameStats getStatsForOneGame(Game game);
+     public List<SimpleStats> GamesStatsNbPlay();
+     public GameStats getStatsForOneGame(Game game);
 
     //Create/delete
     public void createStatsIfNothing(Game game);

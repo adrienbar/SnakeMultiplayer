@@ -14,10 +14,9 @@ import android.widget.TextView;
 
 import com.snakeindustry.snakemultiplayer.R;
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
-import com.snakeindustry.snakemultiplayer.generalApp.NetworkModeAndGameSettings;
 import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
-import com.snakeindustry.snakemultiplayer.generalApp.player.stats.GameStatsActivity;
-import com.snakeindustry.snakemultiplayer.generalApp.player.stats.OneStats;
+import com.snakeindustry.snakemultiplayer.generalApp.player.stats.model.SimpleStats;
+import com.snakeindustry.snakemultiplayer.generalApp.player.stats.StatsOneGameActivity;
 import com.snakeindustry.snakemultiplayer.generalApp.player.stats.OneStatsListAdapter;
 
 public class ProfileActivity extends ActionBarActivity {
@@ -36,19 +35,19 @@ public class ProfileActivity extends ActionBarActivity {
 
         //ArrayAdapter<Game> adapter = new StatsListAdaptateur(this,AppSingleton.getInstance().getPlayer().getStats() );
 
-        ArrayAdapter<OneStats> adapter = new OneStatsListAdapter(this,AppSingleton.getInstance().getPlayer().getStats().GamesStatsNbPlay());
+        ArrayAdapter<SimpleStats> adapter = new OneStatsListAdapter(this,AppSingleton.getInstance().getPlayer().getStats().GamesStatsNbPlay());
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                OneStats oneStats = (OneStats) parent.getItemAtPosition(position);
-                Game game = AppSingleton.getGameFromName(oneStats.getDescription());
+                SimpleStats SimpleStats = (SimpleStats) parent.getItemAtPosition(position);
+                Game game = AppSingleton.getGameFromName(SimpleStats.getDescription());
                 AppSingleton.getInstance().setCurrentGame(game);
 
 
-                Intent myIntent = new Intent(view.getContext(), GameStatsActivity.class);
+                Intent myIntent = new Intent(view.getContext(), StatsOneGameActivity.class);
                 view.getContext().startActivity(myIntent);
             }
         });

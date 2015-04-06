@@ -4,10 +4,8 @@ import com.snakeindustry.snakemultiplayer.Snake.GameSnake;
 import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
 import com.snakeindustry.snakemultiplayer.generalApp.player.DefaultPlayer;
 import com.snakeindustry.snakemultiplayer.generalApp.player.Player;
-import com.snakeindustry.snakemultiplayer.generalApp.player.stats.Stats;
-import com.snakeindustry.snakemultiplayer.generalApp.player.stats.StatsForOneGame;
-import com.snakeindustry.snakemultiplayer.generalApp.player.stats.StatsHashmap;
-import com.snakeindustry.snakemultiplayer.generalApp.player.stats.StatsHashmap2;
+import com.snakeindustry.snakemultiplayer.generalApp.player.stats.model.Stats;
+import com.snakeindustry.snakemultiplayer.generalApp.player.stats.model.StatsGlobalHashmap;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +60,7 @@ public class AppSingleton {
         //TESTS Stats
         this.getPlayer().setName("Test name");
         this.setCurrentGame(this.getAvailabeGames().get(0));
-        Stats statsForTest = new StatsHashmap2();
+        Stats statsForTest = new StatsGlobalHashmap();
         statsForTest.createStatsIfNothing(this.getCurrentGame());
         statsForTest.addAPlay(this.getCurrentGame());
         statsForTest.addPlayedTime(this.getCurrentGame(),5);

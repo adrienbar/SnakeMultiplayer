@@ -1,15 +1,8 @@
-package com.snakeindustry.snakemultiplayer.generalApp.player.stats;
+package com.snakeindustry.snakemultiplayer.generalApp.player.stats.old;
 
 import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.snakeindustry.snakemultiplayer.R;
-import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
+import com.snakeindustry.snakemultiplayer.generalApp.player.stats.model.Stats;
 
 /**
  * Created by Adrien on 31/03/15.
