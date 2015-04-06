@@ -22,7 +22,7 @@ public interface Stats {
     public List<SimpleStats> getStatsFriends();
 
 
-    //
+
     // public List<Game> getGameWithStats();
      public List<SimpleStats> GamesStatsNbPlay();
      public GameStats getStatsForOneGame(Game game);

@@ -12,19 +12,24 @@ import java.util.List;
 public class GameStatsI implements GameStats {
     private SimpleStatsI playedTime,nbPlay,bestScore;
     private HashMap<String,Integer> friends;
+    private List<Double> scoreValues;
 
-    public GameStatsI(SimpleStatsI playedTime, SimpleStatsI nbPlay, SimpleStatsI bestScore, HashMap<String, Integer> friends) {
+    public GameStatsI(SimpleStatsI playedTime, SimpleStatsI nbPlay, SimpleStatsI bestScore, HashMap<String, Integer> friends,List<Double> scoreValues) {
         this.playedTime = playedTime;
         this.nbPlay = nbPlay;
         this.bestScore = bestScore;
         this.friends = friends;
+        this.scoreValues=scoreValues;
+
     }
 
     public GameStatsI() {
         this(new SimpleStatsI("Played time",0,"h",null),
                 new SimpleStatsI("Nb of plays",0,"play(s)",null),
                 new SimpleStatsI("Best Score", 0,"",null),
-                new HashMap<String, Integer>());
+                new HashMap<String, Integer>(),
+                new ArrayList<Double>());
+
 
     }
 
@@ -33,25 +38,17 @@ public class GameStatsI implements GameStats {
 
 
     @Override
-    public String getBestScoreAsAString() {
-        return ""+this.getBestScore().getValue()+ this.getBestScore().getUnit();
-    }
-
-    @Override
-    public List<SimpleStats> getFriendsList() {
-        List<SimpleStats> list = new ArrayList<>();
-        for (String s : this.getFriends().keySet()) {
-            String play="play";
-            double value=this.getFriends().get(s);
-            if(value>1) {
-                play=play+s;
-            }
-            SimpleStats nbPlayWithFriend=new SimpleStatsI(s,value,play,null);
-
-            list.add(nbPlayWithFriend);
+    public List<SimpleStats> getStatsFriends() {
+        LinkedList<SimpleStats> list=new LinkedList<>();
+        for(String friendName : this.getFriends().keySet())
+        {
+            list.add(new SimpleStatsI(friendName,this.getFriends().get(friendName),"play(s)",null));
         }
+
         return list;
     }
+
+
 
     @Override
     public void addPlayedTime(double hour) {
@@ -75,32 +72,15 @@ public class GameStatsI implements GameStats {
 
     }
 
-    @Override
-    public List<SimpleStats> getStatsFriends() {
-         LinkedList<SimpleStats> list=new LinkedList<>();
-        for(String friendName : this.getFriends().keySet())
-        {
-            list.add(new SimpleStatsI(friendName,this.getFriends().get(friendName),"play(s)",null));
-        }
 
-        return list;
-    }
+
 
     @Override
-    public List<SimpleStats> getSpecificStats() {
-        return new LinkedList<>();
-    }
-
-    @Override
-    public List<SimpleStats> getAllStats() {
+    public List<SimpleStats> getStatsAsList() {
         List<SimpleStats> list = new ArrayList<>();
-
         list.add(this.getBestScore());
         list.add(this.getPlayedTime());
         list.add(this.getNbPlay());
-
-      //  list.addAll(this.getSpecificStats());
-
         return list;
     }
 
@@ -132,6 +112,14 @@ public class GameStatsI implements GameStats {
         return bestScore;
     }
 
+    @Override
+    public void addScore(double score) {
+        this.getScoreValues().add(score);
+        if(this.getBestScore().getValue()<score) {
+            this.getBestScore().setValue(score);
+        }
+    }
+
     public void setPlayedTime(SimpleStatsI playedTime) {
         this.playedTime = playedTime;
     }
@@ -148,6 +136,11 @@ public class GameStatsI implements GameStats {
         this.friends = friends;
     }
 
+    public List<Double> getScoreValues() {
+        return scoreValues;
+    }
 
-
+    public void setScoreValues(List<Double> scoreValues) {
+        this.scoreValues = scoreValues;
+    }
 }

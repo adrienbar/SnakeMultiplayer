@@ -26,7 +26,7 @@ public class NetworkModeAndGameSettings extends ActionBarActivity {
         ImageView gameIcon =  (ImageView) findViewById((R.id.gameiconnetworkandsettings));
         gameIcon.setImageResource(AppSingleton.getInstance().getCurrentGame().getIdIcon());
 
-        Button stats=(Button) findViewById(R.id.statsbutton);
+        Button stats= (Button) findViewById(R.id.statsbutton);
         stats.setOnClickListener(new ButtonController(StatsOneGameActivity.class));
 
     }

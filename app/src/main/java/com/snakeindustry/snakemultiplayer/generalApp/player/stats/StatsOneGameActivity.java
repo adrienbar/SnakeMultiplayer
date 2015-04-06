@@ -38,7 +38,7 @@ public class StatsOneGameActivity extends ActionBarActivity {
 
 
         ListView listView = (ListView)findViewById(R.id.listViewDetailedStats);
-        final ArrayAdapter<SimpleStats> adapter = new OneStatsListAdapter(this, AppSingleton.getInstance().getPlayer().getStats().getStatsForOneGame(currentGame).getAllStats());
+        final ArrayAdapter<SimpleStats> adapter = new OneStatsListAdapter(this, AppSingleton.getInstance().getPlayer().getStats().getStatsForOneGame(currentGame).getStatsAsList());
         listView.setAdapter(adapter);
 
         final ListView topFriends = (ListView)findViewById(R.id.topFriendsList);
