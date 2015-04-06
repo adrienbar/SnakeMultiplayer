@@ -27,6 +27,7 @@ public class OneStats {
 
 
 
+
     //GETTERS and SETTERS
     public String getDescription() {
         return description;
@@ -40,8 +41,15 @@ public class OneStats {
         return unit;
     }
 
-    private void setValue(double value) {
+    public void setValue(double value) {
         this.value = value;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
 }
