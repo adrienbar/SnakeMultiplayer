@@ -1,7 +1,5 @@
 package com.snakeindustry.snakemultiplayer.generalApp.player.stats;
 
-import com.snakeindustry.snakemultiplayer.generalApp.player.Player;
-
 import java.util.List;
 
 /**
@@ -9,15 +7,28 @@ import java.util.List;
  */
 public interface OneGameStats {
 
-    public double getPlayedTimeValue();
-    public int getNbPlayValue();
 
-    //This may have returned an in or a double but a string is enough, because comparing the score between different games does not make much sens.
-    //and a string allows different format of scores
-    public String getBestScoreAsAString();
-    public List<String> getFriendsList();
-
+    //Played time
+    public OneStats getPlayedTime();
     public void addPlayedTime(double hour);
+    //nb play
+    public OneStats getNbPlay();
     public void addAPlay();
 
+    //friends
+    public void addAPlayWithAFriend(String friend);
+    public List<OneStats> getStatsFriends();
+
+    public List<OneStats> getFriendsList();
+    //This may have returned an in or a double but a string is enough, because comparing the score between different games does not make much sens.
+    //and a string allows different format of score
+    public String getBestScoreAsAString();
+
+
+
+    public List<OneStats> getSpecificStats();
+
+    public List<OneStats> getAllStats();
+
+    public void reset();
 }

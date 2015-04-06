@@ -1,9 +1,12 @@
 package com.snakeindustry.snakemultiplayer.generalApp.player;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -11,8 +14,11 @@ import android.widget.TextView;
 
 import com.snakeindustry.snakemultiplayer.R;
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
+import com.snakeindustry.snakemultiplayer.generalApp.NetworkModeAndGameSettings;
 import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
-import com.snakeindustry.snakemultiplayer.generalApp.player.stats.StatsListAdaptateur;
+import com.snakeindustry.snakemultiplayer.generalApp.player.stats.GameStatsActivity;
+import com.snakeindustry.snakemultiplayer.generalApp.player.stats.OneStats;
+import com.snakeindustry.snakemultiplayer.generalApp.player.stats.OneStatsListAdapter;
 
 public class ProfileActivity extends ActionBarActivity {
 
@@ -27,9 +33,26 @@ public class ProfileActivity extends ActionBarActivity {
         Button editName = (Button) findViewById((R.id.editname));
 
         ListView listView = (ListView) findViewById(R.id.liststats);
-        System.out.println("AAAAAAA "+AppSingleton.getInstance().getPlayer().getName());
-        ArrayAdapter<Game> adapter = new StatsListAdaptateur(this,AppSingleton.getInstance().getPlayer().getStats() );
+
+        //ArrayAdapter<Game> adapter = new StatsListAdaptateur(this,AppSingleton.getInstance().getPlayer().getStats() );
+
+        ArrayAdapter<OneStats> adapter = new OneStatsListAdapter(this,AppSingleton.getInstance().getPlayer().getStats().GamesStatsNbPlay());
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                OneStats oneStats = (OneStats) parent.getItemAtPosition(position);
+                Game game = AppSingleton.getGameFromName(oneStats.getDescription());
+                AppSingleton.getInstance().setCurrentGame(game);
+
+
+                Intent myIntent = new Intent(view.getContext(), GameStatsActivity.class);
+                view.getContext().startActivity(myIntent);
+            }
+        });
+
 
 
 

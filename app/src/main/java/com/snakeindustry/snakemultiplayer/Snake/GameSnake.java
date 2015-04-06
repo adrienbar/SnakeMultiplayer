@@ -8,6 +8,7 @@ import com.snakeindustry.snakemultiplayer.Snake.viewAndControl.SnakeViewTouchCon
 import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameState;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameView;
+import com.snakeindustry.snakemultiplayer.generalApp.player.stats.OneGameStats;
 import com.snakeindustry.snakemultiplayer.generalApp.player.stats.StatsForOneGame;
 
 /**
@@ -49,7 +50,7 @@ public class GameSnake implements Game {
     }
 
     @Override
-    public StatsForOneGame createStats() {
+    public OneGameStats createStats() {
         return new SnakeStats();
     }
 

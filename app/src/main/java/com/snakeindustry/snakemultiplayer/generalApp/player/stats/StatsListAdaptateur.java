@@ -14,10 +14,13 @@ import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
 /**
  * Created by Adrien on 31/03/15.
  */
-public class StatsListAdaptateur extends ArrayAdapter<Game> {
+
+
+public class StatsListAdaptateur// extends ArrayAdapter<Game> {
+{
     private Context context;
     private Stats stats;
-
+/*
 
     public StatsListAdaptateur(Context context, Stats stats) {
         super(context, android.R.layout.simple_list_item_2,stats.getGameWithStats());
@@ -61,5 +64,6 @@ public class StatsListAdaptateur extends ArrayAdapter<Game> {
 
         return rowView;
     }
-
+*/
 }
+

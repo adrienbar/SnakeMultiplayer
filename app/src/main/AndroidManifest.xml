@@ -24,6 +24,10 @@
             android:name=".generalApp.NetworkModeAndGameSettings"
             android:label="@string/title_activity_network_mode_and_game_settings" >
         </activity>
+        <activity
+            android:name=".generalApp.player.stats.GameStatsActivity"
+            android:label="@string/title_activity_game_stats" >
+        </activity>
     </application>
 
 </manifest>

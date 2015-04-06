@@ -11,8 +11,9 @@ import java.util.List;
 /**
  * Created by Adrien on 31/03/15.
  */
-public class StatsHashmap implements Stats {
-
+public class StatsHashmap //implements Stats {
+{
+    /*
     private HashMap<String,StatsForOneGame> stats;
 
 
@@ -115,4 +116,5 @@ public class StatsHashmap implements Stats {
     public void resetStats(Game game) {
         this.getStats().put(game.getName(),game.createStats());
     }
+    */
 }
