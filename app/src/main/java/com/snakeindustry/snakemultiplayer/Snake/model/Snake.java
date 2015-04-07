@@ -50,6 +50,38 @@ public class Snake {
         this.length = length;
     }
 
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
+    public LinkedList<SnakeCell> getBody() {
+        return body;
+    }
+
+    public void setBody(LinkedList<SnakeCell> body) {
+        this.body = body;
+    }
+
+    public int getGrowing() {
+        return growing;
+    }
+
+    public void setGrowing(int growing) {
+        this.growing = growing;
+    }
+
+    public direction getCurrentDirection() {
+        return currentDirection;
+    }
+
+    public void setCurrentDirection(direction currentDirection) {
+        this.currentDirection = currentDirection;
+    }
+
     private void moveCurrentDirection()
     {
         addSquareToHead();

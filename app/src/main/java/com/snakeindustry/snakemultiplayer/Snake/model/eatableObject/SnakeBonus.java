@@ -5,10 +5,11 @@ import com.snakeindustry.snakemultiplayer.Snake.model.state.State;
 /**
  * Created by Adrien on 28/03/15.
  */
+
 public abstract class SnakeBonus extends EatableObject {
 
     private State state;
-    private enum target{all,self,others};
+    public enum target{all,self,others};
     private target target;
 
 
@@ -25,11 +26,11 @@ public abstract class SnakeBonus extends EatableObject {
         this.state = state;
     }
 
-    public SnakeBonus.target getTarget() {
+    public target getTarget() {
         return target;
     }
 
-    public void setTarget(SnakeBonus.target target) {
+    public void setTarget(target target) {
         this.target = target;
     }
 }
