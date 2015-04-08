@@ -13,7 +13,7 @@ public abstract class SnakeBonus extends EatableObject {
     private target target;
 
 
-    protected SnakeBonus(double x, double y, double width, double height, State state) {
+    public SnakeBonus(double x, double y, double width, double height, State state,String bonus) {
         super(x, y, width, height);
         this.state=state;
     }

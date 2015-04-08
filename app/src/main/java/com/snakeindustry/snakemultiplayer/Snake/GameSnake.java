@@ -17,7 +17,7 @@ public class GameSnake implements Game {
 
   //  public static final String ID_NAME="MULTIPLAYER_SNAKE";
 
-    private final String name = "Multilayer Snake" ;
+    private final String name = "Multiplayer Snake" ;
 
     private GameView gameView;
     private GameState gameState;

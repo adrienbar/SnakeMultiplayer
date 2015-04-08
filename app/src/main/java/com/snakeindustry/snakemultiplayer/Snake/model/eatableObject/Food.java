@@ -5,7 +5,7 @@ package com.snakeindustry.snakemultiplayer.Snake.model.eatableObject;
  */
 public class Food extends EatableObject {
 
-    protected Food(double x, double y, double width, double height) {
+    public Food(double x, double y, double width, double height) {
         super(x, y, width, height);
     }
 }

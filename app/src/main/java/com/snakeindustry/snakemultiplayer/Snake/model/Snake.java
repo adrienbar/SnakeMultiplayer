@@ -19,20 +19,31 @@ public class Snake {
     private int length; // Cell length
     private LinkedList<SnakeCell> body;
     private int growing;//Will be used to count the number of cells that have to grow
+    private String player;//The name of the player the snake belongs to
     private enum direction {
         up, down, left, right, none
     }
 
     private direction currentDirection;
 
-    public Snake()
+    public Snake(String player,int width, int length)
     {
         this.state= new NormalState();
         this.body=new LinkedList<SnakeCell>();
+        this.player=player;
+        this.width=width;
+        this.length=length;
         growing=0;
 
     }
 
+    public String getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(String player) {
+        this.player = player;
+    }
 
     public int getWidth() {
         return width;
