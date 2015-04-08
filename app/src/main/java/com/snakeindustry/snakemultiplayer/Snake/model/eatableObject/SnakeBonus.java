@@ -11,6 +11,7 @@ public abstract class SnakeBonus extends EatableObject {
     private State state;
     public enum target{all,self,others};
     private target target;
+    private int duration;
 
 
     public SnakeBonus(double x, double y, double width, double height, State state,String bonus) {
@@ -32,5 +33,13 @@ public abstract class SnakeBonus extends EatableObject {
 
     public void setTarget(target target) {
         this.target = target;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 }

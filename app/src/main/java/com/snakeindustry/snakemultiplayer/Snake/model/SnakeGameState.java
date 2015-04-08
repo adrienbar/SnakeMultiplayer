@@ -1,12 +1,17 @@
 package com.snakeindustry.snakemultiplayer.Snake.model;
 
 import com.snakeindustry.snakemultiplayer.Snake.model.eatableObject.Food;
+import com.snakeindustry.snakemultiplayer.Snake.model.state.NormalState;
 import com.snakeindustry.snakemultiplayer.Snake.model.state.State;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameState;
 import com.snakeindustry.snakemultiplayer.Snake.model.eatableObject.SnakeBonus;
 import  com.snakeindustry.snakemultiplayer.Snake.model.eatableObject.SnakeBonus.target;
+
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by Adrien on 28/03/15.
@@ -127,6 +132,29 @@ public class SnakeGameState extends GameState {
 
 
 
+    }
+
+     class CancelBonusTask extends TimerTask {
+
+        List<String> targets;
+         public CancelBonusTask(List<String> targets){
+            this.targets=targets;
+        }
+
+        public void run() {
+            Iterator<Snake> iter = snakes.iterator();
+            while(iter.hasNext()){
+               Snake temp = iter.next();
+                //Set all affected snakes back to normal
+                if(targets.contains(temp.getPlayer())){
+                        temp.setState(new NormalState());
+                }
+
+                //Remove the bonus from the active bonus list
+
+            }
+
+        }
     }
 
 
