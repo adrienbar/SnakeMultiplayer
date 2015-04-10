@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.snakeindustry.snakemultiplayer.R;
 import com.snakeindustry.snakemultiplayer.generalApp.mainActivity.ButtonController;
 import com.snakeindustry.snakemultiplayer.generalApp.player.stats.StatsOneGameActivity;
+import com.snakeindustry.snakemultiplayer.generalApp.player.stats.model.SimpleStats;
 
 public class NetworkModeAndGameSettings extends ActionBarActivity {
 
@@ -28,6 +29,10 @@ public class NetworkModeAndGameSettings extends ActionBarActivity {
 
         Button stats= (Button) findViewById(R.id.statsbutton);
         stats.setOnClickListener(new ButtonController(StatsOneGameActivity.class));
+
+        TextView bestScore = (TextView) findViewById(R.id.bestScore);
+        SimpleStats bestScore1 = AppSingleton.getInstance().getPlayer().getStats().getStatsForOneGame(AppSingleton.getInstance().getCurrentGame()).getBestScore();
+        bestScore.setText(bestScore1.getDescription() + " " + bestScore1.getValue() + " "+ bestScore1.getUnit());
 
     }
 
