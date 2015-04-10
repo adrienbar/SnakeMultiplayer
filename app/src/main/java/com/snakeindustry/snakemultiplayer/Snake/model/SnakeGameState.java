@@ -7,6 +7,7 @@ import com.snakeindustry.snakemultiplayer.generalApp.game.GameState;
 import com.snakeindustry.snakemultiplayer.Snake.model.eatableObject.SnakeBonus;
 import  com.snakeindustry.snakemultiplayer.Snake.model.eatableObject.SnakeBonus.target;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -71,28 +72,38 @@ public class SnakeGameState extends GameState {
 
     //Checks if any snake is on a bonus, if yes apply it
     public void checkBonuses() {
-
+        Timer timer;
         for (Snake s : snakes) {
 
             for (SnakeBonus sb : spawnedBonuses) {
 
                 if (s.getBody().getFirst().getX() == sb.getX() && s.getBody().getFirst().getY() == sb.getY()) {
-
+                    List<String> targets = new ArrayList<>();
                     if(sb.getTarget()== target.self){
                         s.setState(sb.getState());
+                        timer=new Timer();
+
+                       targets.add(s.getPlayer());
+                       timer.schedule(new CancelBonusTask(targets,sb), sb.getDuration() * 1000);
                     }
                     else if(sb.getTarget()== target.all){
 
                         for (Snake targeted : snakes) {
                               targeted.setState(sb.getState());
+                              targets.add(s.getPlayer());
                         }
+                        timer=new Timer();
+                        timer.schedule(new CancelBonusTask(targets,sb), sb.getDuration() * 1000);
                      }
                     else if(sb.getTarget()== target.others){
                         for (Snake targeted : snakes) {
                             if(!targeted.equals(s)) {
                                 targeted.setState(sb.getState());
+                                targets.add(s.getPlayer());
                             }
                         }
+                        timer=new Timer();
+                        timer.schedule(new CancelBonusTask(targets,sb), sb.getDuration() * 1000);
                     }
 
 
@@ -133,12 +144,13 @@ public class SnakeGameState extends GameState {
 
 
     }
-
+    //Class used for timer cancelling bonus
      class CancelBonusTask extends TimerTask {
 
         List<String> targets;
-         public CancelBonusTask(List<String> targets){
-            this.targets=targets;
+         SnakeBonus bonus;
+         public CancelBonusTask(List<String> targets,SnakeBonus bonus){
+            this.targets=targets;this.bonus=bonus;
         }
 
         public void run() {
@@ -153,7 +165,17 @@ public class SnakeGameState extends GameState {
                 //Remove the bonus from the active bonus list
 
             }
+            Iterator<SnakeBonus> iter2 = spawnedBonuses.iterator();
+            while(iter.hasNext()){
+                SnakeBonus temp = iter2.next();
+                //Set all affected snakes back to normal
+                if(temp.getId().equals(bonus.getId())){
+                    spawnedBonuses.remove(temp);
+                }
 
+                //Remove the bonus from the active bonus list
+
+            }
         }
     }
 
