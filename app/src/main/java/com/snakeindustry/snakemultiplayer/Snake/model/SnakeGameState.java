@@ -215,7 +215,7 @@ public class SnakeGameState extends GameState {
     public void nextStep(HashMap<String, Integer> playerCommand) {
 
 
-        System.out.println("GAME STATE  nextStep : "+ playerCommand.keySet()+" command : " + playerCommand.values());
+       // System.out.println("GAME STATE  nextStep : "+ playerCommand.keySet()+" command : " + playerCommand.values());
         //update the direction of each snake
         for(String playerName : playerCommand.keySet()){
             performeActionCode(playersSnakes.get(playerName),playerCommand.get(playerName));

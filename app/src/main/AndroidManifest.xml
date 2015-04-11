@@ -38,6 +38,10 @@
             android:name=".Snake.viewAndControl.GamePlayActivity"
             android:label="@string/title_activity_game_play" >
         </activity>
+        <activity
+            android:name=".generalApp.pseudoNetwork.RoomActivity"
+            android:label="@string/title_activity_room" >
+        </activity>
     </application>
 
 </manifest>

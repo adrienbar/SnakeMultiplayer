@@ -8,5 +8,6 @@
     <string name="title_activity_game_stats">GameStatsActivity</string>
     <string name="title_activity_edit_name">EditName</string>
     <string name="title_activity_game_play">GamePlayActivity</string>
+    <string name="title_activity_room">RoomActivity</string>
 
 </resources>

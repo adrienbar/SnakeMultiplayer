@@ -23,7 +23,7 @@ public class GameThread extends Thread{
         super();
         this.server = new ServerC(null,this);
         this.gameState = AppSingleton.getInstance().getCurrentGame().getGameState();
-        this.refreshInterval = 2000; //ms
+        this.refreshInterval = 50; //ms
         this.running=true;
     }
 
