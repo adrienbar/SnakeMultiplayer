@@ -1,17 +1,23 @@
 package com.snakeindustry.snakemultiplayer.generalApp;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.snakeindustry.snakemultiplayer.R;
+import com.snakeindustry.snakemultiplayer.Snake.viewAndControl.GamePlayActivity;
+import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
+import com.snakeindustry.snakemultiplayer.generalApp.game.GameThread;
 import com.snakeindustry.snakemultiplayer.generalApp.mainActivity.ButtonController;
 import com.snakeindustry.snakemultiplayer.generalApp.player.stats.StatsOneGameActivity;
 import com.snakeindustry.snakemultiplayer.generalApp.player.stats.model.SimpleStats;
+import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.ServerC;
 
 public class NetworkModeAndGameSettings extends ActionBarActivity {
 
@@ -33,6 +39,21 @@ public class NetworkModeAndGameSettings extends ActionBarActivity {
         TextView bestScore = (TextView) findViewById(R.id.bestScore);
         SimpleStats bestScore1 = AppSingleton.getInstance().getPlayer().getStats().getStatsForOneGame(AppSingleton.getInstance().getCurrentGame()).getBestScore();
         bestScore.setText(bestScore1.getDescription() + " " + bestScore1.getValue() + " "+ bestScore1.getUnit());
+
+        Button testSolo = (Button) findViewById(R.id.testSolo);
+        testSolo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                AppSingleton.getInstance().setServer(true);
+
+                AppSingleton.getInstance().setCurrenGameTread(new GameThread());
+                AppSingleton.getInstance().getCurrenGameTread().getServer().getRoom().startTheGame();
+
+                Intent myIntent = new Intent(v.getContext(), GamePlayActivity.class);
+                v.getContext().startActivity(myIntent);
+            }
+        });
 
     }
 

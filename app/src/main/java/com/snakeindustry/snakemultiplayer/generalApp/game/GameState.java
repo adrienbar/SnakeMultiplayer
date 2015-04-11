@@ -1,7 +1,9 @@
 package com.snakeindustry.snakemultiplayer.generalApp.game;
 
 import com.snakeindustry.snakemultiplayer.generalApp.player.Player;
+import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.Server;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -13,9 +15,9 @@ public abstract class GameState {
 
     public abstract boolean isGameOver();
 
-    public abstract void configure();
+    public abstract void configure(List<String> playersNames);
 
-    public abstract void nextStep();
+    public abstract void nextStep(HashMap<String,Integer> playerCommand);
 
     public abstract void gameOverAction();
 

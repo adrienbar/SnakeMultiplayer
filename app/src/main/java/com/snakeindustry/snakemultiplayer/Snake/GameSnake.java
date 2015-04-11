@@ -15,22 +15,27 @@ import com.snakeindustry.snakemultiplayer.generalApp.player.stats.model.GameStat
  */
 public class GameSnake implements Game {
 
+    private static GameSnake instance = null;
+    private GameSnake() {
+        this.gameView = null;
+        this.gameState = new SnakeGameState();
+
+    }
+
+    public static synchronized GameSnake getInstance() {
+        if (instance == null) {
+            instance = new GameSnake();
+        }
+
+        return instance;
+    }
+
   //  public static final String ID_NAME="MULTIPLAYER_SNAKE";
 
     private final String name = "Multiplayer Snake" ;
 
     private GameView gameView;
     private GameState gameState;
-
-
-    public GameSnake(GameView gameView, GameState gameState) {
-        this.gameView = gameView;
-        this.gameState = gameState;
-    }
-
-    public GameSnake() {
-        this(new SnakeViewTouchControl(),new SnakeGameState());
-    }
 
 
     @Override
@@ -59,6 +64,11 @@ public class GameSnake implements Game {
     }
 
     @Override
+    public void resetGameState() {
+        this.setGameState(new SnakeGameState());
+    }
+
+    @Override
     public String toString() {
         return getName();
     }
@@ -67,5 +77,9 @@ public class GameSnake implements Game {
     @Override
     public View getSettings() {
         return null;
+    }
+
+    public void setGameState(GameState gameState) {
+        this.gameState = gameState;
     }
 }

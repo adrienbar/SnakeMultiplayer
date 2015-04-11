@@ -2,6 +2,9 @@ package com.snakeindustry.snakemultiplayer.generalApp;
 
 import com.snakeindustry.snakemultiplayer.Snake.GameSnake;
 import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
+import com.snakeindustry.snakemultiplayer.generalApp.game.GameThread;
+import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.LocalClient;
+import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.Server;
 import com.snakeindustry.snakemultiplayer.generalApp.player.DefaultPlayer;
 import com.snakeindustry.snakemultiplayer.generalApp.player.Player;
 import com.snakeindustry.snakemultiplayer.generalApp.player.stats.model.Stats;
@@ -26,12 +29,19 @@ public class AppSingleton {
     private Game currentGame;
     private Player player;
 
+    private boolean isServer;
+    private GameThread currenGameTread;
+    private LocalClient localClient;
+
 
     //APPLICATION'S PARAMETERS
     private AppSingleton() {
         this.player=new DefaultPlayer();
         this.availabeGames=new ArrayList<Game>();
-        this.availabeGames.add(new GameSnake());
+        this.availabeGames.add(GameSnake.getInstance());
+        this.isServer=false;
+        this.currenGameTread=null;
+        this.localClient=null;
 
         //System.out.println("AAAAAAAA "+this.getAvailabeGames());
 
@@ -118,5 +128,21 @@ public class AppSingleton {
 
     public void setPlayer(Player player) {
         this.player = player;
+    }
+
+    public boolean isServer() {
+        return isServer;
+    }
+
+    public GameThread getCurrenGameTread() {
+        return currenGameTread;
+    }
+
+    public void setCurrenGameTread(GameThread currenGameTread) {
+        this.currenGameTread = currenGameTread;
+    }
+
+    public void setServer(boolean isServer) {
+        this.isServer = isServer;
     }
 }

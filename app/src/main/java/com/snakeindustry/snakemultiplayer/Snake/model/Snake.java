@@ -15,6 +15,12 @@ import java.util.LinkedList;
 public class Snake {
 
     private State state;
+
+    /*
+
+     */
+    private final double heightScale=0.05;//proportion of the screen height;
+    private final double widthScale = 0.05; //heightScale*10.0/16.0; //most of screen are 16/10
     private int width; //Cell width
     private int length; // Cell length
     private LinkedList<SnakeCell> body;
@@ -35,6 +41,16 @@ public class Snake {
         this.length=length;
         growing=0;
 
+    }
+
+    /**
+     * Default snake for testing
+     */
+    public Snake(){
+        this.body=new LinkedList<>();
+        this.body.add(new SnakeCell(0.1,0.1));
+        this.body.add(new SnakeCell(0.1,0.5));
+        this.body.add(new SnakeCell(0.5,0.5));
     }
 
     public String getPlayer() {
@@ -113,8 +129,8 @@ public class Snake {
      */
     private void addSquareToHead() {
         SnakeCell head = body.getFirst();
-        int newX = head.getX();
-        int newY = head.getY();
+        int newX = (int) head.getX();
+        int newY = (int) head.getY();
         switch (currentDirection) {
             case up:
                 newY-=length;
@@ -183,14 +199,25 @@ public class Snake {
     }
 
 
-
     public void grow(int amount){
         growing+=amount;
     }
 
 
+    public double getWidthScale() {
+        return widthScale;
+    }
+
+    public double getHeightScale() {
+        return heightScale;
+    }
 
 
+    public void turnRight(){
+        System.out.println("Snake turns Right");
+    }
 
-
+    public void turnLeft(){
+        System.out.println("Snake turns Left");
+    }
 }

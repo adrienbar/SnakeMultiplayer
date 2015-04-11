@@ -15,6 +15,8 @@ public int getIdIcon();
 public GameView getGameView();
 public GameStats createStats();
 public GameState getGameState();
+public void resetGameState();
+
 
     //type View should be discussed, and more generally the Settings of a game
 public View getSettings();

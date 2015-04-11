@@ -34,6 +34,10 @@
             android:name=".generalApp.player.EditName"
             android:label="@string/title_activity_edit_name" >
         </activity>
+        <activity
+            android:name=".Snake.viewAndControl.GamePlayActivity"
+            android:label="@string/title_activity_game_play" >
+        </activity>
     </application>
 
 </manifest>

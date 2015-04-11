@@ -3,12 +3,16 @@ package com.snakeindustry.snakemultiplayer.Snake.model;
 import com.snakeindustry.snakemultiplayer.Snake.model.eatableObject.Food;
 import com.snakeindustry.snakemultiplayer.Snake.model.state.NormalState;
 import com.snakeindustry.snakemultiplayer.Snake.model.state.State;
+import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameState;
 import com.snakeindustry.snakemultiplayer.Snake.model.eatableObject.SnakeBonus;
 import  com.snakeindustry.snakemultiplayer.Snake.model.eatableObject.SnakeBonus.target;
+import com.snakeindustry.snakemultiplayer.generalApp.player.Player;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.Timer;
@@ -19,35 +23,42 @@ import java.util.TimerTask;
  */
 public class SnakeGameState extends GameState {
 
+    public final static int SNAKE_TURN_LEFT=0;
+    public final static int SNAKE_TURN_RIGHT=1;
+
     List<SnakeBonus> spawnedBonuses, activeBonuses;
     List<Food> spawnedFood;
     List<Snake> snakes;
+    HashMap<String,Snake> playersSnakes;
     //Array of available bonuses name, with strings to randomly generate them
     String[] availableBonuses;
     int screenWidth,screenLength;
    //Should define the windth and length of all items, ie food/bonuses/snakecells,etc
     int itemWidth,itemLength;
 
-   public SnakeGameState(){
+    public SnakeGameState(){
        super();
-       availableBonuses=new String[1];
-       availableBonuses[0]="Invincible";
+        this.spawnedBonuses = new LinkedList<SnakeBonus>();
+        this.activeBonuses = new LinkedList<SnakeBonus>();
+        this.spawnedFood = new LinkedList<Food>();
+
+        availableBonuses=new String[1];
+        availableBonuses[0]="Invincible";
+
+        //initialise properly playersSnakes and snakes
+        this.configure(new ArrayList<String>());
+
    }
+
 
     @Override
     public boolean isGameOver() {
         return false;
     }
 
-    @Override
-    public void configure() {
 
-    }
 
-    @Override
-    public void nextStep() {
 
-    }
 
     @Override
     public void gameOverAction() {
@@ -180,5 +191,74 @@ public class SnakeGameState extends GameState {
     }
 
 
- }
+
+
+    /**
+     * create a new snake for each player and update ths snakesList
+     * @param players in the game
+     */
+    public void configure(List<String> players) {
+        playersSnakes=new HashMap<>();
+        snakes=new ArrayList<>();
+        //create a new Snake for the local player
+        //this.playersSnakes.put(AppSingleton.getInstance().getPlayer().getName(), new Snake());
+
+        //create a new Snake for each distantPlayers
+        for (String playerName :players) {
+            playersSnakes.put(playerName,new Snake());
+        }
+        //update the list of snakes
+        snakes.addAll(playersSnakes.values());
+    }
+
+    @Override
+    public void nextStep(HashMap<String, Integer> playerCommand) {
+
+
+        System.out.println("GAME STATE  nextStep : "+ playerCommand.keySet()+" command : " + playerCommand.values());
+        //update the direction of each snake
+        for(String playerName : playerCommand.keySet()){
+            performeActionCode(playersSnakes.get(playerName),playerCommand.get(playerName));
+        }
+
+        //update positions
+
+        //update collisions
+
+
+    }
+
+
+
+
+    private void performeActionCode(Snake snake,Integer commande) {
+        if(commande!=null) {
+            switch (commande) {
+                case SNAKE_TURN_LEFT:
+                    snake.turnLeft();
+                case SNAKE_TURN_RIGHT:
+                    snake.turnRight();
+                default:
+            }
+        }
+
+    }
+
+
+
+    //GETTERS AND SETTERS
+
+    public List<SnakeBonus> getSpawnedBonuses() {
+        return spawnedBonuses;
+    }
+
+    public List<Food> getSpawnedFood() {
+        return spawnedFood;
+    }
+
+    public List<Snake> getSnakes() {
+        return snakes;
+    }
+
+}
 

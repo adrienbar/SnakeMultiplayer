@@ -96,6 +96,14 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="53dp" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TestSolo"
+        android:id="@+id/testSolo"
+        android:layout_above="@+id/statsbutton"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
 
 
