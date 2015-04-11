@@ -10,23 +10,13 @@ import com.snakeindustry.snakemultiplayer.generalApp.game.GameView;
  */
 public class LocalClient implements LocalClientI {
 
-    private GameThread gameThread;
     private GameView gameView;
 
 
-    public LocalClient(GameThread gameThread, GameView gameView) {
-        this.gameThread = gameThread;
+    public LocalClient(GameView gameView) {
         this.gameView=gameView;
     }
 
-    public LocalClient(){
-        this(null,null);
-    }
-
-    @Override
-    public GameThread getGameThread() {
-        return this.gameThread;
-    }
 
     @Override
     public void receive(GameState gameState) {
@@ -35,7 +25,7 @@ public class LocalClient implements LocalClientI {
 
     @Override
     public void sendCommand(int command) {
-        this.getGameThread().getServer().getRoom().setPlayerCommand(AppSingleton.getInstance().getPlayer().getName(),command);
+        AppSingleton.getInstance().getCurrenGameTread().getServer().getRoom().setPlayerCommand(AppSingleton.getInstance().getPlayer().getName(),command);
         //System.out.println("LOCAL CLIENT command sent : " + command);
     }
 
