@@ -34,7 +34,7 @@ public class SnakeGameState extends GameState {
     String[] availableBonuses;
     int screenWidth,screenLength;
    //Should define the windth and length of all items, ie food/bonuses/snakecells,etc
-    int itemWidth,itemLength;
+    double itemWidth,itemLength;
 
     public SnakeGameState(){
        super();
@@ -47,6 +47,12 @@ public class SnakeGameState extends GameState {
 
         //initialise properly playersSnakes and snakes
         this.configure(new ArrayList<String>());
+        screenWidth=1;
+        screenLength=1;
+        itemWidth=0.05;
+        itemLength=0.05;
+
+
 
    }
 
@@ -127,8 +133,8 @@ public class SnakeGameState extends GameState {
 
     public void spawnFood(){
         Random randomGenerator = new Random();
-        int randomX=randomGenerator.nextInt(screenWidth-itemWidth+1)+itemWidth;
-        int randomY=randomGenerator.nextInt(screenLength-itemLength+1)+itemLength;
+        double randomX=itemWidth/2+(screenWidth -itemWidth/2)*randomGenerator.nextDouble();
+        double randomY=itemLength/2+(screenLength -itemLength/2)*randomGenerator.nextDouble();
         Food spawned = new Food(randomX,randomY,itemWidth,itemLength);
         spawnedFood.add(spawned);
 
@@ -137,8 +143,8 @@ public class SnakeGameState extends GameState {
     public void spawnBonus() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
 
         Random randomGenerator = new Random();
-        int randomX=randomGenerator.nextInt(screenWidth-itemWidth+1)+itemWidth;
-        int randomY=randomGenerator.nextInt(screenLength-itemLength+1)+itemLength;
+        double randomX=itemWidth/2+(screenWidth -itemWidth/2)*randomGenerator.nextDouble();
+        double randomY=itemLength/2+(screenLength -itemLength/2)*randomGenerator.nextDouble();
         //Chose index in the list of bonuses
         int randomBonus=randomGenerator.nextInt(activeBonuses.size());
         //Instantiate the appropriate class

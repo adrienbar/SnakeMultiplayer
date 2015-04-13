@@ -12,6 +12,8 @@ import java.util.LinkedList;
 /**
  * Created by Adrien on 28/03/15.
  */
+
+
 public class Snake {
 
     private State state;
@@ -26,10 +28,10 @@ public class Snake {
     private LinkedList<SnakeCell> body;
     private int growing;//Will be used to count the number of cells that have to grow
     private String player;//The name of the player the snake belongs to
-    private enum direction {
-        up, down, left, right, none
-    }
 
+    private enum direction {
+         down, left, right, up, none
+    }
     private direction currentDirection;
 
     public Snake(String player,int width, int length)
@@ -199,6 +201,8 @@ public class Snake {
     }
 
 
+
+
     public void grow(int amount){
         growing+=amount;
     }
@@ -214,10 +218,70 @@ public class Snake {
 
 
     public void turnRight(){
+
+        if (currentDirection == direction.left) { // it is not possible to move
+            // in the opposite direction
+            currentDirection = direction.up;
+        }
+        else if(currentDirection == direction.up){
+            currentDirection = direction.right;
+        }
+        else if(currentDirection == direction.right){
+            currentDirection = direction.down;
+        }
+        else if(currentDirection == direction.down){
+            currentDirection = direction.left;
+        }
+
         System.out.println("Snake turns Right");
     }
 
-    public void turnLeft(){
+    public void turnLeft( ){
+        if (currentDirection == direction.left) { // it is not possible to move
+            // in the opposite direction
+            currentDirection = direction.down;
+        }
+        else if(currentDirection == direction.down){
+            currentDirection = direction.right;
+        }
+        else if(currentDirection == direction.right){
+            currentDirection = direction.up;
+        }
+        else if(currentDirection == direction.up){
+            currentDirection = direction.left;
+        }
         System.out.println("Snake turns Left");
     }
+
+        public boolean ifTurnPossible(int turndirection)
+        {
+            //Assume 0=Up,1=Right,2=Down,3=Left
+
+            switch (turndirection){
+                case 0:
+                    if(currentDirection == direction.down ){
+                        return false;
+
+                    }
+                case 1:
+                    if(currentDirection == direction.left ){
+                        return false;
+
+                    }
+                case 2:
+                    if(currentDirection == direction.up ){
+                        return false;
+
+                    }
+                case 3:
+                    if(currentDirection == direction.right ){
+                        return false;
+
+                    }
+            }
+
+
+            return true;
+        }
+
 }
