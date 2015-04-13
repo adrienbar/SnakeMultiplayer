@@ -1,7 +1,9 @@
 package com.snakeindustry.snakemultiplayer.Snake.model.state;
 
 import com.snakeindustry.snakemultiplayer.Snake.model.Snake;
+import com.snakeindustry.snakemultiplayer.Snake.model.SnakeCell;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -9,15 +11,12 @@ import java.util.List;
  */
 public class NormalState extends State {
 
-    public NormalState(double width, double length)
+    public NormalState(LinkedList<SnakeCell> body,double width, double length)
     {
 
-        super(width,length);
+        super(body,width,length);
     }
 
-    public boolean collisionManagement( List<Snake> snakes){
-        return false;
-    }
 
 
 }

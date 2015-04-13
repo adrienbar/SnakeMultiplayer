@@ -77,9 +77,9 @@ public class SnakeGameState extends GameState {
 
             for (Food f : spawnedFood) {
 
-                if (s.getBody().getFirst().getX() == f.getX() && s.getBody().getFirst().getY() == f.getY()) {
+                if (s.getState().getBody().getFirst().getX() == f.getX() && s.getState().getBody().getFirst().getY() == f.getY()) {
 
-                    s.grow(1);
+                    s.getState().grow(1);
                     spawnedFood.remove(f);
                 }
             }
@@ -94,7 +94,7 @@ public class SnakeGameState extends GameState {
 
             for (SnakeBonus sb : spawnedBonuses) {
 
-                if (s.getBody().getFirst().getX() == sb.getX() && s.getBody().getFirst().getY() == sb.getY()) {
+                if (s.getState().getBody().getFirst().getX() == sb.getX() && s.getState().getBody().getFirst().getY() == sb.getY()) {
                     List<String> targets = new ArrayList<>();
                     if(sb.getTarget()== target.self){
                         s.setState(sb.getState());
@@ -176,7 +176,9 @@ public class SnakeGameState extends GameState {
                Snake temp = iter.next();
                 //Set all affected snakes back to normal
                 if(targets.contains(temp.getPlayer())){
-                        temp.setState(new NormalState());
+
+                        temp.setState(new NormalState(temp.getState().getBody(),temp.getState().getWidth(),temp.getState().getLength()));
+
                 }
 
                 //Remove the bonus from the active bonus list
@@ -241,9 +243,9 @@ public class SnakeGameState extends GameState {
         if(commande!=null) {
             switch (commande) {
                 case SNAKE_TURN_LEFT:
-                    snake.turnLeft();
+                    snake.getState().turnLeft();
                 case SNAKE_TURN_RIGHT:
-                    snake.turnRight();
+                    snake.getState().turnRight();
                 default:
             }
         }

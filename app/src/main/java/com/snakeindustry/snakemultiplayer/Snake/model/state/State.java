@@ -4,6 +4,7 @@ import com.snakeindustry.snakemultiplayer.Snake.model.Snake;
 import com.snakeindustry.snakemultiplayer.Snake.model.SnakeCell;
 import com.snakeindustry.snakemultiplayer.Snake.model.eatableObject.SnakeBonus;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -24,6 +25,15 @@ public abstract class State {
     public State(double width, double length){
 
         this.body=new LinkedList<SnakeCell>();
+        this.width=width;
+        this.length=length;
+        growing=0;
+
+    }
+
+    public State(LinkedList<SnakeCell> body,double width, double length){
+
+        this.body=body;
         this.width=width;
         this.length=length;
         growing=0;
@@ -71,7 +81,31 @@ public abstract class State {
     }
 
     //Returns false if collision, true if not
-    public boolean collisionManagement( List<Snake> snakes){return false;}
+    public boolean collisionManagement( List<Snake> snakes){
+            //Check collision with other snakes
+            for(Snake temp : snakes) {
+                //Ignore our own body by checking head coordinates
+                if(temp.getState().getBody().getFirst().getX()!=this.getBody().getFirst().getX() && temp.getState().getBody().getFirst().getY()!=this.getBody().getFirst().getY()) {
+
+                    Iterator<SnakeCell> iter = temp.getState().getBody().iterator();
+                    //Check all cells of the snake body
+                    while(iter.hasNext()){
+                        if(iter.next().getX()==this.getBody().getFirst().getX() && iter.next().getY()==this.getBody().getFirst().getY())
+                        {
+                            return true;
+                        }
+                }
+            }
+
+
+        }
+        if(this.getBody().getFirst().getX() > 1 || this.getBody().getFirst().getY()>1){
+            return true;
+        }
+
+
+        return false;
+    }
 
     private void moveCurrentDirection()
     {
@@ -219,6 +253,9 @@ public abstract class State {
                 moveLeft();
         }
     }
+
+
+
 
 
 }
