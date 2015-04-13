@@ -17,6 +17,12 @@ public class NormalState extends State {
         super(body,width,length);
     }
 
+    public NormalState(double width, double length)
+    {
+
+        super(width,length);
+    }
+
 
 
 }

@@ -13,20 +13,22 @@ import java.util.List;
  */
 public abstract class State {
 
-    private double width; //Cell width
-    private double length; // Cell length
-    private LinkedList<SnakeCell> body;
-    private int growing;//Will be used to count the number of cells that have to grow
-    private enum direction {
+    protected double width; //Cell width
+    protected double length; // Cell length
+    protected double speed;
+    protected LinkedList<SnakeCell> body;
+    protected int growing;//Will be used to count the number of cells that have to grow
+    protected enum direction {
         down, left, right, up, none
     }
-    private direction currentDirection;
+    protected direction currentDirection;
 
     public State(double width, double length){
 
         this.body=new LinkedList<SnakeCell>();
         this.width=width;
         this.length=length;
+        speed=1;
         growing=0;
 
     }
@@ -38,6 +40,14 @@ public abstract class State {
         this.length=length;
         growing=0;
 
+    }
+
+    public double getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(double speed) {
+        this.speed = speed;
     }
 
     public LinkedList<SnakeCell> getBody() {
@@ -107,7 +117,7 @@ public abstract class State {
         return false;
     }
 
-    private void moveCurrentDirection()
+    protected void moveCurrentDirection()
     {
         addSquareToHead();
         if (body.size() > 1) {
@@ -125,22 +135,22 @@ public abstract class State {
      * adds a square in front of the current head of the snake (in the direction
      * specified in currentDirection).
      */
-    private void addSquareToHead() {
+    protected void addSquareToHead() {
         SnakeCell head = body.getFirst();
         int newX = (int) head.getX();
         int newY = (int) head.getY();
         switch (currentDirection) {
             case up:
-                newY-=length;
+                newY-=speed*length;
                 break;
             case down:
-                newY+=length;
+                newY+=speed*length;
                 break;
             case left:
-                newX-=width;
+                newX-=speed*width;
                 break;
             case right:
-                newX+=width;
+                newX+=speed*width;
                 break;
             case none:
                 return;
