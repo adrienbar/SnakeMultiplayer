@@ -219,8 +219,7 @@ public class Snake {
 
     public void turnRight(){
 
-        if (currentDirection == direction.left) { // it is not possible to move
-            // in the opposite direction
+        if (currentDirection == direction.left) {
             currentDirection = direction.up;
         }
         else if(currentDirection == direction.up){
@@ -253,35 +252,20 @@ public class Snake {
         System.out.println("Snake turns Left");
     }
 
-        public boolean ifTurnPossible(int turndirection)
+        public void swipeTurn(int turndirection)
         {
             //Assume 0=Up,1=Right,2=Down,3=Left
 
             switch (turndirection){
                 case 0:
-                    if(currentDirection == direction.down ){
-                        return false;
-
-                    }
+                    moveUp();
                 case 1:
-                    if(currentDirection == direction.left ){
-                        return false;
-
-                    }
+                   moveRight();
                 case 2:
-                    if(currentDirection == direction.up ){
-                        return false;
-
-                    }
+                    moveDown();
                 case 3:
-                    if(currentDirection == direction.right ){
-                        return false;
-
-                    }
+                    moveLeft();
             }
-
-
-            return true;
         }
 
 }
