@@ -20,19 +20,4 @@ public class NormalState extends State {
     }
 
 
-    public void swipeTurn(int turndirection)
-    {
-        //Assume 0=Up,1=Right,2=Down,3=Left
-
-        switch (turndirection){
-            case 0:
-                moveUp();
-            case 1:
-                moveRight();
-            case 2:
-                moveDown();
-            case 3:
-                moveLeft();
-        }
-    }
 }
