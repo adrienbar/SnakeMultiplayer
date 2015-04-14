@@ -18,7 +18,7 @@ public abstract class State {
     protected double speed;
     protected LinkedList<SnakeCell> body;
     protected int growing;//Will be used to count the number of cells that have to grow
-    protected enum direction {
+    public enum direction {
         down, left, right, up, none
     }
     protected direction currentDirection;
@@ -30,6 +30,7 @@ public abstract class State {
         this.length=length;
         speed=1;
         growing=0;
+
 
     }
 
