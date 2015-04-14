@@ -28,7 +28,7 @@ public class Snake {
 
 
 
-    public Snake(String player,int width, int length)
+    public Snake(String player,double width, double length)
     {
         this.state= new NormalState(width,length);
 
@@ -42,7 +42,11 @@ public class Snake {
      * Default snake for testing
      */
     public Snake(){
+        this.player="";
+        this.state= new NormalState(0.05,0.05);
         this.state.setBody(new LinkedList<SnakeCell>());
+
+        //for testing
         this.state.getBody().add(new SnakeCell(0.1,0.1));
         this.state.getBody().add(new SnakeCell(0.1,0.5));
         this.state.getBody().add(new SnakeCell(0.5,0.5));

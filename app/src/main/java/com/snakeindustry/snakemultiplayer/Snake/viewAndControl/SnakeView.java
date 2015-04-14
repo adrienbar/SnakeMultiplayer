@@ -117,21 +117,21 @@ public abstract class SnakeView extends GameViewAC {
         h = (float) (snake.getHeightScale()*this.getHeight());
         w = (float) (snake.getWidthScale()*this.getWidth());
 
-        x1= (float) (snake.getBody().get(0).getX()*this.getWidth());
-        y1 = (float) (snake.getBody().get(0).getY()*this.getHeight());
+        x1= (float) (snake.getState().getBody().get(0).getX()*this.getWidth());
+        y1 = (float) (snake.getState().getBody().get(0).getY()*this.getHeight());
 
         canvas.drawRect(x1,y1,x1+w,y1+h,paint);
 
 
 
         //DRAW A LINES BETWEEN EACH FOLLOWING POINTS OF THE SNAKE
-        for(int i=1;i<snake.getBody().size();i++){
+        for(int i=1;i<snake.getState().getBody().size();i++){
             //define points
             x2=x1;
             y2=y1;
 
-            x1 = (float) (snake.getBody().get(i).getX()*this.getWidth());
-            y1 = (float) (snake.getBody().get(i).getY()*this.getHeight());
+            x1 = (float) (snake.getState().getBody().get(i).getX()*this.getWidth());
+            y1 = (float) (snake.getState().getBody().get(i).getY()*this.getHeight());
 
 
             //accords the Stroke of the Line to the height or width of the cell which could be different
@@ -152,8 +152,8 @@ public abstract class SnakeView extends GameViewAC {
         }
 
         // Make the snake's head green
-        x1= (float) (snake.getBody().get(0).getX()*this.getWidth());
-        y1 = (float) (snake.getBody().get(0).getY()*this.getHeight());
+        x1= (float) (snake.getState().getBody().get(0).getX()*this.getWidth());
+        y1 = (float) (snake.getState().getBody().get(0).getY()*this.getHeight());
         paint.setColor(Color.GREEN);
         canvas.drawRect(x1,y1,x1+w,y1+h,paint);
     }
