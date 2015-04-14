@@ -10,17 +10,18 @@ import java.util.UUID;
 
 public abstract class SnakeBonus extends EatableObject {
 
-    private State state;
+    protected State state;
     public enum target{all,self,others};
-    private target target;
-    private int duration;
-    private UUID id;
+    protected target target;
+    protected int duration;
+    protected UUID id;
 
 
-    public SnakeBonus(double x, double y, double width, double height, State state,String bonus) {
+    public SnakeBonus(double x, double y, double width, double height, State state) {
         super(x, y, width, height);
         this.state=state;
         this.id=UUID.randomUUID();
+        this.duration=5;
     }
 
     public UUID getId() {

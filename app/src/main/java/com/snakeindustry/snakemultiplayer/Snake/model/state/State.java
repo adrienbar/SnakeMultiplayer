@@ -117,7 +117,7 @@ public abstract class State {
         return false;
     }
 
-    protected void moveCurrentDirection()
+    public void moveCurrentDirection()
     {
         addSquareToHead();
         if (body.size() > 1) {

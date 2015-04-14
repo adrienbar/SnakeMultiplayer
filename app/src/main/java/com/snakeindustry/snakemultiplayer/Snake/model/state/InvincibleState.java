@@ -17,6 +17,11 @@ public class InvincibleState extends State {
         super(body,width,length);
        }
 
+    public InvincibleState (double width, double length){
+
+        super(width,length);
+    }
+
     //Returns false if collision, true if not
     public boolean collisionManagement( List<Snake> snakes){
         //Only checks if we leave the screen

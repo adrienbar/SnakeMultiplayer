@@ -17,6 +17,14 @@ public class ReverseState extends State{
 
     }
 
+    public ReverseState (double width, double length){
+
+        super(width,length);
+
+
+
+    }
+
     public void turnRight(){
 
         if (currentDirection == direction.left) {

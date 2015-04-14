@@ -59,6 +59,8 @@ public class SnakeGameState extends GameState {
 
     @Override
     public boolean isGameOver() {
+
+      
         return false;
     }
 
@@ -97,6 +99,7 @@ public class SnakeGameState extends GameState {
                 if (s.getState().getBody().getFirst().getX() == sb.getX() && s.getState().getBody().getFirst().getY() == sb.getY()) {
                     List<String> targets = new ArrayList<>();
                     if(sb.getTarget()== target.self){
+                        sb.getState().setBody(s.getState().getBody());
                         s.setState(sb.getState());
                         timer=new Timer();
 
@@ -106,6 +109,7 @@ public class SnakeGameState extends GameState {
                     else if(sb.getTarget()== target.all){
 
                         for (Snake targeted : snakes) {
+                              sb.getState().setBody(s.getState().getBody());
                               targeted.setState(sb.getState());
                               targets.add(s.getPlayer());
                         }
@@ -115,6 +119,7 @@ public class SnakeGameState extends GameState {
                     else if(sb.getTarget()== target.others){
                         for (Snake targeted : snakes) {
                             if(!targeted.equals(s)) {
+                                sb.getState().setBody(s.getState().getBody());
                                 targeted.setState(sb.getState());
                                 targets.add(s.getPlayer());
                             }
@@ -151,8 +156,7 @@ public class SnakeGameState extends GameState {
         SnakeBonus spawnedBonus = (SnakeBonus) (Class.forName(availableBonuses[randomBonus]).newInstance());
         spawnedBonus.setX(randomX);
         spawnedBonus.setY(randomY);
-        //Instantiate the appropriate state, state class names should follow the pattern :BehaviorState ( ex: InvincibleState)
-        spawnedBonus.setState((State) (Class.forName(availableBonuses[randomBonus]+"State").newInstance()));
+
 
         spawnedBonuses.add(spawnedBonus);
 
@@ -230,9 +234,15 @@ public class SnakeGameState extends GameState {
         }
 
         //update positions
-
+        for(Snake s : snakes){
+            s.getState().moveCurrentDirection();
+        }
         //update collisions
-
+        for(Snake s : snakes){
+            if(s.getState().collisionManagement(snakes)==true){
+                snakes.remove(s);
+            }
+        }
 
     }
 

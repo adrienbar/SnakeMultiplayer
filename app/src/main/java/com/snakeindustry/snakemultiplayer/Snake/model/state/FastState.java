@@ -17,6 +17,14 @@ public class FastState extends State {
 
     }
 
+    public FastState (double width, double length){
+
+        super(width,length);
+        speed=3;
+
+
+    }
+
     //Test, not sure it will look good on screen to add speed like this
     protected void moveCurrentDirection()
     {
