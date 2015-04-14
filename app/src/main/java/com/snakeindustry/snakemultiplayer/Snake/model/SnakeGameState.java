@@ -60,7 +60,7 @@ public class SnakeGameState extends GameState {
     @Override
     public boolean isGameOver() {
 
-      
+
         return false;
     }
 
