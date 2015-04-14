@@ -26,7 +26,7 @@ public class FastState extends State {
     }
 
     //Test, not sure it will look good on screen to add speed like this
-    protected void moveCurrentDirection()
+    public void moveCurrentDirection()
     {
         for(int i=0;i<speed;i++){
             addSquareToHead();
