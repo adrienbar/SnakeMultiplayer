@@ -52,6 +52,43 @@ public class Snake {
         this.state.getBody().add(new SnakeCell(0.5,0.5));
     }
 
+    public Snake(double x, double y){
+        this.player="";
+        this.state= new NormalState(0.05,0.05);
+        this.state.setBody(new LinkedList<SnakeCell>());
+        initializeBody(x,y);
+        //for testing
+
+
+    }
+
+    public void initializeBody(double x, double y){
+
+        this.state.getBody().add(new SnakeCell(x,y));
+        if(x<0.5 && y<0.5){
+            this.state.getBody().add(new SnakeCell(x-state.getWidth(),y));
+            this.state.getBody().add(new SnakeCell(x-2*state.getWidth(),y));
+            this.state.setCurrentDirection(State.direction.right);
+        }
+        else if(x<0.5 && y>0.5){
+
+            this.state.getBody().add(new SnakeCell(x,y+state.getLength()));
+            this.state.getBody().add(new SnakeCell(x,y+2*state.getLength()));
+            this.state.setCurrentDirection(State.direction.up);
+
+        }
+        else if(x>0.5 && y<0.5){
+            this.state.getBody().add(new SnakeCell(x,y-state.getLength()));
+            this.state.getBody().add(new SnakeCell(x,y-2*state.getLength()));
+            this.state.setCurrentDirection(State.direction.down);
+        }
+        else{
+            this.state.getBody().add(new SnakeCell(x+state.getWidth(),y));
+            this.state.getBody().add(new SnakeCell(x+2*state.getWidth(),y));
+            this.state.setCurrentDirection(State.direction.left);
+        }
+    }
+
     public String getPlayer() {
         return player;
     }

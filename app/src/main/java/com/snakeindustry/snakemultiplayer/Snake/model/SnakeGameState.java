@@ -42,8 +42,10 @@ public class SnakeGameState extends GameState {
         this.activeBonuses = new LinkedList<SnakeBonus>();
         this.spawnedFood = new LinkedList<Food>();
 
-        availableBonuses=new String[1];
+        availableBonuses=new String[3];
         availableBonuses[0]="Invincible";
+        availableBonuses[1]="Reverse";
+        availableBonuses[2]="Fast";
 
         //initialise properly playersSnakes and snakes
         this.configure(new ArrayList<String>());
@@ -216,8 +218,20 @@ public class SnakeGameState extends GameState {
         //this.playersSnakes.put(AppSingleton.getInstance().getPlayer().getName(), new Snake());
 
         //create a new Snake for each distantPlayers
+
         for (String playerName :players) {
-            playersSnakes.put(playerName,new Snake());
+            if(playersSnakes.size()==0){
+            playersSnakes.put(playerName,new Snake(0.25,0.25));
+            }
+            else if(playersSnakes.size()==0){
+                playersSnakes.put(playerName,new Snake(0.25,0.75));
+            }
+            else if(playersSnakes.size()==0){
+                playersSnakes.put(playerName,new Snake(0.75,0.25));
+            }
+            else{
+                playersSnakes.put(playerName,new Snake(0.75,0.75));
+            }
         }
         //update the list of snakes
         snakes.addAll(playersSnakes.values());
