@@ -138,8 +138,8 @@ public abstract class State {
      */
     protected void addSquareToHead() {
         SnakeCell head = body.getFirst();
-        int newX = (int) head.getX();
-        int newY = (int) head.getY();
+        double newX =  head.getX();
+        double newY =  head.getY();
         switch (currentDirection) {
             case up:
                 newY-=speed*length;
@@ -153,12 +153,10 @@ public abstract class State {
             case right:
                 newX+=speed*width;
                 break;
-            case none:
-                return;
             default:
                 return;
         }
-        body.add(0, new SnakeCell(newX, newY));
+        body.addFirst( new SnakeCell(newX, newY));
     }
 
     /**

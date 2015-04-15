@@ -107,6 +107,7 @@ public class SnakeGameState extends GameState {
 
                        targets.add(s.getPlayer());
                        timer.schedule(new CancelBonusTask(targets,sb), sb.getDuration() * 1000);
+
                     }
                     else if(sb.getTarget()== target.all){
 
@@ -130,7 +131,7 @@ public class SnakeGameState extends GameState {
                         timer.schedule(new CancelBonusTask(targets,sb), sb.getDuration() * 1000);
                     }
 
-
+                     spawnedBonuses.remove(sb);
                   }
 
               }
@@ -187,18 +188,19 @@ public class SnakeGameState extends GameState {
 
                 }
 
-                //Remove the bonus from the active bonus list
+
 
             }
-            Iterator<SnakeBonus> iter2 = spawnedBonuses.iterator();
+            //Remove the bonus from the active bonus list
+            Iterator<SnakeBonus> iter2 = activeBonuses.iterator();
             while(iter.hasNext()){
                 SnakeBonus temp = iter2.next();
-                //Set all affected snakes back to normal
+
                 if(temp.getId().equals(bonus.getId())){
-                    spawnedBonuses.remove(temp);
+                    activeBonuses.remove(temp);
                 }
 
-                //Remove the bonus from the active bonus list
+
 
             }
         }
