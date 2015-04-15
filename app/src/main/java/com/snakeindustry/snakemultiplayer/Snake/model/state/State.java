@@ -28,7 +28,7 @@ public abstract class State {
         this.body=new LinkedList<SnakeCell>();
         this.width=width;
         this.length=length;
-        speed=1;
+        speed=0.1;
         growing=0;
 
 

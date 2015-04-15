@@ -29,25 +29,39 @@ public class SnakeViewTouchControl extends SnakeView {
         //int h =this.getHeight();
         int w = this.getWidth();
 
-        //event's position
-        int x =(int) event.getX();
-        //int y = (int) event.getY();
+        float x;
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                x=event.getX();
+                //Left Side of the Screen
+                if(x<(w/2)) {
 
+                    this.getClient().sendCommand(SnakeGameState.SNAKE_TURN_LEFT);
+                    Log.d("Game2View", "Left side of the screen touched");
+                }
+
+                //Left Side of the Screen
+                if(x>(w/2)) {
+                    this.getClient().sendCommand(SnakeGameState.SNAKE_TURN_RIGHT);
+                    Log.d("Game2View", "Right side of the screen touched");
+                }
+                break;
+            default:
+
+        }
+
+
+
+
+
+        //event's position
+        ///int x =(int) event.getX();
+        //int y = (int) event.getY();
 
         //area are Rectangles
 
-        //Left Side of the Screen
-        if(x<(w/2)) {
 
-            this.getClient().sendCommand(SnakeGameState.SNAKE_TURN_LEFT);
-            //Log.d("Game2View", "Left side of the screen touched");
-        }
 
-        //Left Side of the Screen
-        if(x>(w/2)) {
-            this.getClient().sendCommand(SnakeGameState.SNAKE_TURN_RIGHT);
-            //Log.d("Game2View", "Right side of the screen touched");
-        }
 
         return true;
     }

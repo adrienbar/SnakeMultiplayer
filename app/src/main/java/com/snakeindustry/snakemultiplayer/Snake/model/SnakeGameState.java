@@ -269,9 +269,9 @@ public class SnakeGameState extends GameState {
         if(commande!=null) {
             switch (commande) {
                 case SNAKE_TURN_LEFT:
-                    snake.getState().turnLeft();
+                    snake.getState().turnLeft();break;
                 case SNAKE_TURN_RIGHT:
-                    snake.getState().turnRight();
+                    snake.getState().turnRight();break;
                 default:
             }
         }
