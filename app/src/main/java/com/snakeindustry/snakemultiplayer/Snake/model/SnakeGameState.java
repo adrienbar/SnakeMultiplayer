@@ -34,7 +34,7 @@ public class SnakeGameState extends GameState {
     String[] availableBonuses;
     int screenWidth,screenLength;
    //Should define the windth and length of all items, ie food/bonuses/snakecells,etc
-    double itemWidth,itemLength;
+    private double itemWidth,itemLength;
 
     public SnakeGameState(){
        super();
@@ -81,7 +81,10 @@ public class SnakeGameState extends GameState {
 
             for (Food f : spawnedFood) {
 
-                if (s.getState().getBody().getFirst().getX() == f.getX() && s.getState().getBody().getFirst().getY() == f.getY()) {
+                if (s.getState().getBody().getFirst().getX() <= f.getX()+itemWidth &&
+                    s.getState().getBody().getFirst().getX() >= f.getX()+itemWidth &&
+                    s.getState().getBody().getFirst().getY() >= f.getY()-itemLength &&
+                    s.getState().getBody().getFirst().getY() <= f.getY()+itemLength     ) {
 
                     s.getState().grow(1);
                     spawnedFood.remove(f);
@@ -98,7 +101,10 @@ public class SnakeGameState extends GameState {
 
             for (SnakeBonus sb : spawnedBonuses) {
 
-                if (s.getState().getBody().getFirst().getX() == sb.getX() && s.getState().getBody().getFirst().getY() == sb.getY()) {
+                if (s.getState().getBody().getFirst().getX() <= sb.getX()+itemWidth &&
+                    s.getState().getBody().getFirst().getX() >= sb.getX()+itemWidth &&
+                    s.getState().getBody().getFirst().getY() >= sb.getY()-itemLength &&
+                    s.getState().getBody().getFirst().getY() <= sb.getY()+itemLength   ) {
                     List<String> targets = new ArrayList<>();
                     if(sb.getTarget()== target.self){
                         sb.getState().setBody(s.getState().getBody());
@@ -154,7 +160,7 @@ public class SnakeGameState extends GameState {
         double randomX=itemWidth/2+(screenWidth -itemWidth/2)*randomGenerator.nextDouble();
         double randomY=itemLength/2+(screenLength -itemLength/2)*randomGenerator.nextDouble();
         //Chose index in the list of bonuses
-        int randomBonus=randomGenerator.nextInt(activeBonuses.size());
+        int randomBonus=randomGenerator.nextInt(availableBonuses.length);
         //Instantiate the appropriate class
         SnakeBonus spawnedBonus = (SnakeBonus) (Class.forName(availableBonuses[randomBonus]).newInstance());
         spawnedBonus.setX(randomX);
@@ -257,8 +263,11 @@ public class SnakeGameState extends GameState {
         for(Snake s : snakes){
             if(s.getState().collisionManagement(snakes)==true){
                 snakes.remove(s);
+
             }
         }
+        checkFood();
+        checkBonuses();
 
     }
 

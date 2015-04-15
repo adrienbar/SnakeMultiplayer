@@ -3,11 +3,14 @@ package com.snakeindustry.snakemultiplayer.generalApp.game;
 import android.os.SystemClock;
 import android.util.Log;
 
+import com.snakeindustry.snakemultiplayer.Snake.model.SnakeGameState;
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
 import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.Server;
 import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.ServerC;
 
 import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by Adrien on 28/03/15.
@@ -33,8 +36,10 @@ public class GameThread extends Thread{
         //nothing to do yet
 
 
-
-
+        //Start the food & bonus spawning timed task
+        Timer timer = new Timer(true);
+        timer.scheduleAtFixedRate(new SpawnBonus(this.getGameState()), 0, 10*1000);
+        timer.scheduleAtFixedRate(new SpawnFood(this.getGameState()), 0, 5*1000);
 
         //GAME LOOP
         while ((!this.getGameState().isGameOver())&this.isRunning()) {
@@ -66,6 +71,8 @@ public class GameThread extends Thread{
                 Log.d("GameThread", "device too slow : refreshTime exceded by " + -sleepTime + " ms");
             }
         }
+        //Game over, stop spawning food and bonus
+        timer.cancel();
 
 
 
@@ -109,5 +116,45 @@ public class GameThread extends Thread{
 
     public void setRunning(boolean running) {
         this.running = running;
+    }
+}
+
+ class SpawnFood extends TimerTask {
+     SnakeGameState gamestate;
+    public SpawnFood(GameState gamestate){
+         this.gamestate=(SnakeGameState) gamestate;
+    }
+
+     @Override
+    public void run() {
+        completeTask();
+    }
+
+    private void completeTask() {
+        this.gamestate.spawnFood();
+    }
+}
+
+class SpawnBonus extends TimerTask {
+    SnakeGameState gamestate;
+    public SpawnBonus(GameState gamestate){
+        this.gamestate=(SnakeGameState) gamestate;
+    }
+
+    @Override
+    public void run() {
+        completeTask();
+    }
+
+    private void completeTask() {
+        try {
+            this.gamestate.spawnBonus();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        }
     }
 }

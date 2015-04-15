@@ -20,7 +20,7 @@ public class FastState extends State {
     public FastState (double width, double length){
 
         super(width,length);
-        speed=3;
+        speed=0.6;
 
 
     }
