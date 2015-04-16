@@ -134,8 +134,11 @@ public abstract class State {
     }
 
     public void moveCurrentDirectionSpeed(){
-        Iterator<SnakeCell> iter = body.descendingIterator();
+        Iterator<SnakeCell> iter = body.iterator();
         direction cellDirection=currentDirection;
+        if(currentDirection==direction.down){
+            System.out.println("Test");
+        }
         SnakeCell prev = body.getFirst();
         while(iter.hasNext()){
             SnakeCell temp = iter.next();
@@ -151,10 +154,10 @@ public abstract class State {
             }
             else if(prev.getX()!=temp.getX() && cellDirection==direction.down || prev.getX()!=temp.getX() && cellDirection==direction.up){
                 if(prev.getX()>temp.getX()){
-                    cellDirection=direction.left;
+                    cellDirection=direction.right;
                 }
                 else{
-                    cellDirection=direction.right;
+                    cellDirection=direction.left;
                 }
             }
             switch (cellDirection) {
