@@ -5,14 +5,14 @@ import android.graphics.Bitmap;
 /**
  * Created by Adrien on 06/04/15.
  */
-public class SimpleStatsI implements SimpleStats {
+public class SimpleStatsC implements SimpleStats {
     private String description;
     private double value;
     private String unit;
     private Bitmap icon;
 
 
-    public SimpleStatsI(String description, double value, String unit, Bitmap icon) {
+    public SimpleStatsC(String description, double value, String unit, Bitmap icon) {
         this.description = description;
         this.value = value;
         this.unit = unit;
@@ -21,7 +21,7 @@ public class SimpleStatsI implements SimpleStats {
 
 
 
-    public SimpleStatsI() {
+    public SimpleStatsC() {
         this("untitled stats", 0, "", Bitmap.createBitmap(10, 10, Bitmap.Config.ARGB_4444));
     }
 

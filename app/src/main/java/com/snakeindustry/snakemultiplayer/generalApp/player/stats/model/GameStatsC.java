@@ -9,12 +9,12 @@ import java.util.List;
 /**
  * Created by Adrien on 06/04/15.
  */
-public class GameStatsI implements GameStats {
-    private SimpleStatsI playedTime,nbPlay,bestScore;
+public class GameStatsC implements GameStats {
+    private SimpleStatsC playedTime,nbPlay,bestScore;
     private HashMap<String,Integer> friends;
     private List<Double> scoreValues;
 
-    public GameStatsI(SimpleStatsI playedTime, SimpleStatsI nbPlay, SimpleStatsI bestScore, HashMap<String, Integer> friends,List<Double> scoreValues) {
+    public GameStatsC(SimpleStatsC playedTime, SimpleStatsC nbPlay, SimpleStatsC bestScore, HashMap<String, Integer> friends, List<Double> scoreValues) {
         this.playedTime = playedTime;
         this.nbPlay = nbPlay;
         this.bestScore = bestScore;
@@ -23,10 +23,10 @@ public class GameStatsI implements GameStats {
 
     }
 
-    public GameStatsI() {
-        this(new SimpleStatsI("Played time",0,"h",null),
-                new SimpleStatsI("Nb of plays",0,"play(s)",null),
-                new SimpleStatsI("Best Score", 0,"",null),
+    public GameStatsC() {
+        this(new SimpleStatsC("Played time",0,"h",null),
+                new SimpleStatsC("Nb of plays",0,"play(s)",null),
+                new SimpleStatsC("Best Score", 0,"",null),
                 new HashMap<String, Integer>(),
                 new ArrayList<Double>());
 
@@ -35,14 +35,12 @@ public class GameStatsI implements GameStats {
 
 
 
-
-
     @Override
     public List<SimpleStats> getStatsFriends() {
         LinkedList<SimpleStats> list=new LinkedList<>();
         for(String friendName : this.getFriends().keySet())
         {
-            list.add(new SimpleStatsI(friendName,this.getFriends().get(friendName),"play(s)",null));
+            list.add(new SimpleStatsC(friendName,this.getFriends().get(friendName),"play(s)",null));
         }
 
         return list;
@@ -99,16 +97,16 @@ public class GameStatsI implements GameStats {
     }
 
     @Override
-    public SimpleStatsI getPlayedTime() {
+    public SimpleStatsC getPlayedTime() {
         return playedTime;
     }
 
     @Override
-    public SimpleStatsI getNbPlay() {
+    public SimpleStatsC getNbPlay() {
         return nbPlay;
     }
 
-    public SimpleStatsI getBestScore() {
+    public SimpleStatsC getBestScore() {
         return bestScore;
     }
 
@@ -120,15 +118,15 @@ public class GameStatsI implements GameStats {
         }
     }
 
-    public void setPlayedTime(SimpleStatsI playedTime) {
+    public void setPlayedTime(SimpleStatsC playedTime) {
         this.playedTime = playedTime;
     }
 
-    public void setNbPlay(SimpleStatsI nbPlay) {
+    public void setNbPlay(SimpleStatsC nbPlay) {
         this.nbPlay = nbPlay;
     }
 
-    public void setBestScore(SimpleStatsI bestScore) {
+    public void setBestScore(SimpleStatsC bestScore) {
         this.bestScore = bestScore;
     }
 

@@ -98,7 +98,7 @@ public class StatsGlobalHashmap implements Stats {
         }
         List<SimpleStats> list=new ArrayList<SimpleStats>();
         for(String s :counter.keySet()) {
-            SimpleStats SimpleStats =new SimpleStatsI(s,counter.get(s),"play(s)", null);
+            SimpleStats SimpleStats =new SimpleStatsC(s,counter.get(s),"play(s)", null);
             list.add(SimpleStats);
         }
         return list;
@@ -116,7 +116,7 @@ public class StatsGlobalHashmap implements Stats {
 
             //icon
             Bitmap icon= Bitmap.createBitmap(100,100, Bitmap.Config.ARGB_8888);
-            SimpleStats SimpleStats =new SimpleStatsI(gameName,value,unit,icon);
+            SimpleStats SimpleStats =new SimpleStatsC(gameName,value,unit,icon);
             list.add(SimpleStats);
         }
         return list;
