@@ -12,7 +12,9 @@ public class GamePlayActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game_play);
+        setContentView(new SnakeViewTouchControl(getApplicationContext(),null));
+        //setContentView(R.layout.activity_game_play);
+
     }
 
 

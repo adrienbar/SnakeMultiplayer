@@ -13,6 +13,7 @@ import com.snakeindustry.snakemultiplayer.Snake.model.SnakeGameState;
 import com.snakeindustry.snakemultiplayer.Snake.model.eatableObject.EatableObject;
 import com.snakeindustry.snakemultiplayer.Snake.model.eatableObject.Food;
 import com.snakeindustry.snakemultiplayer.Snake.model.eatableObject.SnakeBonus;
+import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameState;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameThread;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameView;
@@ -55,8 +56,6 @@ public abstract class SnakeView extends GameViewAC {
             }
         }
 
-
-
         //BONUS
         if(snakeGameState.getSpawnedBonuses()!=null){
             Paint paintBonus=new Paint();
@@ -69,11 +68,23 @@ public abstract class SnakeView extends GameViewAC {
 
 
         //SNAKES
+
+
         if(snakeGameState.getSnakes()!=null) {
             Paint paintSnake=new Paint();
+            paintSnake.setColor(Color.BLACK);
             paintSnake.setStyle(Paint.Style.FILL);
-            for(Snake snake:snakeGameState.getSnakes() ){
-                this.drawSnake(snake, paintSnake,canvas);
+
+            for (String playerName : snakeGameState.getPlayersSnakes().keySet()) {
+
+                Snake snake=snakeGameState.getPlayersSnakes().get(playerName);
+
+                if(playerName== AppSingleton.getInstance().getPlayer().getName()) {
+                    paintSnake.setColor(Color.RED);
+                    playerName="";
+                }
+                this.drawSnake(snake, paintSnake,canvas,playerName);
+                paintSnake.setColor(Color.BLACK);
             }
         }
 
@@ -110,7 +121,7 @@ public abstract class SnakeView extends GameViewAC {
      * @param paint  how to draw
      * @param canvas where to draw
      */
-    private void drawSnake(Snake snake,Paint paint,Canvas canvas) {
+    private void drawSnake(Snake snake,Paint paint,Canvas canvas,String name) {
 
         float x1,x2,y1,y2,h,w;
 
@@ -121,8 +132,6 @@ public abstract class SnakeView extends GameViewAC {
         y1 = (float) (snake.getState().getBody().get(0).getY()*this.getHeight());
 
         canvas.drawRect(x1,y1,x1+w,y1+h,paint);
-
-
 
         //DRAW A LINES BETWEEN EACH FOLLOWING POINTS OF THE SNAKE
         for(int i=1;i<snake.getState().getBody().size();i++){
@@ -156,6 +165,11 @@ public abstract class SnakeView extends GameViewAC {
         y1 = (float) (snake.getState().getBody().get(0).getY()*this.getHeight());
         paint.setColor(Color.GREEN);
         canvas.drawRect(x1,y1,x1+w,y1+h,paint);
+
+        //put Name
+        paint.setColor(Color.BLUE);
+        canvas.drawText(name,x1,y1,paint);
+
     }
 
 
