@@ -197,9 +197,9 @@ public class SnakeGameState extends GameState {
                Snake temp = iter.next();
                 //Set all affected snakes back to normal
                 if(targets.contains(temp.getPlayer())){
-
+                        State.direction dir = temp.getState().getCurrentDirection();
                         temp.setState(new NormalState(temp.getState().getBody(),temp.getState().getWidth(),temp.getState().getLength()));
-
+                        temp.getState().setCurrentDirection(dir);
                 }
 
 

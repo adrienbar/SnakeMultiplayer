@@ -133,6 +133,52 @@ public abstract class State {
 
     }
 
+    public void moveCurrentDirectionSpeed(){
+        Iterator<SnakeCell> iter = body.descendingIterator();
+        direction cellDirection=currentDirection;
+        SnakeCell prev = body.getFirst();
+        while(iter.hasNext()){
+            SnakeCell temp = iter.next();
+            double newX =  temp.getX();
+            double newY =  temp.getY();
+            if(prev.getY()!=temp.getY() && cellDirection==direction.left || prev.getY()!=temp.getY() && cellDirection==direction.right ){
+                if(prev.getY()>temp.getY()){
+                    cellDirection=direction.up;
+                }
+                else{
+                    cellDirection=direction.down;
+                }
+            }
+            else if(prev.getX()!=temp.getX() && cellDirection==direction.down || prev.getX()!=temp.getX() && cellDirection==direction.up){
+                if(prev.getX()>temp.getX()){
+                    cellDirection=direction.left;
+                }
+                else{
+                    cellDirection=direction.right;
+                }
+            }
+            switch (cellDirection) {
+                case up:
+                    newY-=speed*length;
+                    break;
+                case down:
+                    newY+=speed*length;
+                    break;
+                case left:
+                    newX-=speed*width;
+                    break;
+                case right:
+                    newX+=speed*width;
+                    break;
+                }
+            prev=temp;
+            temp.setX(newX);
+            temp.setY(newY);
+
+        }
+
+    }
+
     /**
      * adds a square in front of the current head of the snake (in the direction
      * specified in currentDirection).

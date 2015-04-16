@@ -12,7 +12,7 @@ public class FastState extends State {
     public FastState (LinkedList<SnakeCell> body,double width, double length){
 
         super(body,width,length);
-        speed=3;
+        speed=0.6;
 
 
     }
