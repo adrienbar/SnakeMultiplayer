@@ -102,21 +102,21 @@ public abstract class State {
                     Iterator<SnakeCell> iter = temp.getState().getBody().iterator();
                     //Check all cells of the snake body
                     while(iter.hasNext()){
-                        if(iter.next().getX()==this.getBody().getFirst().getX() && iter.next().getY()==this.getBody().getFirst().getY())
-                        {
+
+                        if(iter.next().getX() <= this.getBody().getFirst().getX()+width/2 &&
+                           iter.next().getX() >= this.getBody().getFirst().getX()-width/2 &&
+                           iter.next().getY() >= this.getBody().getFirst().getX()-length/2 &&
+                           iter.next().getY() <= this.getBody().getFirst().getX()+length/2) {
+
                             return true;
                         }
-                }
+                     }
+                 }
             }
-
-
-        }
-        if(this.getBody().getFirst().getX() > 1 || this.getBody().getFirst().getY()>1){
-            return true;
-        }
-
-
-        return false;
+            if(this.getBody().getFirst().getX() > 1 || this.getBody().getFirst().getY()>1){
+                return true;
+            }
+    return false;
     }
 
     public void moveCurrentDirection()

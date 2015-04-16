@@ -84,18 +84,19 @@ public class SnakeGameState extends GameState {
     //Checks if any snake is on food, if yes make it grow
     public void checkFood() {
         for (Snake s : snakes) {
-
+            Food toRemove=null;
             for (Food f : spawnedFood) {
 
-                if (s.getState().getBody().getFirst().getX() <= f.getX()+itemWidth &&
-                    s.getState().getBody().getFirst().getX() >= f.getX()+itemWidth &&
-                    s.getState().getBody().getFirst().getY() >= f.getY()-itemLength &&
-                    s.getState().getBody().getFirst().getY() <= f.getY()+itemLength     ) {
-
+                if (s.getState().getBody().getFirst().getX() <= f.getX()+itemWidth/2 &&
+                    s.getState().getBody().getFirst().getX() >= f.getX()-itemWidth/2 &&
+                    s.getState().getBody().getFirst().getY() >= f.getY()-itemLength/2 &&
+                    s.getState().getBody().getFirst().getY() <= f.getY()+itemLength/2     ) {
+                    toRemove=f;
                     s.getState().grow(1);
-                    spawnedFood.remove(f);
                 }
             }
+
+            spawnedFood.remove(toRemove);
         }
 
     }
@@ -104,13 +105,13 @@ public class SnakeGameState extends GameState {
     public void checkBonuses() {
         Timer timer;
         for (Snake s : snakes) {
-
+            SnakeBonus toRemove=null;
             for (SnakeBonus sb : spawnedBonuses) {
 
-                if (s.getState().getBody().getFirst().getX() <= sb.getX()+itemWidth &&
-                    s.getState().getBody().getFirst().getX() >= sb.getX()+itemWidth &&
-                    s.getState().getBody().getFirst().getY() >= sb.getY()-itemLength &&
-                    s.getState().getBody().getFirst().getY() <= sb.getY()+itemLength   ) {
+                if (s.getState().getBody().getFirst().getX() <= sb.getX()+itemWidth/2 &&
+                    s.getState().getBody().getFirst().getX() >= sb.getX()-itemWidth/2 &&
+                    s.getState().getBody().getFirst().getY() >= sb.getY()-itemLength/2 &&
+                    s.getState().getBody().getFirst().getY() <= sb.getY()+itemLength/2   ) {
                     List<String> targets = new ArrayList<>();
                     if(sb.getTarget()== target.self){
                         sb.getState().setBody(s.getState().getBody());
@@ -142,11 +143,12 @@ public class SnakeGameState extends GameState {
                         timer=new Timer();
                         timer.schedule(new CancelBonusTask(targets,sb), sb.getDuration() * 1000);
                     }
+                    toRemove=sb;
 
-                     spawnedBonuses.remove(sb);
                   }
 
               }
+            spawnedBonuses.remove(toRemove);
          }
 
       }

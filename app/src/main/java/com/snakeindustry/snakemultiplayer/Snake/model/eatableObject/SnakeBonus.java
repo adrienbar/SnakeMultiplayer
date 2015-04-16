@@ -55,4 +55,30 @@ public abstract class SnakeBonus extends EatableObject {
     public void setDuration(int duration) {
         this.duration = duration;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof SnakeBonus)) return false;
+
+        SnakeBonus that = (SnakeBonus) o;
+
+        if (duration != that.duration) return false;
+        if (!id.equals(that.id)) return false;
+        if (!state.equals(that.state)) return false;
+        if (target != that.target) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = state.hashCode();
+        result = 31 * result + target.hashCode();
+        result = 31 * result + duration;
+        result = 31 * result + id.hashCode();
+        return result;
+    }
 }
+
+
