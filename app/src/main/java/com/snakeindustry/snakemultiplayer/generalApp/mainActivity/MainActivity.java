@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.snakeindustry.snakemultiplayer.R;
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
@@ -28,6 +29,7 @@ public class MainActivity extends ActionBarActivity {
         AppSingleton.getInstance().loadProfile();
         AppSingleton.getInstance().checkStats();
 
+
         //Profile Buttons
         LinearLayout profile = (LinearLayout) findViewById(R.id.profile);
         //TextView textView= (TextView) findViewById(R.id.profile);
@@ -42,6 +44,13 @@ public class MainActivity extends ActionBarActivity {
         listView.setOnItemClickListener(new GameListListener());
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        //welcome
+       TextView welcome=(TextView) findViewById(R.id.welcome);
+        welcome.setText("Welcome "+ AppSingleton.getInstance().getPlayer().getName());
+    }
 
 
 
