@@ -24,6 +24,22 @@ public abstract class SnakeBonus extends EatableObject {
         this.duration=5;
     }
 
+    public static SnakeBonus SnakeBonusFactory (String name, double x, double y, double width, double height){
+
+
+
+        if(name.equals("Invincible")){
+             return  new InvincibleBonus(x,y, width, height,UUID.randomUUID(),5);
+       }
+        else if(name.equals("Fast")){
+            return  new FastBonus(x,y, width, height,UUID.randomUUID(),5);
+        }
+        else {
+            return  new ReverseBonus(x,y, width, height,UUID.randomUUID(),5);
+        }
+
+    }
+
     public UUID getId() {
         return id;
     }

@@ -14,6 +14,12 @@ public abstract class  EatableObject {
         this.width = width;
         this.height = height;
     }
+    protected EatableObject(String name, double x, double y, double width, double height) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+    }
 
     public double getX() {
         return x;

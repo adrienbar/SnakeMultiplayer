@@ -170,11 +170,8 @@ public class SnakeGameState extends GameState {
         //Chose index in the list of bonuses
         int randomBonus=randomGenerator.nextInt(availableBonuses.length);
         //Instantiate the appropriate class
-        SnakeBonus spawnedBonus = (SnakeBonus) (Class.forName(availableBonuses[randomBonus]).newInstance());
-        spawnedBonus.setX(randomX);
-        spawnedBonus.setY(randomY);
-
-
+        //SnakeBonus spawnedBonus = (SnakeBonus) (Class.forName(availableBonuses[randomBonus]+"Bonus").newInstance());
+        SnakeBonus spawnedBonus=SnakeBonus.SnakeBonusFactory(availableBonuses[randomBonus],randomX,randomY,itemWidth,itemLength);
         spawnedBonuses.add(spawnedBonus);
 
 
