@@ -21,8 +21,8 @@ public class Snake {
     /*
 
      */
-    private final double heightScale=0.05;//proportion of the screen height;
-    private final double widthScale = 0.05; //heightScale*10.0/16.0; //most of screen are 16/10
+   // private final double heightScale=0.05;//proportion of the screen height;
+   // private final double widthScale = 0.05; //heightScale*10.0/16.0; //most of screen are 16/10
 
     private String player;//The name of the player the snake belongs to
 
@@ -107,13 +107,7 @@ public class Snake {
         this.state = state;
     }
 
-     public double getWidthScale() {
-        return widthScale;
-    }
 
-    public double getHeightScale() {
-        return heightScale;
-    }
 
 
 
