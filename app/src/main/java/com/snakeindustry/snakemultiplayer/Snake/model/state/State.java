@@ -13,6 +13,7 @@ import java.util.List;
  */
 public abstract class State {
 
+
     protected double width; //Cell width
     protected double length; // Cell length
     protected double speed;
@@ -247,7 +248,7 @@ public abstract class State {
         System.out.println("Snake turns Left");
     }
 
-    public void swipeTurn(int turndirection)
+    public void goTo(int turndirection)
     {
         //Assume 0=Up,1=Right,2=Down,3=Left
 

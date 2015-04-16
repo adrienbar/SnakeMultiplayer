@@ -1,5 +1,6 @@
 package com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork;
 
+import com.snakeindustry.snakemultiplayer.Snake.model.SnakeGameState;
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameState;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameThread;
@@ -11,15 +12,18 @@ import com.snakeindustry.snakemultiplayer.generalApp.game.GameView;
 public class LocalClient implements LocalClientI {
 
     private GameView gameView;
+    private GameState lastGameState;
 
 
-    public LocalClient(GameView gameView) {
+    public LocalClient(GameView gameView, GameState gameState) {
         this.gameView=gameView;
+        lastGameState=gameState;
     }
 
 
     @Override
     public void receive(GameState gameState) {
+        this.lastGameState=gameState;
         this.gameView.draw(gameState);
     }
 
@@ -27,6 +31,11 @@ public class LocalClient implements LocalClientI {
     public void sendCommand(int command) {
         AppSingleton.getInstance().getCurrenGameTread().getServer().getRoom().setPlayerCommand(AppSingleton.getInstance().getPlayer().getName(),command);
         //System.out.println("LOCAL CLIENT command sent : " + command);
+    }
+
+    @Override
+    public GameState getLastGameState() {
+        return lastGameState;
     }
 
 }

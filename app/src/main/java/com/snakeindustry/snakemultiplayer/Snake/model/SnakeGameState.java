@@ -23,8 +23,14 @@ import java.util.TimerTask;
  */
 public class SnakeGameState extends GameState {
 
-    public final static int SNAKE_TURN_LEFT=0;
-    public final static int SNAKE_TURN_RIGHT=1;
+    public final static int SNAKE_GO_UP=0;
+    public final static int SNAKE_GO_RIGHT=1;
+    public final static int SNAKE_GO_DOWN=2;
+    public final static int SNAKE_GO_LEFT=3;
+
+    public final static int SNAKE_TURN_LEFT=4;
+    public final static int SNAKE_TURN_RIGHT=5;
+
 
     List<SnakeBonus> spawnedBonuses, activeBonuses;
     List<Food> spawnedFood;
@@ -277,10 +283,15 @@ public class SnakeGameState extends GameState {
     private void performeActionCode(Snake snake,Integer commande) {
         if(commande!=null) {
             switch (commande) {
-                case SNAKE_TURN_LEFT:
-                    snake.getState().turnLeft();break;
-                case SNAKE_TURN_RIGHT:
-                    snake.getState().turnRight();break;
+
+
+                case SNAKE_GO_DOWN: snake.getState().moveDown();break;
+                case SNAKE_GO_UP: snake.getState().moveUp();break;
+                case SNAKE_GO_RIGHT: snake.getState().moveRight();break;
+                case SNAKE_GO_LEFT: snake.getState().moveLeft();break;
+
+                case SNAKE_TURN_LEFT: snake.getState().turnLeft();break;
+                case SNAKE_TURN_RIGHT: snake.getState().turnRight();break;
                 default:
             }
         }
@@ -303,5 +314,8 @@ public class SnakeGameState extends GameState {
         return snakes;
     }
 
+    public HashMap<String, Snake> getPlayersSnakes() {
+        return playersSnakes;
+    }
 }
 

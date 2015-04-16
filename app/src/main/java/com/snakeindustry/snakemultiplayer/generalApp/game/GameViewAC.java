@@ -35,7 +35,7 @@ public abstract class GameViewAC extends SurfaceView implements GameView,Surface
 
         //SET CLIENT ACCORDING TO WHERE IS THE SERVER
         if(AppSingleton.getInstance().isServer()) {
-            LocalClient localClient = new LocalClient(this);
+            LocalClient localClient = new LocalClient(this,AppSingleton.getInstance().getCurrentGame().getGameState());
             this.client = localClient;
             AppSingleton.getInstance().getCurrenGameTread().getServer().setLocalClientI(localClient);
         }
