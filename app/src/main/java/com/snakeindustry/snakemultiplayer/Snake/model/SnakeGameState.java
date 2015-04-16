@@ -115,6 +115,7 @@ public class SnakeGameState extends GameState {
                     List<String> targets = new ArrayList<>();
                     if(sb.getTarget()== target.self){
                         sb.getState().setBody(s.getState().getBody());
+                        sb.getState().setCurrentDirection(s.getState().getCurrentDirection());
                         s.setState(sb.getState());
                         timer=new Timer();
 
@@ -126,6 +127,7 @@ public class SnakeGameState extends GameState {
 
                         for (Snake targeted : snakes) {
                               sb.getState().setBody(s.getState().getBody());
+                              sb.getState().setCurrentDirection(s.getState().getCurrentDirection());
                               targeted.setState(sb.getState());
                               targets.add(s.getPlayer());
                         }
@@ -136,6 +138,7 @@ public class SnakeGameState extends GameState {
                         for (Snake targeted : snakes) {
                             if(!targeted.equals(s)) {
                                 sb.getState().setBody(s.getState().getBody());
+                                sb.getState().setCurrentDirection(s.getState().getCurrentDirection());
                                 targeted.setState(sb.getState());
                                 targets.add(s.getPlayer());
                             }
