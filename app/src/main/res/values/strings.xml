@@ -9,5 +9,7 @@
     <string name="title_activity_edit_name">EditName</string>
     <string name="title_activity_game_play">GamePlayActivity</string>
     <string name="title_activity_room">RoomActivity</string>
+    <string name="title_activity_snake_settings">SnakeSettings</string>
+    <string name="title_activity_settings_one_game">SettingsOneGameActivity</string>
 
 </resources>

@@ -9,7 +9,7 @@ import com.snakeindustry.snakemultiplayer.generalApp.player.stats.model.StatsGlo
 public class DefaultPlayer extends Player {
 
     public DefaultPlayer(Stats stats, String name) {
-        super(stats, name);
+        super(stats, name, null);
     }
 
     public DefaultPlayer() {

@@ -27,7 +27,6 @@ public class StatsGlobalHashmap implements Stats {
 
 
 
-
     @Override
     public double getPlayedTime(Game game) {
         GameStats tmp = this.getGamesStatsHashMap().get(game.getName());
