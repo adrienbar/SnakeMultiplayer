@@ -131,8 +131,8 @@ public abstract class SnakeView extends GameViewAC {
 
         float x1,x2,y1,y2,h,w;
 
-        h = (float) (snake.getHeightScale()*this.getHeight());
-        w = (float) (snake.getWidthScale()*this.getWidth());
+        h = (float) (snake.getState().getWidth()*this.getHeight());
+        w = (float) (snake.getState().getWidth()*this.getWidth());
 
         x1= (float) (snake.getState().getBody().get(0).getX()*this.getWidth());
         y1 = (float) (snake.getState().getBody().get(0).getY()*this.getHeight());
