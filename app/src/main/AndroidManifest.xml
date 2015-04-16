@@ -42,6 +42,14 @@
             android:name=".generalApp.pseudoNetwork.RoomActivity"
             android:label="@string/title_activity_room" >
         </activity>
+        <activity
+            android:name=".Snake.Activity_to_delete"
+            android:label="@string/title_activity_snake_settings" >
+        </activity>
+        <activity
+            android:name=".generalApp.player.settings.SettingsOneGameActivity"
+            android:label="@string/title_activity_settings_one_game" >
+        </activity>
     </application>
 
 </manifest>
