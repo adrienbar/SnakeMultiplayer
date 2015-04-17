@@ -37,26 +37,30 @@ public class GameThread extends Thread{
 
 
         //Start the food & bonus spawning timed task
-        Timer timer = new Timer(true);
-        timer.scheduleAtFixedRate(new SpawnBonus(this.getGameState()), 0, 10*1000);
-        timer.scheduleAtFixedRate(new SpawnFood(this.getGameState()), 0, 5*1000);
+       // Timer timer = new Timer(true);
+       // timer.scheduleAtFixedRate(new SpawnBonus(this.getGameState()), 0, 10*1000);
+       // timer.scheduleAtFixedRate(new SpawnFood(this.getGameState()), 0, 5*1000);
+
 
         //GAME LOOP
         while ((!this.getGameState().isGameOver())&this.isRunning()) {
 
-            long startTime = SystemClock.currentThreadTimeMillis();
-            long time0=SystemClock.elapsedRealtime();
 
+            long time0=SystemClock.elapsedRealtime();
+            long startTime = SystemClock.currentThreadTimeMillis();
 
             //UPDATE
-            this.getGameState().nextStep(this.getServer().getRoom().getAndResetPlayersCommand());
+            this.getGameState().nextStep(this.getServer().getRoom().getAndResetPlayersCommand(),time0);
 
+            long time1=SystemClock.currentThreadTimeMillis();
 
 
             //send GameStatToClients
             //at the reception, clients are supposed to refresh the View
             this.getServer().getRoom().sendToAllClients(this.getGameState());
 
+
+            long time2=SystemClock.currentThreadTimeMillis();
             // DRAW
             //done by the client
 
@@ -68,11 +72,14 @@ public class GameThread extends Thread{
                 SystemClock.sleep(sleepTime);
             }
             else {
-                Log.d("GameThread", "device too slow : refreshTime exceded by " + -sleepTime + " ms");
+                Log.d("GameThread", "-----------------------------------------------------------------");
+                Log.d("GameThread", "device too SLOW !!! : refreshTime exceeded by " + -sleepTime + " ms");
+                Log.d("GameThread", "device too SLOW !!! : Update time" + (time1-startTime)+ "  "+((time1-startTime)/refreshInterval));
+                Log.d("GameThread", "device too SLOW !!! : Send + Draw time: "+(time2-time1)+" " +((time2-time1)/refreshInterval)*100 +"%");
             }
         }
         //Game over, stop spawning food and bonus
-        timer.cancel();
+      //  timer.cancel();
 
 
 
@@ -118,7 +125,7 @@ public class GameThread extends Thread{
         this.running = running;
     }
 }
-
+/*
  class SpawnFood extends TimerTask {
      SnakeGameState gamestate;
     public SpawnFood(GameState gamestate){
@@ -157,4 +164,5 @@ class SpawnBonus extends TimerTask {
             e.printStackTrace();
         }
     }
-}
+    */
+
