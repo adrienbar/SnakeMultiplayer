@@ -50,14 +50,12 @@ public class EditName extends ActionBarActivity {
 
 
 
-
-
-
         Button save = (Button) findViewById(R.id.save);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AppSingleton.getInstance().getPlayer().setName(name.getText()+"");
+                AppSingleton.getInstance().saveProfile();
                 EditName.this.finish();
             }
         });
@@ -70,8 +68,6 @@ public class EditName extends ActionBarActivity {
                 EditName.this.finish();
             }
         });
-
-
 
     }
 
@@ -94,7 +90,6 @@ public class EditName extends ActionBarActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }
