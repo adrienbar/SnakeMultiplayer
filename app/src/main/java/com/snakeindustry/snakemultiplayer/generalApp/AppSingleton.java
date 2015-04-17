@@ -74,6 +74,12 @@ public class AppSingleton {
 
     }
 
+    public void checkSettings() {
+        for(Game game : this.getAvailabeGames()){
+            this.getPlayer().getSettings().createSettingsIfNothing(game.getName());
+        }
+    }
+
     //METHODES
 
     /**

@@ -22,13 +22,13 @@ public class SettingsGlobalHashmap implements Settings {
     }
 
     @Override
-    public double getSpeed() {
-        return 0;
+    public int getSpeed(String gameName) {
+        return AppSingleton.getInstance().getPlayer().getSettings().getSettingsForOneGame(gameName).getfps();
     }
 
     @Override
-    public void setSpeed() {
-
+    public void setSpeed(String gameName, int speed) {
+        AppSingleton.getInstance().getPlayer().getSettings().getSettingsForOneGame(gameName).setfps(speed);
     }
 
     @Override
@@ -55,11 +55,9 @@ public class SettingsGlobalHashmap implements Settings {
     public void createSettingsIfNothing(String gameName) {
         GameSettings settingsForOneGame = this.getGameSettingsHashMap().get(gameName);
         if (settingsForOneGame==null){
-            System.out.println("bbbbbbbbbbb create if nothing "+gameName);
             this.getGameSettingsHashMap().put(gameName, AppSingleton.getGameFromName(gameName).createSettings());
             SnakeSettings snakeSettings = (SnakeSettings) AppSingleton.getInstance().getPlayer().getSettings().getSettingsForOneGame(AppSingleton.getInstance().getCurrentGame().getName());
 
-            System.out.println("bbbbbbbbbbbbbbbbbbbbbbbbbb"+snakeSettings);
         }
     }
 

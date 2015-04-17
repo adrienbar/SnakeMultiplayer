@@ -12,14 +12,13 @@ import android.widget.TextView;
 import com.snakeindustry.snakemultiplayer.R;
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
 import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
-import com.snakeindustry.snakemultiplayer.generalApp.player.settings.model.Settings;
 
 public class Activity_to_delete extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game_settings);
+        setContentView(R.layout.activity_to_delete);
 
 
         final Game currentGame= AppSingleton.getInstance().getCurrentGame();

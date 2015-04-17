@@ -48,9 +48,8 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Control mode"
         android:id="@+id/control_mode"
-        android:layout_below="@+id/linearLayout"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp" />
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
     <Spinner
         android:layout_width="wrap_content"
@@ -64,9 +63,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Speed"
+        android:text="Speed (only for the server)"
         android:id="@+id/speed"
-        android:layout_below="@+id/control_mode_spinner"
+        android:layout_below="@+id/linearLayout"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp" />
 
@@ -76,27 +75,20 @@
         android:id="@+id/seekBar"
         android:layout_marginTop="39dp"
         android:layout_below="@+id/speed"
-        android:layout_alignLeft="@+id/control_mode_spinner"
-        android:layout_alignStart="@+id/control_mode_spinner"
-        android:layout_alignRight="@+id/control_mode_spinner"
-        android:layout_alignEnd="@+id/control_mode_spinner" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignLeft="@+id/linearLayout"
+        android:layout_alignStart="@+id/linearLayout"
+        android:indeterminate="false" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Speed"
         android:id="@+id/value"
-        android:layout_below="@+id/seekBar"
-        android:layout_alignLeft="@+id/control_mode"
-        android:layout_alignStart="@+id/control_mode" />
-
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/listView2"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/value" />
+        android:layout_below="@+id/seekBar" />
+
 
 </RelativeLayout>
 

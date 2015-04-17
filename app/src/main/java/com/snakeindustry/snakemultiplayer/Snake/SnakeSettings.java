@@ -29,8 +29,8 @@ public class SnakeSettings extends GameSettingsC{
     public SnakeSettings() {
         super();
         nomId=new HashMap<>();
-        nomId.put("Swipe control",SWIPE);
-        nomId.put("Touch control",TOUCH);
+        nomId.put("Swipe",SWIPE);
+        nomId.put("Touch",TOUCH);
         idPreferredControl=SWIPE;
     }
 

@@ -18,7 +18,7 @@ public class GameSettingsC implements GameSettings{
 
     //default value 30fps
     public GameSettingsC(){
-        this(30);
+        this(15);
     }
 
     @Override

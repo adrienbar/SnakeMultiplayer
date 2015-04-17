@@ -6,13 +6,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.snakeindustry.snakemultiplayer.R;
+import com.snakeindustry.snakemultiplayer.Snake.SnakeSettings;
+import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
 
 public class GamePlayActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(new SnakeViewTouchControl(getApplicationContext(),null));
+        String currentGameName = AppSingleton.getInstance().getCurrentGame().getName();
+        SnakeSettings snakeSettings = (SnakeSettings) AppSingleton.getInstance().getPlayer().getSettings().getSettingsForOneGame(currentGameName);
+        SnakeView snakeView = snakeSettings.getPreferredControl(this, null);
+        setContentView(snakeView);
         //setContentView(R.layout.activity_game_play);
 
     }

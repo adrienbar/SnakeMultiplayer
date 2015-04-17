@@ -8,8 +8,8 @@ import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
 public interface Settings {
 
     //Speed
-    public double getSpeed();
-    public void setSpeed();
+    public int getSpeed(String gameName);
+    public void setSpeed(String gameName, int i);
 
     // public List<Game> getGameWithStats();
     public GameSettings getSettingsForOneGame(String gameName);
