@@ -1,6 +1,8 @@
 package com.snakeindustry.snakemultiplayer.generalApp;
 
+
 import com.snakeindustry.snakemultiplayer.Snake.GameSnake;
+import com.snakeindustry.snakemultiplayer.generalApp.database.PlayerDAO;
 import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameThread;
 import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.LocalClient;
@@ -17,9 +19,6 @@ import java.util.List;
  * Created by Adrien on 31/03/15.
  */
 public class AppSingleton {
-
-
-
     /**
      * List of instanced available games
      */
@@ -32,7 +31,7 @@ public class AppSingleton {
     private boolean isServer;
     private GameThread currenGameTread;
     private LocalClient localClient;
-
+    private PlayerDAO db;
 
     //APPLICATION'S PARAMETERS
     private AppSingleton() {
@@ -42,12 +41,8 @@ public class AppSingleton {
         this.isServer=false;
         this.currenGameTread=null;
         this.localClient=null;
-
         //System.out.println("AAAAAAAA "+this.getAvailabeGames());
-
     }
-
-
 
     public static Game getGameFromName(String gameName) {
         Game game=null;
@@ -68,7 +63,7 @@ public class AppSingleton {
       }
 
         //TESTS Stats
-        this.getPlayer().setName("Test name");
+       // this.getPlayer().setName("Test name");
         this.setCurrentGame(this.getAvailabeGames().get(0));
         Stats statsForTest = new StatsGlobalHashmap();
         statsForTest.createStatsIfNothing(this.getCurrentGame());
@@ -86,7 +81,10 @@ public class AppSingleton {
      * retrieve the profile from the database
      */
     public void loadProfile() {
-
+        System.out.println("Load");
+        System.out.println(db.loadPlayeName());
+        this.getPlayer().setName(db.loadPlayeName());
+        System.out.println("End Load");
     }
 
     /**
@@ -94,11 +92,16 @@ public class AppSingleton {
      */
 
     public void saveProfile() {
-
+        db.savePlayerName(this.getPlayer().getName());
     }
 
+    public PlayerDAO getDb(){
+        return db;
+    }
 
-
+    public void setDb(PlayerDAO db){
+        this.db = db;
+    }
 
 
     //GETTERS AND SETTERS
