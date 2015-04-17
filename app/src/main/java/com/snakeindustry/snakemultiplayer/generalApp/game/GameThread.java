@@ -37,9 +37,10 @@ public class GameThread extends Thread{
 
 
         //Start the food & bonus spawning timed task
-        Timer timer = new Timer(true);
-        timer.scheduleAtFixedRate(new SpawnBonus(this.getGameState()), 0, 10*1000);
-        timer.scheduleAtFixedRate(new SpawnFood(this.getGameState()), 0, 5*1000);
+       // Timer timer = new Timer(true);
+       // timer.scheduleAtFixedRate(new SpawnBonus(this.getGameState()), 0, 10*1000);
+       // timer.scheduleAtFixedRate(new SpawnFood(this.getGameState()), 0, 5*1000);
+
 
         //GAME LOOP
         while ((!this.getGameState().isGameOver())&this.isRunning()) {
@@ -49,7 +50,7 @@ public class GameThread extends Thread{
 
 
             //UPDATE
-            this.getGameState().nextStep(this.getServer().getRoom().getAndResetPlayersCommand());
+            this.getGameState().nextStep(this.getServer().getRoom().getAndResetPlayersCommand(),time0);
 
 
 
@@ -72,7 +73,7 @@ public class GameThread extends Thread{
             }
         }
         //Game over, stop spawning food and bonus
-        timer.cancel();
+      //  timer.cancel();
 
 
 
@@ -118,7 +119,7 @@ public class GameThread extends Thread{
         this.running = running;
     }
 }
-
+/*
  class SpawnFood extends TimerTask {
      SnakeGameState gamestate;
     public SpawnFood(GameState gamestate){
@@ -157,4 +158,5 @@ class SpawnBonus extends TimerTask {
             e.printStackTrace();
         }
     }
-}
+    */
+

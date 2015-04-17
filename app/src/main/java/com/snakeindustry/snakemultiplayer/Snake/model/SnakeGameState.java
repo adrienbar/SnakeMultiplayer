@@ -42,6 +42,10 @@ public class SnakeGameState extends GameState {
    //Should define the windth and length of all items, ie food/bonuses/snakecells,etc
     private double itemWidth,itemLength;
 
+    //to control time appartion
+    private long timeBetweenBonusSpawn, timeBetweenFoodSpawn;
+    private long timeOfLastBonusSpawn,timeOfLastFoodSpan;
+
     public SnakeGameState(){
        super();
         this.spawnedBonuses = new LinkedList<SnakeBonus>();
@@ -59,6 +63,11 @@ public class SnakeGameState extends GameState {
         screenLength=1;
         itemWidth=0.05;
         itemLength=0.05;
+
+        timeBetweenBonusSpawn=10*1000;
+        timeBetweenFoodSpawn=5*1000;
+        timeOfLastBonusSpawn=0;
+        timeOfLastFoodSpan=0;
 
 
 
@@ -165,7 +174,7 @@ public class SnakeGameState extends GameState {
 
     }
 
-    public void spawnBonus() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+    public void spawnBonus() {
 
         Random randomGenerator = new Random();
         double randomX=itemWidth/2+(screenWidth -itemWidth/2)*randomGenerator.nextDouble();
@@ -254,7 +263,10 @@ public class SnakeGameState extends GameState {
     }
 
     @Override
-    public void nextStep(HashMap<String, Integer> playerCommand) {
+    public void nextStep(HashMap<String, Integer> playerCommand,long threadTime) {
+
+
+        performeActionTime(threadTime);
 
 
        // System.out.println("GAME STATE  nextStep : "+ playerCommand.keySet()+" command : " + playerCommand.values());
@@ -278,13 +290,26 @@ public class SnakeGameState extends GameState {
 
     }
 
+    private void performeActionTime(long threadTime) {
 
+        if(threadTime>timeOfLastBonusSpawn+timeBetweenBonusSpawn) {
+            this.spawnBonus();
+            timeOfLastBonusSpawn=threadTime;
+        }
+        if(threadTime>timeOfLastFoodSpan+timeBetweenFoodSpawn){
+            this.spawnFood();
+            timeOfLastFoodSpan=threadTime;
+
+        }
+
+
+
+    }
 
 
     private void performeActionCode(Snake snake,Integer commande) {
         if(commande!=null) {
             switch (commande) {
-
 
                 case SNAKE_GO_DOWN: snake.getState().moveDown();break;
                 case SNAKE_GO_UP: snake.getState().moveUp();break;

@@ -17,7 +17,7 @@ public abstract class GameState {
 
     public abstract void configure(List<String> playersNames);
 
-    public abstract void nextStep(HashMap<String,Integer> playerCommand);
+    public abstract void nextStep(HashMap<String,Integer> playerCommand,long threadTime);
 
     public abstract void gameOverAction();
 

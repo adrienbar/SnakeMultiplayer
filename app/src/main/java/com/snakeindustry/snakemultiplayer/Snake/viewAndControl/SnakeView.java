@@ -66,6 +66,8 @@ public abstract class SnakeView extends GameViewAC {
 
         //BONUS
         if(snakeGameState.getSpawnedBonuses()!=null){
+
+            //Border
             Paint paintBonus=new Paint();
             paintBonus.setColor(Color.GREEN);
             paintBonus.setStyle(Paint.Style.STROKE);
@@ -139,17 +141,27 @@ public void drawBonus(SnakeBonus bonus,Canvas canvas,Paint paint) {
     float w = (float) (bonus.getWidth()*this.getWidth());
 
 
-
-
-
     int ressourcePictureId=R.drawable.forward;
 
     if(bonus instanceof ReverseBonus) { ressourcePictureId=R.drawable.reverse;}
     if(bonus instanceof InvincibleBonus) {ressourcePictureId=R.drawable.star;}
     if(bonus instanceof FastBonus) {ressourcePictureId=R.drawable.forward; }
+
+
+    Paint background=new Paint();
+    background.setStyle(Paint.Style.FILL);
+    switch (bonus.getTarget()){
+        case all: background.setColor(Color.BLUE);break;
+        case self:background.setColor(Color.GREEN);break;
+        case others:background.setColor(Color.RED);break;
+    }
+
+
     Bitmap bitmap=BitmapFactory.decodeResource(this.getResources(), ressourcePictureId);
     Rect src=new Rect(0,0,bitmap.getWidth(),bitmap.getHeight());
     RectF destination=new RectF(x-w/2,y-h/2,x+w/2,y+h/2);
+
+    canvas.drawRect(destination,background);
     canvas.drawBitmap(bitmap,src,destination,paint);
     canvas.drawRect(destination,paint);
 
@@ -210,9 +222,21 @@ public void drawBonus(SnakeBonus bonus,Canvas canvas,Paint paint) {
         paint.setColor(Color.GREEN);
         canvas.drawRect(x1-(w/2),y1-(h/2),x1+(w/2),y1+(h/2),paint);
 
+
+        //bonus time
+      //  paint.setColor(Color.GRAY);
+      //  canvas.drawRect(x1-(w/2),y1-(h/2),x1+(w/2),y1+(h/2),paint);
+
+        // canvas.drawArc(x1-(w/2),y1-(h/2),x1+(w/2),y1+(h/2),0,180,true,paint);
+
+
         //put Name
         paint.setColor(Color.BLUE);
         canvas.drawText(name,x1,y1,paint);
+
+
+
+
 
     }
 
