@@ -129,7 +129,7 @@ public class SnakeGameState extends GameState {
                         timer=new Timer();
 
                        targets.add(s.getPlayer());
-                       timer.schedule(new CancelBonusTask(targets,sb), sb.getDuration() * 1000);
+                       timer.schedule(new CancelBonusTask(targets,sb), sb.getDuration()*100 * 1000);
 
                     }
                     else if(sb.getTarget()== target.all){
@@ -185,12 +185,7 @@ public class SnakeGameState extends GameState {
         //SnakeBonus spawnedBonus = (SnakeBonus) (Class.forName(availableBonuses[randomBonus]+"Bonus").newInstance());
         SnakeBonus spawnedBonus=SnakeBonus.SnakeBonusFactory(availableBonuses[randomBonus],randomX,randomY,itemWidth,itemLength);
         spawnedBonuses.add(spawnedBonus);
-
-
-
-
-
-    }
+ }
     //Class used for timer cancelling bonus
      class CancelBonusTask extends TimerTask {
 
@@ -207,7 +202,8 @@ public class SnakeGameState extends GameState {
                 //Set all affected snakes back to normal
                 if(targets.contains(temp.getPlayer())){
                         State.direction dir = temp.getState().getCurrentDirection();
-                        temp.setState(new NormalState(temp.getState().getBody(),temp.getState().getWidth(),temp.getState().getLength()));
+                        State newstate=new NormalState(temp.getState().getBody(),temp.getState().getWidth(),temp.getState().getLength(),temp.getState().getGrowing());
+                        temp.setState(newstate);
                         temp.getState().setCurrentDirection(dir);
                 }
 
@@ -216,16 +212,17 @@ public class SnakeGameState extends GameState {
             }
             //Remove the bonus from the active bonus list
             Iterator<SnakeBonus> iter2 = activeBonuses.iterator();
+            SnakeBonus toremove=null;
             while(iter.hasNext()){
                 SnakeBonus temp = iter2.next();
 
                 if(temp.getId().equals(bonus.getId())){
-                    activeBonuses.remove(temp);
+                    toremove=temp;
+
                 }
-
-
-
             }
+            activeBonuses.remove(toremove);
+
         }
     }
 

@@ -154,15 +154,9 @@ class SpawnBonus extends TimerTask {
     }
 
     private void completeTask() {
-        try {
+
             this.gamestate.spawnBonus();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        }
+
     }
     */
 

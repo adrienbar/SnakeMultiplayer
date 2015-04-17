@@ -41,6 +41,7 @@ public abstract class State {
         this.width=width;
         this.length=length;
         growing=0;
+        speed=0.2;
 
     }
 
@@ -136,23 +137,23 @@ public abstract class State {
     public void moveCurrentDirectionSpeed(){
         Iterator<SnakeCell> iter = body.iterator();
         direction cellDirection=currentDirection;
-        if(currentDirection==direction.down){
+        SnakeCell prev = body.getFirst();
+        if(speed==0.5 ){
             System.out.println("Test");
         }
-        SnakeCell prev = body.getFirst();
         while(iter.hasNext()){
             SnakeCell temp = iter.next();
             double newX =  temp.getX();
             double newY =  temp.getY();
-            if(prev.getY()!=temp.getY() && cellDirection==direction.left || prev.getY()!=temp.getY() && cellDirection==direction.right ){
+            if(!(Math.abs(prev.getY()-temp.getY())<0.005) && cellDirection==direction.left || !(Math.abs(prev.getY()-temp.getY())<0.005) && cellDirection==direction.right ){
                 if(prev.getY()>temp.getY()){
-                    cellDirection=direction.up;
-                }
-                else{
                     cellDirection=direction.down;
                 }
+                else{
+                    cellDirection=direction.up;
+                }
             }
-            else if(prev.getX()!=temp.getX() && cellDirection==direction.down || prev.getX()!=temp.getX() && cellDirection==direction.up){
+            else if(!(Math.abs(prev.getX()-temp.getX())<0.005) && cellDirection==direction.down || !(Math.abs(prev.getX()-temp.getX())<0.005) && cellDirection==direction.up){
                 if(prev.getX()>temp.getX()){
                     cellDirection=direction.right;
                 }
@@ -160,6 +161,7 @@ public abstract class State {
                     cellDirection=direction.left;
                 }
             }
+
             switch (cellDirection) {
                 case up:
                     newY-=speed*length;
@@ -177,6 +179,26 @@ public abstract class State {
             prev=temp;
             temp.setX(newX);
             temp.setY(newY);
+
+        }
+
+        if(growing>0){
+
+            switch (cellDirection) {
+                case up:
+                    body.addLast(new SnakeCell(body.getLast().getX(),body.getLast().getY()+length));
+                    break;
+                case down:
+                    body.addLast(new SnakeCell(body.getLast().getX(),body.getLast().getY()-length));
+                    break;
+                case left:
+                    body.addLast(new SnakeCell(body.getLast().getX()+width,body.getLast().getY()));
+                    break;
+                case right:
+                    body.addLast(new SnakeCell(body.getLast().getX()-width,body.getLast().getY()));
+                    break;
+            }
+            growing--;
 
         }
 

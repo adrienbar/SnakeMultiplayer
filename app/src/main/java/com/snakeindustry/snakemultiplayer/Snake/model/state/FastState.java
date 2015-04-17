@@ -20,30 +20,9 @@ public class FastState extends State {
     public FastState (double width, double length){
 
         super(width,length);
-        speed=0.6;
+        speed=0.5;
 
 
     }
-
-    //Test, not sure it will look good on screen to add speed like this
-    public void moveCurrentDirection()
-    {
-        for(int i=0;i<speed;i++){
-            addSquareToHead();
-        }
-
-        if (body.size() > 1) {
-            for(int j=0;j<speed;j++) {
-                if (growing == 0) {
-
-                    body.removeLast();
-                } else {
-                    growing--;
-                }
-            }
-        }
-
-    }
-
 
 }
