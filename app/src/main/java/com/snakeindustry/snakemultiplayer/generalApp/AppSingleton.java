@@ -79,7 +79,6 @@ public class AppSingleton {
 
     }
 
-
     //METHODES
 
     /**

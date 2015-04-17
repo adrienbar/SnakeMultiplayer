@@ -38,8 +38,8 @@ public class NetworkModeAndGameSettings extends ActionBarActivity {
         Button stats= (Button) findViewById(R.id.statsbutton);
         stats.setOnClickListener(new ButtonController(StatsOneGameActivity.class));
 
-        /*Button settings = (Button) findViewById(R.id.settings);
-        settings.setOnClickListener(new ButtonController(SettingsOneGameActivity.class));*/
+        Button settings = (Button) findViewById(R.id.settings);
+        settings.setOnClickListener(new ButtonController(SettingsOneGameActivity.class));
 
         TextView bestScore = (TextView) findViewById(R.id.bestScore);
         SimpleStats bestScore1 = AppSingleton.getInstance().getPlayer().getStats().getStatsForOneGame(AppSingleton.getInstance().getCurrentGame()).getBestScore();

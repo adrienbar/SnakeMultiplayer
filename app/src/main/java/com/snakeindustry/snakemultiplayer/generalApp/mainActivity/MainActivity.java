@@ -28,7 +28,7 @@ public class MainActivity extends ActionBarActivity {
 
         AppSingleton.getInstance().loadProfile();
         AppSingleton.getInstance().checkStats();
-
+        AppSingleton.getInstance().checkSettings();
 
         //Profile Buttons
         LinearLayout profile = (LinearLayout) findViewById(R.id.profile);

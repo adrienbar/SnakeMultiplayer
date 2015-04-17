@@ -12,6 +12,15 @@ public class GameSettingsC implements GameSettings{
         return fps;
     }
 
+    public GameSettingsC(int fps) {
+        this.fps = fps;
+    }
+
+    //default value 30fps
+    public GameSettingsC(){
+        this(30);
+    }
+
     @Override
     public void setfps(int i) {
         fps = i;

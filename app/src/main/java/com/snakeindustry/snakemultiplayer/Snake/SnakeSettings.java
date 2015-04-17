@@ -1,5 +1,7 @@
 package com.snakeindustry.snakemultiplayer.Snake;
 
+import android.content.Context;
+import android.util.AttributeSet;
 import android.view.View;
 
 import com.snakeindustry.snakemultiplayer.Snake.viewAndControl.SnakeView;
@@ -9,38 +11,50 @@ import com.snakeindustry.snakemultiplayer.generalApp.player.settings.model.GameS
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 /**
  * Created by Vincent on 16/04/2015.
  */
 public class SnakeSettings extends GameSettingsC{
 
-    private SnakeView preferedControl;
-    private ArrayList<SnakeView> availableControl;
+    private int idPreferredControl;
 
-    public SnakeSettings(ArrayList<SnakeView> availableControl) {
-        super();
-        this.preferedControl = availableControl.get(0);
-        this.availableControl = availableControl;
-    }
+    public static final int SWIPE=0;
+    public static final int TOUCH=1;
+
+    private HashMap<String,Integer> nomId;
+
 
     public SnakeSettings() {
-        this(new ArrayList<SnakeView>(Arrays.asList(new SnakeViewSwipeControl(null,null), new SnakeViewTouchControl(null,null))));
+        super();
+        nomId=new HashMap<>();
+        nomId.put("Swipe control",SWIPE);
+        nomId.put("Touch control",TOUCH);
+        idPreferredControl=SWIPE;
     }
 
-    public SnakeView getPreferedControl() {
-        return preferedControl;
+    public SnakeView getPreferredControl(Context context,AttributeSet attributeSet){
+        switch (idPreferredControl){
+            case SWIPE: return new SnakeViewSwipeControl(context,attributeSet);
+            case TOUCH: return new SnakeViewTouchControl(context,attributeSet);
+            default:return new SnakeViewTouchControl(context,attributeSet);
+        }
     }
 
-    public void setPreferedControl(SnakeView preferedControl) {
-        this.preferedControl = preferedControl;
+    public int getIdPreferredControl() {
+        return idPreferredControl;
     }
 
-    public ArrayList<SnakeView> getAvailableControl() {
-        return availableControl;
+    public void setIdPreferredControl(int idPreferredControl) {
+        this.idPreferredControl = idPreferredControl;
     }
 
-    public void setAvailableControl(ArrayList<SnakeView> availableControl) {
-        this.availableControl = availableControl;
+    public HashMap<String, Integer> getNomId() {
+        return nomId;
+    }
+
+    public void setNomId(HashMap<String, Integer> nomId) {
+        this.nomId = nomId;
     }
 }

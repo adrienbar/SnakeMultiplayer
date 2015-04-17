@@ -8,6 +8,7 @@ import com.snakeindustry.snakemultiplayer.Snake.viewAndControl.SnakeViewTouchCon
 import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameState;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameView;
+import com.snakeindustry.snakemultiplayer.generalApp.player.settings.model.GameSettings;
 import com.snakeindustry.snakemultiplayer.generalApp.player.stats.model.GameStats;
 
 /**
@@ -66,6 +67,11 @@ public class GameSnake implements Game {
     @Override
     public void resetGameState() {
         this.setGameState(new SnakeGameState());
+    }
+
+    @Override
+    public GameSettings createSettings() {
+        return new SnakeSettings();
     }
 
     @Override
