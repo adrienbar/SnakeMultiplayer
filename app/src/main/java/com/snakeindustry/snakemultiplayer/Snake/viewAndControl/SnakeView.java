@@ -14,12 +14,7 @@ import android.util.AttributeSet;
 import com.snakeindustry.snakemultiplayer.R;
 import com.snakeindustry.snakemultiplayer.Snake.model.Snake;
 import com.snakeindustry.snakemultiplayer.Snake.model.SnakeGameState;
-import com.snakeindustry.snakemultiplayer.Snake.model.eatableObject.EatableObject;
-import com.snakeindustry.snakemultiplayer.Snake.model.eatableObject.FastBonus;
-import com.snakeindustry.snakemultiplayer.Snake.model.eatableObject.Food;
-import com.snakeindustry.snakemultiplayer.Snake.model.eatableObject.InvincibleBonus;
-import com.snakeindustry.snakemultiplayer.Snake.model.eatableObject.ReverseBonus;
-import com.snakeindustry.snakemultiplayer.Snake.model.eatableObject.SnakeBonus;
+import com.snakeindustry.snakemultiplayer.Snake.model.eatableObject.*;
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameState;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameThread;
@@ -35,8 +30,15 @@ import java.util.ArrayList;
 public abstract class SnakeView extends GameViewAC {
 
 
+    private Bitmap none,invincible,reverse,fast;
+
     public SnakeView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        none=Bitmap.createBitmap(5,5, Bitmap.Config.ARGB_8888);
+        invincible=BitmapFactory.decodeResource(this.getResources(), R.drawable.star);
+        reverse=BitmapFactory.decodeResource(this.getResources(), R.drawable.reverse);
+        fast=BitmapFactory.decodeResource(this.getResources(), R.drawable.forward);
+
     }
 
     /**
@@ -48,83 +50,49 @@ public abstract class SnakeView extends GameViewAC {
     public void draw(GameState gameState) {
 
         Canvas canvas = this.getHolder().lockCanvas();
-
         canvas.drawColor(Color.WHITE);
 
         SnakeGameState snakeGameState=(SnakeGameState) gameState;
 
-
         //FOOD
         if(snakeGameState.getSpawnedFood()!=null){
-            Paint paintFood=new Paint();
             for(Food food : snakeGameState.getSpawnedFood()){
-                paintFood.setColor(Color.GREEN);
-                this.drawEatableObject(food,paintFood,canvas,"Food");
+                this.drawEatableObject(food,canvas,"Food");
             }
         }
-
 
         //BONUS
         if(snakeGameState.getSpawnedBonuses()!=null){
-
-            //Border
-            Paint paintBonus=new Paint();
-            paintBonus.setColor(Color.GREEN);
-            paintBonus.setStyle(Paint.Style.STROKE);
-
             for(SnakeBonus snakeBonus: snakeGameState.getSpawnedBonuses()){
-
-                this.drawBonus(snakeBonus,canvas,paintBonus);
+                this.drawBonus(snakeBonus,canvas);
             }
         }
-
-
 
         //SNAKES
-
-
         if(snakeGameState.getSnakes()!=null) {
-            Paint paintSnake=new Paint();
-            paintSnake.setColor(Color.BLACK);
-            paintSnake.setStyle(Paint.Style.FILL);
-
             for (String playerName : snakeGameState.getPlayersSnakes().keySet()) {
-
                 Snake snake=snakeGameState.getPlayersSnakes().get(playerName);
-
-                if(playerName== AppSingleton.getInstance().getPlayer().getName()) {
-                    paintSnake.setColor(Color.RED);
-                    playerName="";
-                }
-                this.drawSnake(snake, paintSnake,canvas,playerName);
-                paintSnake.setColor(Color.BLACK);
+                this.drawSnake(snake,canvas,playerName);
             }
         }
-
-       // Paint paint=new Paint();
-      //  paint.setColor(Color.BLUE);
-      //  this.drawEatableObject(new Food(0.1, 0.1, 0.5, 0.5), paint, canvas);
-      //  paint.setColor(Color.RED);
-      //  paint.setStyle(Paint.Style.FILL);
-      //  this.drawSnake(new Snake(""),paint,canvas);
 
         this.getHolder().unlockCanvasAndPost(canvas);
     }
 
+
     /**
      * draw an eatableObject as a Rectangle
      * @param eatable to be drawn
-     * @param paint how to draw
      * @param canvas where to draw
      */
-    private void drawEatableObject(EatableObject eatable,Paint paint,Canvas canvas,String name) {
+    private void drawEatableObject(EatableObject eatable,Canvas canvas,String name) {
 
         float x = (float) (eatable.getX()*this.getWidth());
         float y = (float) (eatable.getY()*this.getHeight());
         float h = (float) (eatable.getHeight()*this.getHeight());
         float w = (float) (eatable.getWidth()*this.getWidth());
 
-
+        Paint paint =  new Paint();
         canvas.drawRect(x-w/2,y-h/2,x+w/2,y+h/2,paint);
 
         //put Name
@@ -133,20 +101,17 @@ public abstract class SnakeView extends GameViewAC {
 
     }
 
-public void drawBonus(SnakeBonus bonus,Canvas canvas,Paint paint) {
+public void drawBonus(SnakeBonus bonus,Canvas canvas) {
 
     float x = (float) (bonus.getX()*this.getWidth());
     float y = (float) (bonus.getY()*this.getHeight());
     float h = (float) (bonus.getHeight()*this.getHeight());
     float w = (float) (bonus.getWidth()*this.getWidth());
 
-
-    int ressourcePictureId=R.drawable.forward;
-
-    if(bonus instanceof ReverseBonus) { ressourcePictureId=R.drawable.reverse;}
-    if(bonus instanceof InvincibleBonus) {ressourcePictureId=R.drawable.star;}
-    if(bonus instanceof FastBonus) {ressourcePictureId=R.drawable.forward; }
-
+    Bitmap bitmap=none;
+    if(bonus instanceof ReverseBonus) { bitmap=reverse;}
+    if(bonus instanceof InvincibleBonus) {bitmap=invincible;}
+    if(bonus instanceof FastBonus) {bitmap=fast; }
 
     Paint background=new Paint();
     background.setStyle(Paint.Style.FILL);
@@ -156,14 +121,14 @@ public void drawBonus(SnakeBonus bonus,Canvas canvas,Paint paint) {
         case others:background.setColor(Color.RED);break;
     }
 
-
-    Bitmap bitmap=BitmapFactory.decodeResource(this.getResources(), ressourcePictureId);
     Rect src=new Rect(0,0,bitmap.getWidth(),bitmap.getHeight());
     RectF destination=new RectF(x-w/2,y-h/2,x+w/2,y+h/2);
 
+    Paint paintBorder=new Paint();
+    Paint paintBitmap =new Paint();
     canvas.drawRect(destination,background);
-    canvas.drawBitmap(bitmap,src,destination,paint);
-    canvas.drawRect(destination,paint);
+    canvas.drawBitmap(bitmap,src,destination,background);
+    //canvas.drawRect(destination,paintBorder);
 
 }
 
@@ -173,20 +138,22 @@ public void drawBonus(SnakeBonus bonus,Canvas canvas,Paint paint) {
     /**
      * Draw a snake as lines, with a Green head
      * @param snake  to be draw
-     * @param paint  how to draw
      * @param canvas where to draw
      */
-    private void drawSnake(Snake snake,Paint paint,Canvas canvas,String name) {
+    private void drawSnake(Snake snake,Canvas canvas,String name) {
+
+        Paint paintBody=new Paint();
+        paintBody.setColor(Color.MAGENTA);
 
         float x1,x2,y1,y2,h,w;
-
         h = (float) (snake.getState().getWidth()*this.getHeight());
         w = (float) (snake.getState().getWidth()*this.getWidth());
 
         x1= (float) (snake.getState().getBody().get(0).getX()*this.getWidth());
         y1 = (float) (snake.getState().getBody().get(0).getY()*this.getHeight());
 
-        canvas.drawRect(x1-(w/2),y1-(h/2),x1+(w/2),y1+(h/2),paint);
+        canvas.drawRect(x1-(w/2),y1-(h/2),x1+(w/2),y1+(h/2),paintBody);
+
 
         //DRAW A LINES BETWEEN EACH FOLLOWING POINTS OF THE SNAKE
         for(int i=1;i<snake.getState().getBody().size();i++){
@@ -194,12 +161,18 @@ public void drawBonus(SnakeBonus bonus,Canvas canvas,Paint paint) {
             x2=x1;
             y2=y1;
 
+
+            if(name== AppSingleton.getInstance().getPlayer().getName()) {
+                paintBody.setColor(Color.LTGRAY);
+                name="";
+            }
+
             x1 = (float) (snake.getState().getBody().get(i).getX()*this.getWidth());
             y1 = (float) (snake.getState().getBody().get(i).getY()*this.getHeight());
 
 
             //accords the Stroke of the Line to the height or width of the cell which could be different
-            Paint linePaint=new Paint(paint);
+            Paint linePaint=new Paint(paintBody);
             if(x1==x2) {
                 linePaint.setStrokeWidth(w);
             }
@@ -207,39 +180,33 @@ public void drawBonus(SnakeBonus bonus,Canvas canvas,Paint paint) {
                 linePaint.setStrokeWidth(h);
             }
 
-
             //DRAW LINE WITH ITS EXTREMITIES ON THE CANVAS
             //draws the line between 2 points
            // canvas.drawLine(x1-(w/2),y1-(h/2),x2+(w/2),y2+(h/2), linePaint);
 
             //draw the point to avoid bad corners
-            canvas.drawRect(x1-(w/2),y1-(h/2),x1+(w/2),y1+(h/2),paint);
+            canvas.drawRect(x1-(w/2),y1-(h/2),x1+(w/2),y1+(h/2),paintBody);
         }
 
-        // Make the snake's head green
+        // HEAD
+        Paint paintHead=new Paint();
+        paintHead.setColor(Color.GRAY);
         x1= (float) (snake.getState().getBody().get(0).getX()*this.getWidth());
         y1 = (float) (snake.getState().getBody().get(0).getY()*this.getHeight());
-        paint.setColor(Color.GREEN);
-        canvas.drawRect(x1-(w/2),y1-(h/2),x1+(w/2),y1+(h/2),paint);
+        canvas.drawRect(x1-(w/2),y1-(h/2),x1+(w/2),y1+(h/2),paintHead);
 
 
         //bonus time
-      //  paint.setColor(Color.GRAY);
-      //  canvas.drawRect(x1-(w/2),y1-(h/2),x1+(w/2),y1+(h/2),paint);
+        //  paint.setColor(Color.GRAY);
+        //  canvas.drawRect(x1-(w/2),y1-(h/2),x1+(w/2),y1+(h/2),paint);
 
         // canvas.drawArc(x1-(w/2),y1-(h/2),x1+(w/2),y1+(h/2),0,180,true,paint);
 
 
         //put Name
-        paint.setColor(Color.BLUE);
-        canvas.drawText(name,x1,y1,paint);
-
-
-
-
-
+        Paint paintName=new Paint();
+        paintName.setColor(Color.BLUE);
+        canvas.drawText(name,x1,y1,paintName);
     }
-
-
 
 }
