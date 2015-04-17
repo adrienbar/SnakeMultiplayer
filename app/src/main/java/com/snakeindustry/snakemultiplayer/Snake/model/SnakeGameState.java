@@ -271,7 +271,6 @@ public class SnakeGameState extends GameState {
         for(Snake s : snakes){
             if(s.getState().collisionManagement(snakes)==true){
                 snakes.remove(s);
-
             }
         }
         checkFood();

@@ -1,17 +1,24 @@
 package com.snakeindustry.snakemultiplayer.Snake.viewAndControl;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.provider.CalendarContract;
 import android.util.AttributeSet;
 
+import com.snakeindustry.snakemultiplayer.R;
 import com.snakeindustry.snakemultiplayer.Snake.model.Snake;
 import com.snakeindustry.snakemultiplayer.Snake.model.SnakeGameState;
 import com.snakeindustry.snakemultiplayer.Snake.model.eatableObject.EatableObject;
+import com.snakeindustry.snakemultiplayer.Snake.model.eatableObject.FastBonus;
 import com.snakeindustry.snakemultiplayer.Snake.model.eatableObject.Food;
+import com.snakeindustry.snakemultiplayer.Snake.model.eatableObject.InvincibleBonus;
+import com.snakeindustry.snakemultiplayer.Snake.model.eatableObject.ReverseBonus;
 import com.snakeindustry.snakemultiplayer.Snake.model.eatableObject.SnakeBonus;
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameState;
@@ -60,10 +67,12 @@ public abstract class SnakeView extends GameViewAC {
         //BONUS
         if(snakeGameState.getSpawnedBonuses()!=null){
             Paint paintBonus=new Paint();
+            paintBonus.setColor(Color.GREEN);
+            paintBonus.setStyle(Paint.Style.STROKE);
 
             for(SnakeBonus snakeBonus: snakeGameState.getSpawnedBonuses()){
-                paintBonus.setColor(Color.RED);
-                this.drawEatableObject(snakeBonus,paintBonus,canvas,"Bonus");
+
+                this.drawBonus(snakeBonus,canvas,paintBonus);
             }
         }
 
@@ -113,12 +122,40 @@ public abstract class SnakeView extends GameViewAC {
         float h = (float) (eatable.getHeight()*this.getHeight());
         float w = (float) (eatable.getWidth()*this.getWidth());
 
+
         canvas.drawRect(x-w/2,y-h/2,x+w/2,y+h/2,paint);
+
         //put Name
-        paint.setColor(Color.BLUE);
-        canvas.drawText(name,x,y,paint);
+        //paint.setColor(Color.BLUE);
+        //canvas.drawText(name,x,y,paint);
 
     }
+
+public void drawBonus(SnakeBonus bonus,Canvas canvas,Paint paint) {
+
+    float x = (float) (bonus.getX()*this.getWidth());
+    float y = (float) (bonus.getY()*this.getHeight());
+    float h = (float) (bonus.getHeight()*this.getHeight());
+    float w = (float) (bonus.getWidth()*this.getWidth());
+
+
+
+
+
+    int ressourcePictureId=R.drawable.forward;
+
+    if(bonus instanceof ReverseBonus) { ressourcePictureId=R.drawable.reverse;}
+    if(bonus instanceof InvincibleBonus) {ressourcePictureId=R.drawable.star;}
+    if(bonus instanceof FastBonus) {ressourcePictureId=R.drawable.forward; }
+    Bitmap bitmap=BitmapFactory.decodeResource(this.getResources(), ressourcePictureId);
+    Rect src=new Rect(0,0,bitmap.getWidth(),bitmap.getHeight());
+    RectF destination=new RectF(x-w/2,y-h/2,x+w/2,y+h/2);
+    canvas.drawBitmap(bitmap,src,destination,paint);
+    canvas.drawRect(destination,paint);
+
+}
+
+
 
 
     /**
