@@ -418,5 +418,7 @@ public class SnakeGameState extends GameState {
     public HashMap<String, Snake> getPlayersSnakes() {
         return playersSnakes;
     }
+
+
 }
 

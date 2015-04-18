@@ -85,9 +85,7 @@ public class GameThread extends Thread{
         //  timer.cancel();
 
 
-
-        //DRAW GAME OVER
-
+        //SEND GAME OVER TO ALL CLIENT
 
 
     }

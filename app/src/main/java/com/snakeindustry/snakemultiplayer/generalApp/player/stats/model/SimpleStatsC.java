@@ -22,8 +22,12 @@ public class SimpleStatsC implements SimpleStats {
 
 
 
-    public SimpleStatsC(String description) {
-        this(description, 0, "", Bitmap.createBitmap(10, 10, Bitmap.Config.ARGB_4444));
+    public SimpleStatsC(String description,double value) {
+        this(description, value, "", Bitmap.createBitmap(10, 10, Bitmap.Config.ARGB_4444));
+    }
+
+    public SimpleStatsC(String description){
+        this(description,0);
     }
 
     public SimpleStatsC() {

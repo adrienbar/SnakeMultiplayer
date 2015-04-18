@@ -8,4 +8,5 @@ import com.snakeindustry.snakemultiplayer.generalApp.game.GameState;
 public interface Client {
     public void sendCommand(int command);
     public GameState getLastGameState();
+
 }
