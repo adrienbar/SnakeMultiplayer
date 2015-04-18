@@ -1,11 +1,10 @@
 package com.snakeindustry.snakemultiplayer.generalApp.player;
 
 import android.graphics.Color;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -55,7 +54,7 @@ public class EditName extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 AppSingleton.getInstance().getPlayer().setName(name.getText()+"");
-                AppSingleton.getInstance().saveProfile();
+                AppSingleton.getInstance().saveProfile(getApplicationContext());
                 EditName.this.finish();
             }
         });

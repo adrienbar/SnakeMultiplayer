@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.snakeindustry.snakemultiplayer.R;
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
-import com.snakeindustry.snakemultiplayer.generalApp.database.PlayerDAO;
 import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
 import com.snakeindustry.snakemultiplayer.generalApp.player.ProfileActivity;
 
@@ -20,7 +19,7 @@ public class MainActivity extends ActionBarActivity {
 
 
     private ListView listView;
-    private PlayerDAO db;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +27,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        db = new PlayerDAO(getApplicationContext());
-        //db.createPlayer("Kriss");
-        AppSingleton.getInstance().setDb(db);
-        AppSingleton.getInstance().loadProfile();
+        AppSingleton.getInstance().loadProfile(getApplicationContext());
         AppSingleton.getInstance().checkStats();
         AppSingleton.getInstance().checkSettings();
 
@@ -70,7 +66,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public void onStop() {
         super.onStop();
-        AppSingleton.getInstance().saveProfile();
+        AppSingleton.getInstance().saveProfile(getApplicationContext());
         //db.close();
 }
 
