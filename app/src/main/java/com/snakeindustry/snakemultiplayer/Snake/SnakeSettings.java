@@ -57,4 +57,5 @@ public class SnakeSettings extends GameSettingsC{
     public void setNomId(HashMap<String, Integer> nomId) {
         this.nomId = nomId;
     }
+
 }

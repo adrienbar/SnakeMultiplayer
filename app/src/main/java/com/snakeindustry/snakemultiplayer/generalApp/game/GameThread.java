@@ -78,8 +78,11 @@ public class GameThread extends Thread{
                 Log.d("GameThread", "device too SLOW !!! : Send + Draw time: "+(time2-time1)+" " +((time2-time1)/refreshInterval)*100 +"%");
             }
         }
+
+
+
         //Game over, stop spawning food and bonus
-      //  timer.cancel();
+        //  timer.cancel();
 
 
 

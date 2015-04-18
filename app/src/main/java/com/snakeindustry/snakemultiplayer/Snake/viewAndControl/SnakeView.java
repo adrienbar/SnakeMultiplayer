@@ -72,7 +72,9 @@ public abstract class SnakeView extends GameViewAC {
         if(snakeGameState.getSnakes()!=null) {
             for (String playerName : snakeGameState.getPlayersSnakes().keySet()) {
                 Snake snake=snakeGameState.getPlayersSnakes().get(playerName);
-                this.drawSnake(snake,canvas,playerName);
+                if(((SnakeGameState) gameState).getSnakes().contains(snake)){
+                    this.drawSnake(snake,canvas,playerName);
+                }
             }
         }
 
