@@ -12,6 +12,7 @@ import android.provider.CalendarContract;
 import android.util.AttributeSet;
 
 import com.snakeindustry.snakemultiplayer.R;
+import com.snakeindustry.snakemultiplayer.Snake.SnakeStats;
 import com.snakeindustry.snakemultiplayer.Snake.model.Snake;
 import com.snakeindustry.snakemultiplayer.Snake.model.SnakeGameState;
 import com.snakeindustry.snakemultiplayer.Snake.model.eatableObject.*;
@@ -66,7 +67,12 @@ public abstract class SnakeView extends GameViewAC {
 
     private void drawGameOver(GameState gameState) {
 
+        //SHOULD NOT BE THERE, just for testing
+        gameOverAction(gameState);
+        //
+
         Canvas canvas = this.getHolder().lockCanvas();
+
 
         canvas.drawColor(Color.WHITE);
         Paint paintScore=new Paint();
@@ -300,4 +306,8 @@ public void drawBonus(SnakeBonus bonus,Canvas canvas) {
         canvas.drawText(name,x1,y1,paintName);
     }
 
+    public void gameOverAction(GameState gameState){
+        SnakeGameState snakeGameState =(SnakeGameState) gameState;
+        snakeGameState.gameOverAction();
+    }
 }

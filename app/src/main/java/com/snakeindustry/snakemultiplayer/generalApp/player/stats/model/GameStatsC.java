@@ -24,7 +24,7 @@ public class GameStatsC implements GameStats {
     }
 
     public GameStatsC() {
-        this(new SimpleStatsC("Played time",0,"h",null),
+        this(new SimpleStatsC("Played time",0,"min",null),
                 new SimpleStatsC("Nb of plays",0,"play(s)",null),
                 new SimpleStatsC("Best Score", 0,"",null),
                 new HashMap<String, Integer>(),

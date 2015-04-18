@@ -104,12 +104,13 @@ public class SnakeGameState extends GameState {
         SnakeStats mySnakeStatsForThisPlay= (SnakeStats) playerStats.get(currentPlayer);
 
         mySnakeStats.addAPlay();
-        mySnakeStats.addPlayedTime((SystemClock.elapsedRealtime()-startTime)/1000/3600);
+        mySnakeStats.addPlayedTime((SystemClock.elapsedRealtime()-startTime)/60000);
         for(String playerName : this.getPlayersSnakes().keySet()) {
+            if(!playerName.equals(AppSingleton.getInstance().getPlayer().getName()))
             mySnakeStats.addAPlayWithAFriend(playerName);
         }
-        mySnakeStats.addScore(mySnakeStatsForThisPlay.getScoreValues().get(0));
-        mySnakeStats.addLength(getScore(currentPlayer));
+        mySnakeStats.addScore(getScore(currentPlayer));
+        mySnakeStats.addLength(playersSnakes.get(currentPlayer).getState().getBody().size());
 
     }
 
