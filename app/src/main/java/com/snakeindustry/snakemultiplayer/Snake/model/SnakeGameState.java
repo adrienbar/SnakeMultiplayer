@@ -129,7 +129,7 @@ public class SnakeGameState extends GameState {
                         timer=new Timer();
 
                        targets.add(s.getPlayer());
-                       timer.schedule(new CancelBonusTask(targets,sb), sb.getDuration()*100 * 1000);
+                       timer.schedule(new CancelBonusTask(targets,sb), sb.getDuration() * 1000);
 
                     }
                     else if(sb.getTarget()== target.all){
@@ -274,7 +274,7 @@ public class SnakeGameState extends GameState {
 
         //update positions
         for(Snake s : snakes){
-            s.getState().moveCurrentDirection();
+            s.getState().moveCurrentDirectionSpeed();
         }
         //update collisions
         for(Snake s : snakes){
