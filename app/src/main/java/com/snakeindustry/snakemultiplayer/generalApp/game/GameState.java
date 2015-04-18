@@ -11,7 +11,6 @@ import java.util.List;
  */
 public abstract class GameState {
 
-    List<Player> playerList;
 
     public abstract boolean isGameOver();
 

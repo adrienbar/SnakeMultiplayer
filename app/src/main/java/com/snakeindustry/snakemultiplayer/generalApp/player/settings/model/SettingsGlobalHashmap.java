@@ -56,7 +56,7 @@ public class SettingsGlobalHashmap implements Settings {
         GameSettings settingsForOneGame = this.getGameSettingsHashMap().get(gameName);
         if (settingsForOneGame==null){
             this.getGameSettingsHashMap().put(gameName, AppSingleton.getGameFromName(gameName).createSettings());
-            SnakeSettings snakeSettings = (SnakeSettings) AppSingleton.getInstance().getPlayer().getSettings().getSettingsForOneGame(AppSingleton.getInstance().getCurrentGame().getName());
+            //SnakeSettings snakeSettings = (SnakeSettings) AppSingleton.getInstance().getPlayer().getSettings().getSettingsForOneGame(AppSingleton.getInstance().getCurrentGame().getName());
 
         }
     }

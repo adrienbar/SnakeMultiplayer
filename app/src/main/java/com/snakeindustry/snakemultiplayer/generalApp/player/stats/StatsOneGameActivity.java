@@ -37,9 +37,9 @@ public class StatsOneGameActivity extends ActionBarActivity {
 
 
 
-        ListView listView = (ListView)findViewById(R.id.listViewDetailedStats);
+        ListView stats = (ListView)findViewById(R.id.listViewDetailedStats);
         final ArrayAdapter<SimpleStats> adapter = new OneStatsListAdapter(this, AppSingleton.getInstance().getPlayer().getStats().getStatsForOneGame(currentGame).getStatsAsList());
-        listView.setAdapter(adapter);
+        stats.setAdapter(adapter);
 
         final ListView topFriends = (ListView)findViewById(R.id.topFriendsList);
         List<SimpleStats> friendsList = AppSingleton.getInstance().getPlayer().getStats().getStatsForOneGame(currentGame).getStatsFriends();
@@ -67,6 +67,8 @@ public class StatsOneGameActivity extends ActionBarActivity {
         getMenuInflater().inflate(R.menu.menu_game_stats, menu);
         return true;
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
