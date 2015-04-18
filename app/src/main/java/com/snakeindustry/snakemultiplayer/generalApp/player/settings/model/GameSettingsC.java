@@ -1,9 +1,11 @@
 package com.snakeindustry.snakemultiplayer.generalApp.player.settings.model;
 
+import android.content.Context;
+
 /**
  * Created by Vincent on 16/04/2015.
  */
-public class GameSettingsC implements GameSettings{
+public abstract class GameSettingsC implements GameSettings{
 
     private int fps;
 
@@ -25,4 +27,17 @@ public class GameSettingsC implements GameSettings{
     public void setfps(int i) {
         fps = i;
     }
+
+
+@Override
+    public void saveSettings(Context context){
+        //save FPS
+    }
+
+@Override
+    public void loadSettings(Context context){
+        //load FPS
+    }
+
+
 }

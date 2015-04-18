@@ -58,4 +58,22 @@ public class SnakeSettings extends GameSettingsC{
         this.nomId = nomId;
     }
 
+    @Override
+    public void saveSettings(Context context) {
+        //save FPS
+        super.saveSettings(context);
+
+
+        //save idPreferred control
+    }
+
+    @Override
+    public void loadSettings(Context context) {
+        //load FPS
+        super.loadSettings(context);
+
+        //load idPreferred controls
+    }
+
+
 }

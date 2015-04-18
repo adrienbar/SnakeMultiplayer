@@ -310,4 +310,5 @@ public void drawBonus(SnakeBonus bonus,Canvas canvas) {
         SnakeGameState snakeGameState =(SnakeGameState) gameState;
         snakeGameState.gameOverAction();
     }
+
 }

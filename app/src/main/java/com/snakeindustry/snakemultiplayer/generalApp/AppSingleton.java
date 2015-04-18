@@ -147,6 +147,24 @@ public class AppSingleton {
     }
 
 
+    //SAVE SETTINGS
+    public void saveSetting(Context context) {
+        for (Game game:this.getAvailabeGames()){
+            getPlayer().getSettings().getSettingsForOneGame(game.getName()).saveSettings(context);
+        }
+    }
+
+    public void loadSettings(Context context){
+        for( Game game:this.getAvailabeGames()){
+            getPlayer().getSettings().getSettingsForOneGame(game.getName()).loadSettings(context);
+        }
+    }
+
+
+
+
+
+
     //GETTERS AND SETTERS
     public static AppSingleton getInstance() {
         return INSTANCE;

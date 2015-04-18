@@ -1,5 +1,6 @@
 package com.snakeindustry.snakemultiplayer.Snake;
 
+import android.content.Context;
 import android.view.View;
 
 import com.snakeindustry.snakemultiplayer.R;
@@ -20,6 +21,8 @@ public class GameSnake implements Game {
     private GameSnake() {
         this.gameView = null;
         this.gameState = new SnakeGameState();
+        this.gameSettings=new SnakeSettings();
+
 
     }
 
@@ -37,6 +40,7 @@ public class GameSnake implements Game {
 
     private GameView gameView;
     private GameState gameState;
+    private GameSettings gameSettings;
 
 
     @Override
@@ -79,11 +83,7 @@ public class GameSnake implements Game {
         return getName();
     }
 
-    // to be discussed
-    @Override
-    public View getSettings() {
-        return null;
-    }
+
 
     public void setGameState(GameState gameState) {
         this.gameState = gameState;

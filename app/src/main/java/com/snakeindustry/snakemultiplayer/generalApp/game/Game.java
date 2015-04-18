@@ -1,5 +1,6 @@
 package com.snakeindustry.snakemultiplayer.generalApp.game;
 
+import android.content.Context;
 import android.view.View;
 
 import com.snakeindustry.snakemultiplayer.generalApp.player.settings.model.GameSettings;
@@ -20,6 +21,6 @@ public void resetGameState();
 public GameSettings createSettings();
 
     //type View should be discussed, and more generally the Settings of a game
-public View getSettings();
+    //public View getSettings();
 
 }
