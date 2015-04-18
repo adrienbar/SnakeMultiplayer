@@ -96,10 +96,10 @@ public class SnakeGameState extends GameState {
             Food toRemove=null;
             for (Food f : spawnedFood) {
 
-                if (s.getState().getBody().getFirst().getX() <= f.getX()+itemWidth/2 &&
-                    s.getState().getBody().getFirst().getX() >= f.getX()-itemWidth/2 &&
-                    s.getState().getBody().getFirst().getY() >= f.getY()-itemLength/2 &&
-                    s.getState().getBody().getFirst().getY() <= f.getY()+itemLength/2     ) {
+                if (s.getState().getBody().getFirst().getX()-s.getState().getWidth()/2 <= f.getX()+itemWidth/2 &&
+                    s.getState().getBody().getFirst().getX()+s.getState().getWidth()/2 >= f.getX()-itemWidth/2 &&
+                    s.getState().getBody().getFirst().getY()+s.getState().getLength()/2 >= f.getY()-itemLength/2 &&
+                    s.getState().getBody().getFirst().getY()-s.getState().getLength()/2 <= f.getY()+itemLength/2     ) {
                     toRemove=f;
                     s.getState().grow(1);
                 }
@@ -117,10 +117,10 @@ public class SnakeGameState extends GameState {
             SnakeBonus toRemove=null;
             for (SnakeBonus sb : spawnedBonuses) {
 
-                if (s.getState().getBody().getFirst().getX() <= sb.getX()+itemWidth/2 &&
-                    s.getState().getBody().getFirst().getX() >= sb.getX()-itemWidth/2 &&
-                    s.getState().getBody().getFirst().getY() >= sb.getY()-itemLength/2 &&
-                    s.getState().getBody().getFirst().getY() <= sb.getY()+itemLength/2   ) {
+                if (s.getState().getBody().getFirst().getX()-s.getState().getWidth()/2 <= sb.getX()+itemWidth/2 &&
+                    s.getState().getBody().getFirst().getX()+s.getState().getWidth()/2 >= sb.getX()-itemWidth/2 &&
+                    s.getState().getBody().getFirst().getY()+s.getState().getLength()/2 >= sb.getY()-itemLength/2 &&
+                    s.getState().getBody().getFirst().getY()-s.getState().getLength()/2 <= sb.getY()+itemLength/2   ) {
                     List<String> targets = new ArrayList<>();
                     if(sb.getTarget()== target.self){
                         sb.getState().setBody(s.getState().getBody());

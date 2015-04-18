@@ -97,24 +97,34 @@ public abstract class State {
     public boolean collisionManagement( List<Snake> snakes){
             //Check collision with other snakes
             for(Snake temp : snakes) {
-                //Ignore our own body by checking head coordinates
-                if(temp.getState().getBody().getFirst().getX()!=this.getBody().getFirst().getX() && temp.getState().getBody().getFirst().getY()!=this.getBody().getFirst().getY()) {
+
 
                     Iterator<SnakeCell> iter = temp.getState().getBody().iterator();
                     //Check all cells of the snake body
+                       if(temp.getState().getBody().getFirst().getX()==this.getBody().getFirst().getX() &&temp.getState().getBody().getFirst().getY()==this.getBody().getFirst().getY() ){
+                           //If it is our own body, jump head and first 2 cells that stacks during the turns:
+                           iter.next();
+                           iter.next();
+                           iter.next();
+                       }
                     while(iter.hasNext()){
+                        SnakeCell tempcell = iter.next();
 
-                        if(iter.next().getX() <= this.getBody().getFirst().getX()+width/2 &&
-                           iter.next().getX() >= this.getBody().getFirst().getX()-width/2 &&
-                           iter.next().getY() >= this.getBody().getFirst().getX()-length/2 &&
-                           iter.next().getY() <= this.getBody().getFirst().getX()+length/2) {
-
+                        if(tempcell.getX()-width/2 <= this.getBody().getFirst().getX()+width/2 &&
+                           tempcell.getX()+width/2 >= this.getBody().getFirst().getX()-width/2 &&
+                           tempcell.getY()+length/2 >= this.getBody().getFirst().getY()-length/2 &&
+                           tempcell.getY()-length/2 <= this.getBody().getFirst().getY()+length/2) {
+                        /*System.out.println(tempcell.getX()-width/2+"<"+this.getBody().getFirst().getX()+width/2);
+                        System.out.println((tempcell.getX()+width/2)+">"+(this.getBody().getFirst().getX()-width/2));
+                        System.out.println((tempcell.getY()+length/2)+">"+(this.getBody().getFirst().getX()-length/2 ));
+                        System.out.println((tempcell.getY()-length/2)+"<"+(this.getBody().getFirst().getX()+length/2));*/
                             return true;
                         }
                      }
-                 }
+
             }
-            if(this.getBody().getFirst().getX() > 1 || this.getBody().getFirst().getY()>1){
+            if(this.getBody().getFirst().getX() > 1 || this.getBody().getFirst().getY()>1
+               || this.getBody().getFirst().getY()<0 ||this.getBody().getFirst().getX()<0 ){
                 return true;
             }
     return false;
