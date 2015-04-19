@@ -111,13 +111,14 @@ public class RoomActivity extends ActionBarActivity {
                     OutputStream outputStream = socket.getOutputStream();
                     PrintStream printStream = new PrintStream(outputStream);
                     printStream.print("Successfully add to the room");
-                    printStream.close();
+                   // printStream.close();
 
 
                 }
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
+
             }
         }
     }
