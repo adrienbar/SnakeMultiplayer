@@ -51,21 +51,10 @@ public abstract class SnakeView extends GameViewAC {
     }
 
 
+
+
     @Override
-    public void draw(GameState gameState){
-
-
-        if(!gameState.isGameOver()){
-            drawGamePlay(gameState);
-        }
-        else {
-            drawGameOver(gameState);
-        }
-
-    }
-
-
-    private void drawGameOver(GameState gameState) {
+    public void drawGameOver(GameState gameState) {
 
         //SHOULD NOT BE THERE, just for testing
         gameOverAction(gameState);
@@ -105,6 +94,7 @@ public abstract class SnakeView extends GameViewAC {
      * gamestate includes Food, SnakeBonus and Snakes
      * @param gameState
      */
+    @Override
     public void drawGamePlay(GameState gameState) {
 
         Canvas canvas = this.getHolder().lockCanvas();
@@ -308,9 +298,5 @@ public void drawBonus(SnakeBonus bonus,Canvas canvas) {
         canvas.drawText(name,x1,y1,paintName);
     }
 
-    public void gameOverAction(GameState gameState){
-        SnakeGameState snakeGameState =(SnakeGameState) gameState;
-        snakeGameState.gameOverAction();
-    }
 
 }

@@ -38,10 +38,6 @@ public class NetworkModeAndGameSettings extends ActionBarActivity {
         Button settings = (Button) findViewById(R.id.settings);
         settings.setOnClickListener(new ButtonController(AppSingleton.getInstance().getCurrentGame().getSettingsActivity()));
 
-        TextView bestScore = (TextView) findViewById(R.id.bestScore);
-        SimpleStats bestScore1 = AppSingleton.getInstance().getPlayer().getStats().getStatsForOneGame(AppSingleton.getInstance().getCurrentGame()).getBestScore();
-        bestScore.setText(bestScore1.getDescription() + " " + bestScore1.getValue() + " "+ bestScore1.getUnit());
-
         Button createGame = (Button) findViewById(R.id.createagame);
         createGame.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +50,15 @@ public class NetworkModeAndGameSettings extends ActionBarActivity {
             }
         });
 
+    }
+
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        TextView bestScore = (TextView) findViewById(R.id.bestScore);
+        SimpleStats bestScore1 = AppSingleton.getInstance().getPlayer().getStats().getStatsForOneGame(AppSingleton.getInstance().getCurrentGame()).getBestScore();
+        bestScore.setText(bestScore1.getDescription() + " " + bestScore1.getValue() + " "+ bestScore1.getUnit());
     }
 
     @Override

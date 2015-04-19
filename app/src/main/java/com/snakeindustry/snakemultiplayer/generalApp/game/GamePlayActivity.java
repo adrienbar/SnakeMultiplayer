@@ -4,6 +4,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.snakeindustry.snakemultiplayer.R;
 import com.snakeindustry.snakemultiplayer.Snake.SnakeSettings;
@@ -16,14 +17,8 @@ public class GamePlayActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String currentGameName = AppSingleton.getInstance().getCurrentGame().getName();
-
-        //SnakeSettings snakeSettings = (SnakeSettings) AppSingleton.getInstance().getPlayer().getSettings().getSettingsForOneGame(currentGameName);
-        //SnakeView snakeView = snakeSettings.getPreferredControl(this, null);
-        GameViewAC gameView= (GameViewAC) AppSingleton.getInstance().getCurrentGame().getGameView(this, null);
-
+        GameViewAC gameView = (GameViewAC) AppSingleton.getInstance().getCurrentGame().getGameView(this, null);
         setContentView(gameView);
-        //setContentView(R.layout.activity_game_play);
     }
 
     @Override
@@ -47,4 +42,6 @@ public class GamePlayActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }

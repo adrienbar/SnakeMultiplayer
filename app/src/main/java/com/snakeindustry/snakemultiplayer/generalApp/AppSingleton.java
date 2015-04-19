@@ -4,6 +4,7 @@ package com.snakeindustry.snakemultiplayer.generalApp;
 import android.content.Context;
 
 import com.snakeindustry.snakemultiplayer.Snake.GameSnake;
+import com.snakeindustry.snakemultiplayer.dummyGame.PacMan;
 import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameThread;
 import com.snakeindustry.snakemultiplayer.generalApp.player.DefaultPlayer;
@@ -43,6 +44,7 @@ public class AppSingleton {
         this.player=new DefaultPlayer();
         this.availabeGames=new ArrayList<Game>();
         this.availabeGames.add(GameSnake.getInstance());
+        this.availabeGames.add(PacMan.getInstance());
         this.isServer=false;
         this.currenGameTread=null;
         this.localClient=null;

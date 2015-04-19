@@ -7,6 +7,7 @@ import com.snakeindustry.snakemultiplayer.Snake.model.eatableObject.Food;
 import com.snakeindustry.snakemultiplayer.Snake.model.state.NormalState;
 import com.snakeindustry.snakemultiplayer.Snake.model.state.State;
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
+import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameState;
 import com.snakeindustry.snakemultiplayer.Snake.model.eatableObject.SnakeBonus;
 import  com.snakeindustry.snakemultiplayer.Snake.model.eatableObject.SnakeBonus.target;
@@ -52,12 +53,6 @@ public class SnakeGameState extends GameState {
     private long timeBetweenBonusSpawn, timeBetweenFoodSpawn;
     private long timeOfLastBonusSpawn,timeOfLastFoodSpan;
 
-    //Statistics
-    private long startTime;
-    private HashMap<String,GameStats> playerStats;
-    //private HashMap<String,Integer> playerScore;
-
-
     public SnakeGameState(){
        super();
         this.spawnedBonuses = new LinkedList<SnakeBonus>();
@@ -81,7 +76,6 @@ public class SnakeGameState extends GameState {
         timeOfLastBonusSpawn=0;
         timeOfLastFoodSpan=0;
 
-        startTime=SystemClock.elapsedRealtime();
 
    }
 
@@ -98,21 +92,15 @@ public class SnakeGameState extends GameState {
     @Override
     public void gameOverAction() {
 
-        //updateStats
-        String currentPlayer=AppSingleton.getInstance().getPlayer().getName();
-        SnakeStats mySnakeStats = (SnakeStats) AppSingleton.getInstance().getPlayer().getStats().getStatsForOneGame(AppSingleton.getInstance().getCurrentGame());
-        SnakeStats mySnakeStatsForThisPlay= (SnakeStats) playerStats.get(currentPlayer);
 
-        mySnakeStats.addAPlay();
-        mySnakeStats.addPlayedTime((SystemClock.elapsedRealtime()-startTime)/60000);
-        for(String playerName : this.getPlayersSnakes().keySet()) {
-            if(!playerName.equals(AppSingleton.getInstance().getPlayer().getName()))
-            mySnakeStats.addAPlayWithAFriend(playerName);
-        }
-        mySnakeStats.addScore(getScore(currentPlayer));
-        mySnakeStats.addLength(playersSnakes.get(currentPlayer).getState().getBody().size());
 
     }
+
+
+
+
+
+
 
     @Override
     public List<String> getPlayers() {
@@ -272,7 +260,6 @@ public class SnakeGameState extends GameState {
         //initialise snakes
         playersSnakes=new HashMap<>();
         snakes=new ArrayList<>();
-        playerStats=new HashMap<>();
         //playerScore=new HashMap<>();
         //create a new Snake for the local player
         //this.playersSnakes.put(AppSingleton.getInstance().getPlayer().getName(), new Snake());
@@ -280,10 +267,6 @@ public class SnakeGameState extends GameState {
         //create a new Snake for each distantPlayers
 
         for (String playerName :players) {
-
-            playerStats.put(playerName,new SnakeStats());
-            //  playerScore.put(playerName,0);
-
 
             switch (playersSnakes.size()) {
                 case 0:
@@ -417,6 +400,22 @@ public class SnakeGameState extends GameState {
 
     public boolean gameOver(String playerName) {
         return !snakes.contains(playersSnakes.get(playerName));
+    }
+
+
+
+
+    @Override
+    public void collectStats() {
+        super.collectStats();
+
+        String currentPlayer = AppSingleton.getInstance().getPlayer().getName();
+        Game currentGame = AppSingleton.getInstance().getCurrentGame();
+        SnakeStats mySnakeStats = (SnakeStats) AppSingleton.getInstance().getPlayer().getStats().getStatsForOneGame(currentGame);
+
+        mySnakeStats.addLength(playersSnakes.get(currentPlayer).getState().getBody().size());
+
+
     }
 
 

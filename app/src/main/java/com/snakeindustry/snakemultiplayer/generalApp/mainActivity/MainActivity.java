@@ -57,7 +57,7 @@ public class MainActivity extends ActionBarActivity {
 
 
         ImageView appIcon= (ImageView) findViewById(R.id.appIcon);
-        appIcon.setImageResource(R.drawable.gamebox);
+        appIcon.setImageResource(R.drawable.gamebox3);
     }
 
     @Override
