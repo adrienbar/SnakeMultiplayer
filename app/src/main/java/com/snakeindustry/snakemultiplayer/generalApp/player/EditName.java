@@ -22,8 +22,7 @@ public class EditName extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_name);
 
-        final TextView textView= (TextView) findViewById(R.id.warningContent);
-
+        final TextView textView = (TextView) findViewById(R.id.warningContent);
 
 
         final EditText name = (EditText) findViewById(R.id.editableName);
@@ -48,13 +47,11 @@ public class EditName extends ActionBarActivity {
         });
 
 
-
         Button save = (Button) findViewById(R.id.save);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AppSingleton.getInstance().getPlayer().setName(name.getText()+"");
-                AppSingleton.getInstance().saveProfile(getApplicationContext());
+                AppSingleton.getInstance().getPlayer().setName(name.getText() + "");
                 EditName.this.finish();
             }
         });

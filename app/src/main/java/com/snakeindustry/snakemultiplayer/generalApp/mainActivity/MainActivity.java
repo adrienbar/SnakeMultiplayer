@@ -27,11 +27,10 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //AppSingleton.getInstance().loadProfile();
-        AppSingleton.getInstance().loadProfile(getApplicationContext());
-
         AppSingleton.getInstance().checkStats();
         AppSingleton.getInstance().checkSettings();
+
+        AppSingleton.getInstance().loadProfile(getApplicationContext());
 
         //Profile Buttons
         LinearLayout profile = (LinearLayout) findViewById(R.id.profile);
@@ -69,8 +68,6 @@ public class MainActivity extends ActionBarActivity {
     public void onStop() {
         super.onStop();
         AppSingleton.getInstance().saveProfile(getApplicationContext());
-        //AppSingleton.getInstance().saveProfile();
-        //db.close();
 }
 
 

@@ -4,7 +4,6 @@ import com.snakeindustry.snakemultiplayer.generalApp.player.stats.model.GameStat
 import com.snakeindustry.snakemultiplayer.generalApp.player.stats.model.SimpleStats;
 import com.snakeindustry.snakemultiplayer.generalApp.player.stats.model.SimpleStatsC;
 
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -26,8 +25,8 @@ public class SnakeStats extends GameStatsC {
     }
 
     @Override
-    public List<SimpleStats> getStatsAsList(){
-        List<SimpleStats> list=super.getStatsAsList();
+    public List<SimpleStats> getStatsAsList() {
+        List<SimpleStats> list = super.getStatsAsList();
         list.add(summedLength);
         return list;
     }

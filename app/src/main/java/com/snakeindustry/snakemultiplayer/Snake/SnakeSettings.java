@@ -2,15 +2,17 @@ package com.snakeindustry.snakemultiplayer.Snake;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.View;
 
 import com.snakeindustry.snakemultiplayer.Snake.viewAndControl.SnakeView;
 import com.snakeindustry.snakemultiplayer.Snake.viewAndControl.SnakeViewSwipeControl;
 import com.snakeindustry.snakemultiplayer.Snake.viewAndControl.SnakeViewTouchControl;
 import com.snakeindustry.snakemultiplayer.generalApp.player.settings.model.GameSettingsC;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.HashMap;
 
 /**
@@ -18,11 +20,9 @@ import java.util.HashMap;
  */
 public class SnakeSettings extends GameSettingsC{
 
-    private int idPreferredControl;
-
     public static final int SWIPE=0;
     public static final int TOUCH=1;
-
+    private int idPreferredControl;
     private HashMap<String,Integer> nomId;
 
 
@@ -63,8 +63,22 @@ public class SnakeSettings extends GameSettingsC{
         //save FPS
         super.saveSettings(context);
 
-
         //save idPreferred control
+        FileOutputStream output;
+        OutputStreamWriter osw;
+
+        try {
+            output = context.openFileOutput("SettingController.dat", Context.MODE_PRIVATE);
+            osw = new OutputStreamWriter(output);
+            System.out.println("Controller save");
+            osw.write(getIdPreferredControl() + "\n");
+            System.out.println(getIdPreferredControl());
+            osw.flush();
+            if (output != null)
+                output.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -73,6 +87,22 @@ public class SnakeSettings extends GameSettingsC{
         super.loadSettings(context);
 
         //load idPreferred controls
+        FileInputStream intput;
+        InputStreamReader isr;
+        BufferedReader reader;
+
+        try {
+            intput = context.openFileInput("SettingController.dat");
+            isr = new InputStreamReader(intput);
+            reader = new BufferedReader(isr);
+            System.out.println("Controller load");
+            setIdPreferredControl(Integer.parseInt(reader.readLine()));
+            System.out.println(getIdPreferredControl());
+            if (intput != null)
+                intput.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
