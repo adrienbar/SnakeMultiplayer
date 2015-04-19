@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.snakeindustry.snakemultiplayer" >
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -41,6 +43,10 @@
         <activity
             android:name=".generalApp.pseudoNetwork.RoomActivity"
             android:label="@string/title_activity_room" >
+        </activity>
+        <activity
+            android:name=".generalApp.pseudoNetwork.RoomActivityClient"
+            android:label="@string/title_activity_room_Client" >
         </activity>
         <activity
             android:name=".Snake.Activity_to_delete"

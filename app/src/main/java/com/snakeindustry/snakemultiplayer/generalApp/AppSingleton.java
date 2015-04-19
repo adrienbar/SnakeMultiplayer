@@ -106,7 +106,6 @@ public class AppSingleton {
         return INSTANCE;
     }
 
-
     public List<Game> getAvailabeGames() {
         return availabeGames;
     }

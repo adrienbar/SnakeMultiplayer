@@ -21,9 +21,22 @@ import com.snakeindustry.snakemultiplayer.generalApp.mainActivity.GameListAdapta
 import com.snakeindustry.snakemultiplayer.generalApp.mainActivity.GameListListener;
 import com.snakeindustry.snakemultiplayer.generalApp.player.Player;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintStream;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.SocketException;
+import java.util.Enumeration;
 import java.util.List;
 
 public class RoomActivity extends ActionBarActivity {
+
+    TextView ipAndPort;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +48,14 @@ public class RoomActivity extends ActionBarActivity {
         ImageView gameIcon =  (ImageView) findViewById((R.id.gameiconnetworkandsettings));
         gameIcon.setImageResource(AppSingleton.getInstance().getCurrentGame().getIdIcon());
 
+        ipAndPort = (TextView) findViewById(R.id.ipAndPort);
+
         //list of available games
 
         ListView listView = (ListView) findViewById(R.id.players);
 
         List<String> playersName =AppSingleton.getInstance().getCurrenGameTread().getServer().getRoom().getPlayersName();
-       int i= playersName.indexOf(AppSingleton.getInstance().getPlayer().getName());
+        int i= playersName.indexOf(AppSingleton.getInstance().getPlayer().getName());
         playersName.set(i,playersName.get(i) + " (Me!)");
 
 
@@ -59,9 +74,87 @@ public class RoomActivity extends ActionBarActivity {
             }
         });
 
+        Thread socketServerThread = new Thread(new SocketServerThread());
+        socketServerThread.start();
 
 
+    }
 
+    private class SocketServerThread extends Thread {
+
+        static final int SocketServerPORT = 32514;
+
+        public void run() {
+            try {
+                ServerSocket serverSocket = new ServerSocket(SocketServerPORT);
+
+                RoomActivity.this.runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        ipAndPort.setText("ip : " + getIpAddress() + " / port : " + SocketServerPORT);
+                    }
+                });
+
+                while (true) {
+                    Socket socket = serverSocket.accept();
+
+                    ByteArrayOutputStream byteArrayOutputStream =
+                            new ByteArrayOutputStream(1024);
+                    byte[] buffer = new byte[1024];
+
+                    int bytesRead;
+                    InputStream inputStream = socket.getInputStream();
+
+                    String name = "";
+
+                    while ((bytesRead = inputStream.read(buffer)) != -1){
+                        byteArrayOutputStream.write(buffer, 0, bytesRead);
+                        name += byteArrayOutputStream.toString("UTF-8");
+                    }
+
+                    OutputStream outputStream = socket.getOutputStream();
+                    PrintStream printStream = new PrintStream(outputStream);
+                    printStream.print("Successfully add to the room");
+                    printStream.close();
+
+
+                }
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private String getIpAddress() {
+        String ip = "";
+        try {
+            Enumeration<NetworkInterface> enumNetworkInterfaces = NetworkInterface
+                    .getNetworkInterfaces();
+            while (enumNetworkInterfaces.hasMoreElements()) {
+                NetworkInterface networkInterface = enumNetworkInterfaces
+                        .nextElement();
+                Enumeration<InetAddress> enumInetAddress = networkInterface
+                        .getInetAddresses();
+                while (enumInetAddress.hasMoreElements()) {
+                    InetAddress inetAddress = enumInetAddress.nextElement();
+
+                    if (inetAddress.isSiteLocalAddress()) {
+                        ip += inetAddress.getHostAddress() + "\n";
+                    }
+
+                }
+
+            }
+
+        } catch (SocketException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            ip += "Something Wrong! " + e.toString() + "\n";
+        }
+
+        return ip;
     }
 
 

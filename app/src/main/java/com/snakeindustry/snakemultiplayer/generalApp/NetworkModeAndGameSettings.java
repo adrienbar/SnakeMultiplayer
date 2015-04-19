@@ -19,7 +19,12 @@ import com.snakeindustry.snakemultiplayer.generalApp.player.settings.SettingsOne
 import com.snakeindustry.snakemultiplayer.generalApp.player.stats.StatsOneGameActivity;
 import com.snakeindustry.snakemultiplayer.generalApp.player.stats.model.SimpleStats;
 import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.RoomActivity;
+import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.RoomActivityClient;
 import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.ServerC;
+
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
 
 public class NetworkModeAndGameSettings extends ActionBarActivity {
 
@@ -49,10 +54,24 @@ public class NetworkModeAndGameSettings extends ActionBarActivity {
         createGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 AppSingleton.getInstance().setServer(true);
                 AppSingleton.getInstance().setCurrenGameTread(new GameThread());
 
                 Intent myIntent = new Intent(v.getContext(), RoomActivity.class);
+                v.getContext().startActivity(myIntent);
+            }
+        });
+
+        Button joinAgame = (Button) findViewById(R.id.joinagame);
+        joinAgame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                AppSingleton.getInstance().setServer(true);
+                AppSingleton.getInstance().setCurrenGameTread(new GameThread());
+
+                Intent myIntent = new Intent(v.getContext(), RoomActivityClient.class);
                 v.getContext().startActivity(myIntent);
             }
         });
