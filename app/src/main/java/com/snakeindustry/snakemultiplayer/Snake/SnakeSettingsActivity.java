@@ -1,7 +1,7 @@
 package com.snakeindustry.snakemultiplayer.Snake;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,7 +13,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.snakeindustry.snakemultiplayer.R;
-import com.snakeindustry.snakemultiplayer.Snake.SnakeSettings;
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
 import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
 
@@ -75,6 +74,7 @@ public class SnakeSettingsActivity extends ActionBarActivity implements AdapterV
                 }
 
                 AppSingleton.getInstance().getPlayer().getSettings().getSettingsForOneGame(currentGame.getName()).setfps(progress);
+                AppSingleton.getInstance().saveSettings(getApplicationContext());
             }
 
             @Override
@@ -124,6 +124,7 @@ public class SnakeSettingsActivity extends ActionBarActivity implements AdapterV
         System.out.println("snake settings Hashmap : " + snakesettings.getNomId());
         System.out.println("entier current mode : "+snakesettings.getNomId().get(currentMode));
         snakesettings.setIdPreferredControl(snakesettings.getNomId().get(currentMode));
+        AppSingleton.getInstance().saveSettings(getApplicationContext());
     }
 
     @Override

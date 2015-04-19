@@ -52,6 +52,7 @@ public class EditName extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 AppSingleton.getInstance().getPlayer().setName(name.getText() + "");
+                AppSingleton.getInstance().saveName(getApplicationContext());
                 EditName.this.finish();
             }
         });
