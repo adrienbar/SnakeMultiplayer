@@ -20,7 +20,7 @@ public class PacMan extends DefaultGame {
 
     private static PacMan instance = null;
     private PacMan() {
-        super("Moke Pacman", R.drawable.pacman);
+        super("Mock Pacman", R.drawable.pacman);
     }
 
     public static synchronized DefaultGame getInstance() {
@@ -59,6 +59,16 @@ public class PacMan extends DefaultGame {
                     String text=playerName+" "+gameState.getScore(playerName);
                     canvas.drawText(text,this.getWidth()/2,(float) (y0+i*dy),paintScore);
                     i++;
+                }
+
+
+
+                if(gameState.isGameOver()){
+                    Paint gameOverPaint = new Paint();
+                    gameOverPaint.setColor(Color.RED);
+                    gameOverPaint.setTextAlign(Paint.Align.CENTER);
+                    gameOverPaint.setTextSize(40);
+                    canvas.drawText("OVER",this.getWidth()/2,(float) (this.getHeight()*0.90),gameOverPaint);
                 }
 
                 this.getHolder().unlockCanvasAndPost(canvas);

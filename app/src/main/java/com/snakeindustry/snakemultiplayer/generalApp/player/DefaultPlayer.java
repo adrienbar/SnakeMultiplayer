@@ -9,11 +9,13 @@ import com.snakeindustry.snakemultiplayer.generalApp.player.stats.model.StatsGlo
  */
 public class DefaultPlayer extends Player {
 
+    public final static String DEFAULT_NAME="unammed";
+
     public DefaultPlayer(Stats stats, String name) {
         super(stats, name, new SettingsGlobalHashmap());
     }
 
     public DefaultPlayer() {
-        this(new StatsGlobalHashmap(),"unammed");
+        this(new StatsGlobalHashmap(),DEFAULT_NAME);
     }
 }

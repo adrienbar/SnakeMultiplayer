@@ -1,10 +1,13 @@
 package com.snakeindustry.snakemultiplayer.generalApp.mainActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -12,6 +15,7 @@ import android.widget.TextView;
 import com.snakeindustry.snakemultiplayer.R;
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
 import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
+import com.snakeindustry.snakemultiplayer.generalApp.player.DefaultPlayer;
 import com.snakeindustry.snakemultiplayer.generalApp.player.ProfileActivity;
 
 
@@ -19,6 +23,8 @@ public class MainActivity extends ActionBarActivity {
 
 
     private ListView listView;
+    private int defaultProfileColor;
+    private CharSequence defaultProfileText;
 
 
     @Override
@@ -32,6 +38,10 @@ public class MainActivity extends ActionBarActivity {
 
         AppSingleton.getInstance().loadProfile(getApplicationContext());
 
+        TextView profileText = (TextView) findViewById(R.id.profileText);
+        defaultProfileColor=profileText.getCurrentTextColor();
+        defaultProfileText=profileText.getText();
+
         //Profile Buttons
         LinearLayout profile = (LinearLayout) findViewById(R.id.profile);
         //TextView textView= (TextView) findViewById(R.id.profile);
@@ -44,14 +54,29 @@ public class MainActivity extends ActionBarActivity {
         // Assign adapter to ListView
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new GameListListener());
+
+
+        ImageView appIcon= (ImageView) findViewById(R.id.appIcon);
+        appIcon.setImageResource(R.drawable.gamebox);
     }
 
     @Override
     public void onResume(){
         super.onResume();
         //welcome
-       TextView welcome=(TextView) findViewById(R.id.welcome);
-        welcome.setText("Welcome "+ AppSingleton.getInstance().getPlayer().getName());
+        TextView welcome=(TextView) findViewById(R.id.welcome);
+        welcome.setText("Welcome to GameBox "+AppSingleton.getInstance().getPlayer().getName()+" !");
+
+        if(AppSingleton.getInstance().getPlayer().getName().equals(DefaultPlayer.DEFAULT_NAME) ) {
+            TextView profileText = (TextView) findViewById(R.id.profileText);
+            profileText.setText(profileText.getText() + " - Set your Name Here");
+            profileText.setTextColor(Color.RED);
+        }
+        else {
+            TextView profileText = (TextView) findViewById(R.id.profileText);
+            profileText.setTextColor(defaultProfileColor);
+            profileText.setText(defaultProfileText);
+        }
     }
 
 

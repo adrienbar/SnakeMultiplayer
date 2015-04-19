@@ -21,20 +21,22 @@ public abstract class DefaultGame implements Game {
     private GameState gameState;
     private final String gameName;
     private final int idIcon;
+    private boolean gameOver;
 
     public DefaultGame(String gameName,int idIcon){
         this.gameName=gameName;
         this.idIcon=idIcon;
+        gameOver=false;
         this.gameState=new GameState() {
 
             @Override
             public boolean isGameOver() {
-                return false;
+                return gameOver;
             }
 
             @Override
             public void nextStep(HashMap<String, Integer> playerCommand, long threadTime) {
-
+            gameOver=true;
             }
 
             @Override
