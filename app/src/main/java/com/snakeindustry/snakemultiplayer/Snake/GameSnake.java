@@ -79,6 +79,11 @@ public class GameSnake implements Game {
     }
 
     @Override
+    public Class getSettingsActivity() {
+        return SnakeSettingsActivity.class;
+    }
+
+    @Override
     public String toString() {
         return getName();
     }

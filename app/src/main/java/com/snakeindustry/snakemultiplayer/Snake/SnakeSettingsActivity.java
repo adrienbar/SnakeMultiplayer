@@ -1,4 +1,4 @@
-package com.snakeindustry.snakemultiplayer.generalApp.player.settings;
+package com.snakeindustry.snakemultiplayer.Snake;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -8,30 +8,24 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.snakeindustry.snakemultiplayer.R;
 import com.snakeindustry.snakemultiplayer.Snake.SnakeSettings;
-import com.snakeindustry.snakemultiplayer.Snake.model.Snake;
-import com.snakeindustry.snakemultiplayer.Snake.viewAndControl.SnakeView;
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
 import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
-import com.snakeindustry.snakemultiplayer.generalApp.player.settings.model.GameSettings;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SettingsOneGameActivity extends ActionBarActivity implements AdapterView.OnItemSelectedListener {
+public class SnakeSettingsActivity extends ActionBarActivity implements AdapterView.OnItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings_one_game);
+        setContentView(R.layout.activity_snake_settings);
 
         final Game currentGame=AppSingleton.getInstance().getCurrentGame();
 
@@ -40,8 +34,6 @@ public class SettingsOneGameActivity extends ActionBarActivity implements Adapte
 
         ImageView icon= (ImageView) findViewById(R.id.iconcurentgame);
         icon.setImageResource(currentGame.getIdIcon());
-
-
 
 
 
