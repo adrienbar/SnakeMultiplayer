@@ -172,9 +172,13 @@ public abstract class SnakeView extends GameViewAC {
 
 
     private void drawBackground(Canvas canvas) {
+
+
         Rect src=new Rect(0,0,background.getWidth(),background.getHeight());
         RectF destination= new RectF(0,0, getWidth(),getHeight());
         canvas.drawBitmap(background,src,destination,new Paint());
+
+        //canvas.drawColor(Color.LTGRAY);
     }
 
 
@@ -227,15 +231,15 @@ public void drawBonus(SnakeBonus bonus,Canvas canvas) {
     switch (bonus.getTarget()){
         case all:
             bonusBackground=bonusAll;
-            borderColor=Color.BLUE;
+            borderColor=Color.rgb(21,80,166);
             break;
         case self:
             bonusBackground=bonusSelf;
-            borderColor=Color.GREEN;
+            borderColor=Color.rgb(77,166,11);
             break;
         case others:
             bonusBackground=bonusOthers;
-            borderColor=Color.RED;
+            borderColor=Color.rgb(167,29,29);
             break;
         default:
             bonusBackground=food;
@@ -258,7 +262,7 @@ public void drawBonus(SnakeBonus bonus,Canvas canvas) {
     Paint border=new Paint();
     border.setStyle(Paint.Style.STROKE);
     border.setColor(borderColor);
-    //border.setStrokeWidth((float) (0.05*destination.width()));
+    border.setStrokeWidth((float) (0.1*destination.width()));
     //canvas.drawBitmap(bonusBackground,srcBackground,destination,new Paint());
     canvas.drawRect(destination,border);
     canvas.drawBitmap(bonusIco,srcIco,destination,border);
