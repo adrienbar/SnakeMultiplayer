@@ -114,10 +114,7 @@ public abstract class State {
                            tempcell.getX()+width/2 >= this.getBody().getFirst().getX()-width/2 &&
                            tempcell.getY()+length/2 >= this.getBody().getFirst().getY()-length/2 &&
                            tempcell.getY()-length/2 <= this.getBody().getFirst().getY()+length/2) {
-                        /*System.out.println(tempcell.getX()-width/2+"<"+this.getBody().getFirst().getX()+width/2);
-                        System.out.println((tempcell.getX()+width/2)+">"+(this.getBody().getFirst().getX()-width/2));
-                        System.out.println((tempcell.getY()+length/2)+">"+(this.getBody().getFirst().getX()-length/2 ));
-                        System.out.println((tempcell.getY()-length/2)+"<"+(this.getBody().getFirst().getX()+length/2));*/
+
                             return true;
                         }
                      }
@@ -147,48 +144,93 @@ public abstract class State {
     public void moveCurrentDirectionSpeed(){
         Iterator<SnakeCell> iter = body.iterator();
         direction cellDirection=currentDirection;
-        SnakeCell prev = body.getFirst();
-        if(speed==0.5 ){
+        SnakeCell prev = null;
+       // SnakeCell prevPostChanges = body.getFirst();
+        if(speed !=0.2 ){
             System.out.println("Test");
         }
         while(iter.hasNext()){
             SnakeCell temp = iter.next();
             double newX =  temp.getX();
             double newY =  temp.getY();
-            if(!(Math.abs(prev.getY()-temp.getY())<0.005) && cellDirection==direction.left || !(Math.abs(prev.getY()-temp.getY())<0.005) && cellDirection==direction.right ){
-                if(prev.getY()>temp.getY()){
-                    cellDirection=direction.down;
-                }
-                else{
-                    cellDirection=direction.up;
-                }
-            }
-            else if(!(Math.abs(prev.getX()-temp.getX())<0.005) && cellDirection==direction.down || !(Math.abs(prev.getX()-temp.getX())<0.005) && cellDirection==direction.up){
-                if(prev.getX()>temp.getX()){
-                    cellDirection=direction.right;
-                }
-                else{
-                    cellDirection=direction.left;
+            if(prev!=null) {
+                if (!(Math.abs(prev.getY() - temp.getY()) < 0.005) && cellDirection == direction.left || !(Math.abs(prev.getY() - temp.getY()) < 0.005) && cellDirection == direction.right) {
+                    if ( prev.getY() > temp.getY()) {
+                        cellDirection = direction.down;
+                    } else{
+                        cellDirection = direction.up;
+                    }
+                } else if ( !(Math.abs(prev.getX() - temp.getX()) < 0.005) && cellDirection == direction.down || !(Math.abs(prev.getX() - temp.getX()) < 0.005) && cellDirection == direction.up) {
+                    if ( prev.getX() > temp.getX()) {
+                        cellDirection = direction.right;
+                    } else{
+                        cellDirection = direction.left;
+                    }
                 }
             }
 
             switch (cellDirection) {
                 case up:
-                    newY-=speed*length;
+
+                    if(prev !=null && (newY-speed*length)<prev.getY()){
+                      newY=prev.getY();
+                      if(prev.getX()>temp.getX()){
+                          prev.setX(temp.getX()+length);
+                      }
+                        else{
+                          prev.setX(temp.getX()-length);
+                      }
+                    }else {
+                        newY-=speed*length;
+                    }
                     break;
                 case down:
-                    newY+=speed*length;
+
+                   if(prev !=null && newY+(speed*length)>prev.getY()){
+                        newY=prev.getY();
+                       if(prev.getX()>temp.getX()){
+                           prev.setX(temp.getX()+length);
+                       }
+                       else{
+                           prev.setX(temp.getX()-length);
+                       }
+                    }else{
+                        newY+=speed*length;
+                    }
                     break;
                 case left:
-                    newX-=speed*width;
+
+                    if(prev !=null && (newX-speed*length)<prev.getX()){
+                        newX=prev.getX();
+                        if(prev.getY()>temp.getY()){
+                            prev.setY(temp.getY()+length);
+                        }
+                        else{
+                            prev.setY(temp.getY()-length);
+                        }
+                    }else{
+                        newX-=speed*width;
+                    }
                     break;
                 case right:
-                    newX+=speed*width;
+
+                    if(prev !=null && (newX+speed*length)>prev.getX()){
+                        newX=prev.getX();
+                        if(prev.getY()>temp.getY()){
+                            prev.setY(temp.getY()+length);
+                        }
+                        else{
+                            prev.setY(temp.getY()-length);
+                        }
+                    }else {
+                        newX+=speed*width;
+                    }
                     break;
                 }
             prev=temp;
             temp.setX(newX);
             temp.setY(newY);
+           // prevPostChanges=temp;
 
         }
 
