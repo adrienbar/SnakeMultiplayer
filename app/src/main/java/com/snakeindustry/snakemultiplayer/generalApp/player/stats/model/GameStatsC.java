@@ -36,8 +36,7 @@ public class GameStatsC implements GameStats {
                 new SimpleStatsC("Best Score", 0,"",null),
                 new HashMap<String, Integer>(),
                 new ArrayList<Double>());
-
-
+                scoreValues.add(0.0);
     }
 
     @Override
@@ -76,6 +75,7 @@ public class GameStatsC implements GameStats {
     @Override
     public List<SimpleStats> getStatsAsList() {
         List<SimpleStats> list = new ArrayList<>();
+        list.add(new SimpleStatsC("Last Score",scoreValues.get(scoreValues.size()-1)));
         list.add(this.getBestScore());
         list.add(this.getPlayedTime());
         list.add(this.getNbPlay());

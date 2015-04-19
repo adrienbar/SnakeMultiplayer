@@ -8,6 +8,8 @@ import android.view.MenuItem;
 import com.snakeindustry.snakemultiplayer.R;
 import com.snakeindustry.snakemultiplayer.Snake.SnakeSettings;
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
+import com.snakeindustry.snakemultiplayer.generalApp.game.GameView;
+import com.snakeindustry.snakemultiplayer.generalApp.game.GameViewAC;
 
 public class GamePlayActivity extends ActionBarActivity {
 
@@ -15,13 +17,14 @@ public class GamePlayActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         String currentGameName = AppSingleton.getInstance().getCurrentGame().getName();
-        SnakeSettings snakeSettings = (SnakeSettings) AppSingleton.getInstance().getPlayer().getSettings().getSettingsForOneGame(currentGameName);
-        SnakeView snakeView = snakeSettings.getPreferredControl(this, null);
-        setContentView(snakeView);
+
+        //SnakeSettings snakeSettings = (SnakeSettings) AppSingleton.getInstance().getPlayer().getSettings().getSettingsForOneGame(currentGameName);
+        //SnakeView snakeView = snakeSettings.getPreferredControl(this, null);
+        GameViewAC gameView= (GameViewAC) AppSingleton.getInstance().getCurrentGame().getGameView(this, null);
+
+        setContentView(gameView);
         //setContentView(R.layout.activity_game_play);
-
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

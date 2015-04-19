@@ -40,7 +40,7 @@ public class RoomActivity extends ActionBarActivity {
         ListView listView = (ListView) findViewById(R.id.players);
 
         List<String> playersName =AppSingleton.getInstance().getCurrenGameTread().getServer().getRoom().getPlayersName();
-       int i= playersName.indexOf(AppSingleton.getInstance().getPlayer().getName());
+        int i= playersName.indexOf(AppSingleton.getInstance().getPlayer().getName());
         playersName.set(i,playersName.get(i) + " (Me!)");
 
 

@@ -46,6 +46,10 @@
             android:name=".Snake.SnakeSettingsActivity"
             android:label="@string/title_activity_settings_one_game" >
         </activity>
+        <activity
+            android:name=".generalApp.player.settings.model.DefaultSettingsActivity"
+            android:label="@string/title_activity_default_settings" >
+        </activity>
     </application>
 
 </manifest>

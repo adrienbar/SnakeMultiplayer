@@ -86,9 +86,11 @@ public abstract class SnakeView extends GameViewAC {
         int i=1;
         canvas.drawText("GAME OVER",this.getWidth()/2,(float) (y0),paintScore);
         paintScore.setTextSize(40);
-        SnakeGameState snakeGameState=(SnakeGameState) gameState;
-        for(String playerName: snakeGameState.getPlayersSnakes().keySet()){
-            String text=playerName+" "+snakeGameState.getScore(playerName);
+
+
+
+        for(String playerName: gameState.getPlayers()){
+            String text=playerName+" "+gameState.getScore(playerName);
             canvas.drawText(text,this.getWidth()/2,(float) (y0+i*dy),paintScore);
             i++;
         }
