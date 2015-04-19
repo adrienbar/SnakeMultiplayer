@@ -51,9 +51,9 @@ public abstract class SnakeView extends GameViewAC {
         reverse=BitmapFactory.decodeResource(this.getResources(), R.drawable.reverse);
         fast=BitmapFactory.decodeResource(this.getResources(), R.drawable.forward);
 
-        food=BitmapFactory.decodeResource(this.getResources(), R.drawable.food);
+        food=BitmapFactory.decodeResource(this.getResources(), R.drawable.bonusall);
         bonusOthers=BitmapFactory.decodeResource(this.getResources(), R.drawable.bonusothers);
-        bonusAll=BitmapFactory.decodeResource(this.getResources(), R.drawable.bonusall);
+        bonusAll=BitmapFactory.decodeResource(this.getResources(), R.drawable.food);
         bonusSelf=BitmapFactory.decodeResource(this.getResources(), R.drawable.bonusself);
 
         body=BitmapFactory.decodeResource(this.getResources(), R.drawable.body);
@@ -223,11 +223,24 @@ public void drawBonus(SnakeBonus bonus,Canvas canvas) {
     background.setStyle(Paint.Style.FILL);
 
     Bitmap bonusBackground;
+    int borderColor;
     switch (bonus.getTarget()){
-        case all: bonusBackground=bonusAll;break;
-        case self:bonusBackground=bonusSelf;break;
-        case others:bonusBackground=bonusOthers;break;
-        default:bonusBackground=food;
+        case all:
+            bonusBackground=bonusAll;
+            borderColor=Color.BLUE;
+            break;
+        case self:
+            bonusBackground=bonusSelf;
+            borderColor=Color.GREEN;
+            break;
+        case others:
+            bonusBackground=bonusOthers;
+            borderColor=Color.RED;
+            break;
+        default:
+            bonusBackground=food;
+            borderColor=Color.BLACK;
+
     }
 
     Rect srcIco=new Rect(0,0,bonusIco.getWidth(),bonusIco.getHeight());
@@ -241,8 +254,14 @@ public void drawBonus(SnakeBonus bonus,Canvas canvas) {
    // Paint paintBorder=new Paint();
    // Paint paintBitmap =new Paint();
     ////canvas.drawRect(destination,background);
-    canvas.drawBitmap(bonusBackground,srcBackground,destination,new Paint());
-    canvas.drawBitmap(bonusIco,srcIco,destination,background);
+
+    Paint border=new Paint();
+    border.setStyle(Paint.Style.STROKE);
+    border.setColor(borderColor);
+    //border.setStrokeWidth((float) (0.05*destination.width()));
+    //canvas.drawBitmap(bonusBackground,srcBackground,destination,new Paint());
+    canvas.drawRect(destination,border);
+    canvas.drawBitmap(bonusIco,srcIco,destination,border);
     //canvas.drawRect(destination,paintBorder);
 
 }
