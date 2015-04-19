@@ -1,13 +1,20 @@
 package com.snakeindustry.snakemultiplayer.Snake.model;
 
+import android.os.SystemClock;
+
+import com.snakeindustry.snakemultiplayer.Snake.SnakeStats;
 import com.snakeindustry.snakemultiplayer.Snake.model.eatableObject.Food;
 import com.snakeindustry.snakemultiplayer.Snake.model.state.NormalState;
 import com.snakeindustry.snakemultiplayer.Snake.model.state.State;
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
+import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameState;
 import com.snakeindustry.snakemultiplayer.Snake.model.eatableObject.SnakeBonus;
 import  com.snakeindustry.snakemultiplayer.Snake.model.eatableObject.SnakeBonus.target;
 import com.snakeindustry.snakemultiplayer.generalApp.player.Player;
+import com.snakeindustry.snakemultiplayer.generalApp.player.stats.model.GameStats;
+import com.snakeindustry.snakemultiplayer.generalApp.player.stats.model.SimpleStats;
+import com.snakeindustry.snakemultiplayer.generalApp.player.stats.old.StatsForOneGame;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -57,7 +64,7 @@ public class SnakeGameState extends GameState {
         availableBonuses[1]="Reverse";
         availableBonuses[2]="Fast";
 
-        //initialise properly playersSnakes and snakes
+        //initialise properly playersSnakes, snakes and Statistics;
         this.configure(new ArrayList<String>());
         screenWidth=1;
         screenLength=1;
@@ -70,15 +77,12 @@ public class SnakeGameState extends GameState {
         timeOfLastFoodSpan=0;
 
 
-
    }
 
 
     @Override
     public boolean isGameOver() {
-
-
-        return false;
+        return getSnakes().size()==0;
     }
 
 
@@ -88,6 +92,21 @@ public class SnakeGameState extends GameState {
     @Override
     public void gameOverAction() {
 
+
+
+    }
+
+
+
+
+
+
+
+    @Override
+    public List<String> getPlayers() {
+        ArrayList players=new ArrayList();
+        players.addAll(playersSnakes.keySet());
+        return players;
     }
 
     //Checks if any snake is on food, if yes make it grow
@@ -96,10 +115,10 @@ public class SnakeGameState extends GameState {
             Food toRemove=null;
             for (Food f : spawnedFood) {
 
-                if (s.getState().getBody().getFirst().getX() <= f.getX()+itemWidth/2 &&
-                    s.getState().getBody().getFirst().getX() >= f.getX()-itemWidth/2 &&
-                    s.getState().getBody().getFirst().getY() >= f.getY()-itemLength/2 &&
-                    s.getState().getBody().getFirst().getY() <= f.getY()+itemLength/2     ) {
+                if (s.getState().getBody().getFirst().getX()-s.getState().getWidth()/2 <= f.getX()+itemWidth/2 &&
+                    s.getState().getBody().getFirst().getX()+s.getState().getWidth()/2 >= f.getX()-itemWidth/2 &&
+                    s.getState().getBody().getFirst().getY()+s.getState().getLength()/2 >= f.getY()-itemLength/2 &&
+                    s.getState().getBody().getFirst().getY()-s.getState().getLength()/2 <= f.getY()+itemLength/2     ) {
                     toRemove=f;
                     s.getState().grow(1);
                 }
@@ -117,10 +136,10 @@ public class SnakeGameState extends GameState {
             SnakeBonus toRemove=null;
             for (SnakeBonus sb : spawnedBonuses) {
 
-                if (s.getState().getBody().getFirst().getX() <= sb.getX()+itemWidth/2 &&
-                    s.getState().getBody().getFirst().getX() >= sb.getX()-itemWidth/2 &&
-                    s.getState().getBody().getFirst().getY() >= sb.getY()-itemLength/2 &&
-                    s.getState().getBody().getFirst().getY() <= sb.getY()+itemLength/2   ) {
+                if (s.getState().getBody().getFirst().getX()-s.getState().getWidth()/2 <= sb.getX()+itemWidth/2 &&
+                    s.getState().getBody().getFirst().getX()+s.getState().getWidth()/2 >= sb.getX()-itemWidth/2 &&
+                    s.getState().getBody().getFirst().getY()+s.getState().getLength()/2 >= sb.getY()-itemLength/2 &&
+                    s.getState().getBody().getFirst().getY()-s.getState().getLength()/2 <= sb.getY()+itemLength/2   ) {
                     List<String> targets = new ArrayList<>();
                     if(sb.getTarget()== target.self){
                         sb.getState().setBody(s.getState().getBody());
@@ -165,7 +184,7 @@ public class SnakeGameState extends GameState {
 
       }
 
-    public void spawnFood(){
+    private void spawnFood(){
         Random randomGenerator = new Random();
         double randomX=itemWidth/2+(screenWidth -itemWidth/2)*randomGenerator.nextDouble();
         double randomY=itemLength/2+(screenLength -itemLength/2)*randomGenerator.nextDouble();
@@ -174,7 +193,7 @@ public class SnakeGameState extends GameState {
 
     }
 
-    public void spawnBonus() {
+    private void spawnBonus() {
 
         Random randomGenerator = new Random();
         double randomX=itemWidth/2+(screenWidth -itemWidth/2)*randomGenerator.nextDouble();
@@ -185,12 +204,7 @@ public class SnakeGameState extends GameState {
         //SnakeBonus spawnedBonus = (SnakeBonus) (Class.forName(availableBonuses[randomBonus]+"Bonus").newInstance());
         SnakeBonus spawnedBonus=SnakeBonus.SnakeBonusFactory(availableBonuses[randomBonus],randomX,randomY,itemWidth,itemLength);
         spawnedBonuses.add(spawnedBonus);
-
-
-
-
-
-    }
+ }
     //Class used for timer cancelling bonus
      class CancelBonusTask extends TimerTask {
 
@@ -207,7 +221,8 @@ public class SnakeGameState extends GameState {
                 //Set all affected snakes back to normal
                 if(targets.contains(temp.getPlayer())){
                         State.direction dir = temp.getState().getCurrentDirection();
-                        temp.setState(new NormalState(temp.getState().getBody(),temp.getState().getWidth(),temp.getState().getLength()));
+                        State newstate=new NormalState(temp.getState().getBody(),temp.getState().getWidth(),temp.getState().getLength(),temp.getState().getGrowing());
+                        temp.setState(newstate);
                         temp.getState().setCurrentDirection(dir);
                 }
 
@@ -216,16 +231,17 @@ public class SnakeGameState extends GameState {
             }
             //Remove the bonus from the active bonus list
             Iterator<SnakeBonus> iter2 = activeBonuses.iterator();
+            SnakeBonus toremove=null;
             while(iter.hasNext()){
                 SnakeBonus temp = iter2.next();
 
                 if(temp.getId().equals(bonus.getId())){
-                    activeBonuses.remove(temp);
+                    toremove=temp;
+
                 }
-
-
-
             }
+            activeBonuses.remove(toremove);
+
         }
     }
 
@@ -233,18 +249,42 @@ public class SnakeGameState extends GameState {
 
 
     /**
-     * create a new snake for each player and update ths snakesList
+     * create a new snake for each player and update the snakesList
+     * also create StatForOneGame for each player
      * @param players in the game
      */
     public void configure(List<String> players) {
+        //initialise player's list and scores
+        super.configure(players);
+
+        //initialise snakes
         playersSnakes=new HashMap<>();
         snakes=new ArrayList<>();
+        //playerScore=new HashMap<>();
         //create a new Snake for the local player
         //this.playersSnakes.put(AppSingleton.getInstance().getPlayer().getName(), new Snake());
 
         //create a new Snake for each distantPlayers
 
         for (String playerName :players) {
+
+            switch (playersSnakes.size()) {
+                case 0:
+                    playersSnakes.put(playerName, new Snake(0.25, 0.25));
+                    break;
+                case 1:
+                    playersSnakes.put(playerName, new Snake(0.25, 0.75));
+                    break;
+                case 3:
+                    playersSnakes.put(playerName, new Snake(0.75, 0.25));
+                    break;
+                case 4:
+                    playersSnakes.put(playerName, new Snake(0.75, 0.75));
+                    break;
+                default:
+            }
+
+            /*
             if(playersSnakes.size()==0){
             playersSnakes.put(playerName,new Snake(0.25,0.25));
             }
@@ -257,9 +297,12 @@ public class SnakeGameState extends GameState {
             else{
                 playersSnakes.put(playerName,new Snake(0.75,0.75));
             }
+            }
+        */
         }
         //update the list of snakes
         snakes.addAll(playersSnakes.values());
+
     }
 
     @Override
@@ -277,12 +320,21 @@ public class SnakeGameState extends GameState {
 
         //update positions
         for(Snake s : snakes){
-            s.getState().moveCurrentDirection();
+            s.getState().moveCurrentDirectionSpeed();
         }
         //update collisions
         for(Snake s : snakes){
             if(s.getState().collisionManagement(snakes)==true){
+
+                //updateScore before dying
+                for(String playerName: getPlayers()){
+                    if(getPlayersSnakes().get(playerName)==s) {
+                        setScore(playerName,this.getScore(playerName));
+                    }
+                }
+
                 snakes.remove(s);
+
             }
         }
         checkFood();
@@ -299,12 +351,9 @@ public class SnakeGameState extends GameState {
         if(threadTime>timeOfLastFoodSpan+timeBetweenFoodSpawn){
             this.spawnFood();
             timeOfLastFoodSpan=threadTime;
-
         }
-
-
-
     }
+
 
 
     private void performeActionCode(Snake snake,Integer commande) {
@@ -321,6 +370,51 @@ public class SnakeGameState extends GameState {
                 default:
             }
         }
+
+    }
+
+@Override
+    public double getScore(String playerName){
+        Snake snake=playersSnakes.get(playerName);
+        //if dead, the value is already saved in the super class
+        if(gameOver(playerName)){
+            return super.getScore(playerName);
+        }
+
+        //sum of lengths this snake + deadSnakes
+
+        else { //if alive
+            double score=snake.getState().getBody().size();
+
+            for(String player: getPlayers()) {
+
+                if(gameOver(player) ) {
+                    score=score+getScore(player);
+                }
+
+
+            }
+            return score;
+        }
+    }
+
+    public boolean gameOver(String playerName) {
+        return !snakes.contains(playersSnakes.get(playerName));
+    }
+
+
+
+
+    @Override
+    public void collectStats() {
+        super.collectStats();
+
+        String currentPlayer = AppSingleton.getInstance().getPlayer().getName();
+        Game currentGame = AppSingleton.getInstance().getCurrentGame();
+        SnakeStats mySnakeStats = (SnakeStats) AppSingleton.getInstance().getPlayer().getStats().getStatsForOneGame(currentGame);
+
+        mySnakeStats.addLength(playersSnakes.get(currentPlayer).getState().getBody().size());
+
 
     }
 
@@ -343,5 +437,7 @@ public class SnakeGameState extends GameState {
     public HashMap<String, Snake> getPlayersSnakes() {
         return playersSnakes;
     }
+
+
 }
 

@@ -1,25 +1,30 @@
 package com.snakeindustry.snakemultiplayer.generalApp;
 
+
+import android.content.Context;
+
 import com.snakeindustry.snakemultiplayer.Snake.GameSnake;
+import com.snakeindustry.snakemultiplayer.dummyGame.PacMan;
 import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameThread;
-import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.LocalClient;
-import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.Server;
 import com.snakeindustry.snakemultiplayer.generalApp.player.DefaultPlayer;
 import com.snakeindustry.snakemultiplayer.generalApp.player.Player;
-import com.snakeindustry.snakemultiplayer.generalApp.player.stats.model.Stats;
-import com.snakeindustry.snakemultiplayer.generalApp.player.stats.model.StatsGlobalHashmap;
+import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.LocalClient;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
+
+//import com.snakeindustry.snakemultiplayer.generalApp.database.PlayerDAO;
 
 /**
  * Created by Adrien on 31/03/15.
  */
 public class AppSingleton {
-
-
-
     /**
      * List of instanced available games
      */
@@ -32,22 +37,19 @@ public class AppSingleton {
     private boolean isServer;
     private GameThread currenGameTread;
     private LocalClient localClient;
-
+  //  private PlayerDAO db;
 
     //APPLICATION'S PARAMETERS
     private AppSingleton() {
         this.player=new DefaultPlayer();
         this.availabeGames=new ArrayList<Game>();
         this.availabeGames.add(GameSnake.getInstance());
+        this.availabeGames.add(PacMan.getInstance());
         this.isServer=false;
         this.currenGameTread=null;
         this.localClient=null;
-
         //System.out.println("AAAAAAAA "+this.getAvailabeGames());
-
     }
-
-
 
     public static Game getGameFromName(String gameName) {
         Game game=null;
@@ -59,16 +61,22 @@ public class AppSingleton {
         return game;
     }
 
+    //GETTERS AND SETTERS
+    public static AppSingleton getInstance() {
+        return INSTANCE;
+    }
+
     /**
      * Create Stats for new games
      */
     public void checkStats() {
-       for(Game game : this.getAvailabeGames()) {
-           this.getPlayer().getStats().createStatsIfNothing(game);
-      }
+        for (Game game : this.getAvailabeGames()) {
+            this.getPlayer().getStats().createStatsIfNothing(game);
+        }
 
         //TESTS Stats
-        this.getPlayer().setName("Test name");
+        // this.getPlayer().setName("Test name");
+        /*
         this.setCurrentGame(this.getAvailabeGames().get(0));
         Stats statsForTest = new StatsGlobalHashmap();
         statsForTest.createStatsIfNothing(this.getCurrentGame());
@@ -76,34 +84,97 @@ public class AppSingleton {
         statsForTest.addPlayedTime(this.getCurrentGame(),5);
         statsForTest.addFriend("tintin", this.getCurrentGame());
         this.getPlayer().setStats(statsForTest);
+        */
 
     }
 
-
     //METHODES
+
+    public void checkSettings() {
+        for (Game game : this.getAvailabeGames()) {
+            this.getPlayer().getSettings().createSettingsIfNothing(game.getName());
+        }
+    }
 
     /**
      * retrieve the profile from the database
      */
-    public void loadProfile() {
+    public void loadName(Context context) {
 
+        FileInputStream intput;
+        InputStreamReader isr;
+        String playerName;
+        BufferedReader reader;
+
+        try {
+            intput = context.openFileInput("Player.dat");
+            isr = new InputStreamReader(intput);
+            reader = new BufferedReader(isr);
+            playerName = reader.readLine();
+            player.setName(playerName);
+            if (intput != null)
+                intput.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * save the profile in the database
      */
 
-    public void saveProfile() {
+    public void saveName(Context context) {
+        FileOutputStream output;
+        OutputStreamWriter osw;
 
+        try {
+            output = context.openFileOutput("Player.dat", Context.MODE_PRIVATE);
+            osw = new OutputStreamWriter(output);
+            osw.write(player.getName() + "\n");
+            osw.flush();
+            if (output != null)
+                output.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
+    //SAVE SETTINGS
+    public void saveSettings(Context context) {
+        for (Game game : this.getAvailabeGames()) {
+            getPlayer().getSettings().getSettingsForOneGame(game.getName()).saveSettings(context);
+        }
+    }
 
+    public void loadSettings(Context context) {
+        for (Game game : this.getAvailabeGames()) {
+            getPlayer().getSettings().getSettingsForOneGame(game.getName()).loadSettings(context);
+        }
+    }
 
+    //SAVE STATS
+    public void saveStats(Context context) {
+        for (Game game : this.getAvailabeGames()) {
+            getPlayer().getStats().getStatsForOneGame(game).saveStats(context, game.getName() + ".dat");
+        }
+    }
 
+    public void loadStats(Context context) {
+        for (Game game : this.getAvailabeGames()) {
+            getPlayer().getStats().getStatsForOneGame(game).loadStats(context, game.getName() + ".dat");
+        }
+    }
 
-    //GETTERS AND SETTERS
-    public static AppSingleton getInstance() {
-        return INSTANCE;
+    public void saveProfile(Context context) {
+        saveName(context);
+        saveStats(context);
+        saveSettings(context);
+    }
+
+    public void loadProfile(Context context) {
+        loadName(context);
+        loadStats(context);
+        loadSettings(context);
     }
 
     public List<Game> getAvailabeGames() {
@@ -134,15 +205,15 @@ public class AppSingleton {
         return isServer;
     }
 
+    public void setServer(boolean isServer) {
+        this.isServer = isServer;
+    }
+
     public GameThread getCurrenGameTread() {
         return currenGameTread;
     }
 
     public void setCurrenGameTread(GameThread currenGameTread) {
         this.currenGameTread = currenGameTread;
-    }
-
-    public void setServer(boolean isServer) {
-        this.isServer = isServer;
     }
 }

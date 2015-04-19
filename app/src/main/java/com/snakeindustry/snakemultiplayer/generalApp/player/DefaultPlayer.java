@@ -1,5 +1,6 @@
 package com.snakeindustry.snakemultiplayer.generalApp.player;
 
+import com.snakeindustry.snakemultiplayer.generalApp.player.settings.model.SettingsGlobalHashmap;
 import com.snakeindustry.snakemultiplayer.generalApp.player.stats.model.Stats;
 import com.snakeindustry.snakemultiplayer.generalApp.player.stats.model.StatsGlobalHashmap;
 
@@ -8,11 +9,13 @@ import com.snakeindustry.snakemultiplayer.generalApp.player.stats.model.StatsGlo
  */
 public class DefaultPlayer extends Player {
 
+    public final static String DEFAULT_NAME="unammed";
+
     public DefaultPlayer(Stats stats, String name) {
-        super(stats, name, null);
+        super(stats, name, new SettingsGlobalHashmap());
     }
 
     public DefaultPlayer() {
-        this(new StatsGlobalHashmap(),"unammed");
+        this(new StatsGlobalHashmap(),DEFAULT_NAME);
     }
 }

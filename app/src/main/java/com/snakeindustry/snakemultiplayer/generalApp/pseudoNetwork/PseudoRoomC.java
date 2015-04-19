@@ -1,8 +1,5 @@
 package com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork;
 
-import android.content.Intent;
-
-import com.snakeindustry.snakemultiplayer.Snake.viewAndControl.GamePlayActivity;
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameState;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameThread;
@@ -32,6 +29,7 @@ public class PseudoRoomC implements PseudoRoom {
     public synchronized List<String> getPlayersName() {
         ArrayList<String> playersName=new ArrayList<>();
         playersName.addAll(playersCommand.keySet());
+        System.out.println("PseudoRoomC  getPLayersName "+playersName);
         return playersName;
     }
 
@@ -89,6 +87,7 @@ public class PseudoRoomC implements PseudoRoom {
         //send a command to distant client to switch to the GamePlayActivity
 
         //local
+        System.out.println("PseudoRoomC startTheGame");
         AppSingleton.getInstance().getCurrentGame().getGameState().configure(getPlayersName());
         AppSingleton.getInstance().setCurrenGameTread(new GameThread());
     }

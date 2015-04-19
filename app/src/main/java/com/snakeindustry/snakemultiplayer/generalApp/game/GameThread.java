@@ -26,7 +26,7 @@ public class GameThread extends Thread{
         super();
         this.server = new ServerC(null,this);
         this.gameState = AppSingleton.getInstance().getCurrentGame().getGameState();
-        this.refreshInterval = 50; //ms
+        this.refreshInterval = (int) (1000/AppSingleton.getInstance().getPlayer().getSettings().getSpeed(AppSingleton.getInstance().getCurrentGame().getName())); //ms
         this.running=true;
     }
 
@@ -78,13 +78,14 @@ public class GameThread extends Thread{
                 Log.d("GameThread", "device too SLOW !!! : Send + Draw time: "+(time2-time1)+" " +((time2-time1)/refreshInterval)*100 +"%");
             }
         }
+
+
+
         //Game over, stop spawning food and bonus
-      //  timer.cancel();
+        //  timer.cancel();
 
 
-
-        //DRAW GAME OVER
-
+        //SEND GAME OVER TO ALL CLIENT
 
 
     }
@@ -154,15 +155,9 @@ class SpawnBonus extends TimerTask {
     }
 
     private void completeTask() {
-        try {
+
             this.gamestate.spawnBonus();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        }
+
     }
     */
 

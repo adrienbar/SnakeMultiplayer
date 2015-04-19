@@ -11,11 +11,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.snakeindustry.snakemultiplayer.R;
-import com.snakeindustry.snakemultiplayer.Snake.viewAndControl.GamePlayActivity;
-import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameThread;
 import com.snakeindustry.snakemultiplayer.generalApp.mainActivity.ButtonController;
-import com.snakeindustry.snakemultiplayer.generalApp.player.settings.SettingsOneGameActivity;
+import com.snakeindustry.snakemultiplayer.Snake.SnakeSettingsActivity;
 import com.snakeindustry.snakemultiplayer.generalApp.player.stats.StatsOneGameActivity;
 import com.snakeindustry.snakemultiplayer.generalApp.player.stats.model.SimpleStats;
 import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.RoomActivity;
@@ -43,12 +41,8 @@ public class NetworkModeAndGameSettings extends ActionBarActivity {
         Button stats= (Button) findViewById(R.id.statsbutton);
         stats.setOnClickListener(new ButtonController(StatsOneGameActivity.class));
 
-        /*Button settings = (Button) findViewById(R.id.settings);
-        settings.setOnClickListener(new ButtonController(SettingsOneGameActivity.class));*/
-
-        TextView bestScore = (TextView) findViewById(R.id.bestScore);
-        SimpleStats bestScore1 = AppSingleton.getInstance().getPlayer().getStats().getStatsForOneGame(AppSingleton.getInstance().getCurrentGame()).getBestScore();
-        bestScore.setText(bestScore1.getDescription() + " " + bestScore1.getValue() + " "+ bestScore1.getUnit());
+        Button settings = (Button) findViewById(R.id.settings);
+        settings.setOnClickListener(new ButtonController(AppSingleton.getInstance().getCurrentGame().getSettingsActivity()));
 
         Button createGame = (Button) findViewById(R.id.createagame);
         createGame.setOnClickListener(new View.OnClickListener() {
@@ -76,6 +70,15 @@ public class NetworkModeAndGameSettings extends ActionBarActivity {
             }
         });
 
+    }
+
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        TextView bestScore = (TextView) findViewById(R.id.bestScore);
+        SimpleStats bestScore1 = AppSingleton.getInstance().getPlayer().getStats().getStatsForOneGame(AppSingleton.getInstance().getCurrentGame()).getBestScore();
+        bestScore.setText(bestScore1.getDescription() + " " + bestScore1.getValue() + " "+ bestScore1.getUnit());
     }
 
     @Override

@@ -129,7 +129,7 @@ public class StatsGlobalHashmap implements Stats {
 
     @Override
     public void createStatsIfNothing(Game game) {
-        GameStats statsForOneGame = this.getGamesStatsHashMap().get(game.getName());
+        GameStats statsForOneGame = this.getStatsForOneGame(game);
         if(statsForOneGame==null) {
             this.getGamesStatsHashMap().put(game.getName(),game.createStats());
         }

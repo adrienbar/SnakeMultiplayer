@@ -1,7 +1,6 @@
 package com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork;
 
 import android.content.Intent;
-import android.support.annotation.LayoutRes;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,12 +13,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.snakeindustry.snakemultiplayer.R;
-import com.snakeindustry.snakemultiplayer.Snake.viewAndControl.GamePlayActivity;
+import com.snakeindustry.snakemultiplayer.generalApp.game.GamePlayActivity;
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
-import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
-import com.snakeindustry.snakemultiplayer.generalApp.mainActivity.GameListAdaptateur;
-import com.snakeindustry.snakemultiplayer.generalApp.mainActivity.GameListListener;
-import com.snakeindustry.snakemultiplayer.generalApp.player.Player;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

@@ -37,7 +37,7 @@
             android:label="@string/title_activity_edit_name" >
         </activity>
         <activity
-            android:name=".Snake.viewAndControl.GamePlayActivity"
+            android:name=".generalApp.game.GamePlayActivity"
             android:label="@string/title_activity_game_play" >
         </activity>
         <activity
@@ -49,12 +49,12 @@
             android:label="@string/title_activity_room_Client" >
         </activity>
         <activity
-            android:name=".Snake.Activity_to_delete"
-            android:label="@string/title_activity_snake_settings" >
+            android:name=".Snake.SnakeSettingsActivity"
+            android:label="@string/title_activity_settings_one_game" >
         </activity>
         <activity
-            android:name=".generalApp.player.settings.SettingsOneGameActivity"
-            android:label="@string/title_activity_settings_one_game" >
+            android:name=".generalApp.player.settings.model.DefaultSettingsActivity"
+            android:label="@string/title_activity_default_settings" >
         </activity>
     </application>
 

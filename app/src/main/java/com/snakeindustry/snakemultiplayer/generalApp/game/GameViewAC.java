@@ -79,6 +79,24 @@ public abstract class GameViewAC extends SurfaceView implements GameView,Surface
         }
     }
 
+    @Override
+    public void draw(GameState gameState) {
+        if(gameState.isGameOver()){
+            gameOverAction(gameState);
+            drawGameOver(gameState);
+        }
+        else {
+            drawGamePlay(gameState);
+        }
+    }
+
+    public void gameOverAction(GameState gameState) {
+        gameState.collectStats();
+    }
+
+    public abstract void drawGameOver(GameState gameState);
+
+    public abstract void drawGamePlay(GameState gameState);
 
 
 

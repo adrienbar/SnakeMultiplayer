@@ -1,22 +1,25 @@
-package com.snakeindustry.snakemultiplayer.Snake.viewAndControl;
+package com.snakeindustry.snakemultiplayer.generalApp.game;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.snakeindustry.snakemultiplayer.R;
+import com.snakeindustry.snakemultiplayer.Snake.SnakeSettings;
+import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
+import com.snakeindustry.snakemultiplayer.generalApp.game.GameView;
+import com.snakeindustry.snakemultiplayer.generalApp.game.GameViewAC;
 
 public class GamePlayActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(new SnakeViewTouchControl(getApplicationContext(),null));
-        //setContentView(R.layout.activity_game_play);
-
+        GameViewAC gameView = (GameViewAC) AppSingleton.getInstance().getCurrentGame().getGameView(this, null);
+        setContentView(gameView);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -39,4 +42,6 @@ public class GamePlayActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }

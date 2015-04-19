@@ -12,5 +12,6 @@
     <string name="title_activity_room_Client">RoomActivityClient</string>
     <string name="title_activity_snake_settings">SnakeSettings</string>
     <string name="title_activity_settings_one_game">SettingsOneGameActivity</string>
+    <string name="title_activity_default_settings">DefaultSettingsActivity</string>
 
 </resources>

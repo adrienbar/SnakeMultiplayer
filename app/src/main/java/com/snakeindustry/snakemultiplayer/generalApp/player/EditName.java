@@ -1,11 +1,10 @@
 package com.snakeindustry.snakemultiplayer.generalApp.player;
 
 import android.graphics.Color;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,8 +22,7 @@ public class EditName extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_name);
 
-        final TextView textView= (TextView) findViewById(R.id.warningContent);
-
+        final TextView textView = (TextView) findViewById(R.id.warningContent);
 
 
         final EditText name = (EditText) findViewById(R.id.editableName);
@@ -49,15 +47,12 @@ public class EditName extends ActionBarActivity {
         });
 
 
-
-
-
-
         Button save = (Button) findViewById(R.id.save);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AppSingleton.getInstance().getPlayer().setName(name.getText()+"");
+                AppSingleton.getInstance().getPlayer().setName(name.getText() + "");
+                AppSingleton.getInstance().saveName(getApplicationContext());
                 EditName.this.finish();
             }
         });
@@ -70,8 +65,6 @@ public class EditName extends ActionBarActivity {
                 EditName.this.finish();
             }
         });
-
-
 
     }
 
@@ -94,7 +87,6 @@ public class EditName extends ActionBarActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }
