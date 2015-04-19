@@ -1,4 +1,4 @@
-package com.snakeindustry.snakemultiplayer.Snake.viewAndControl;
+package com.snakeindustry.snakemultiplayer.generalApp.game;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;

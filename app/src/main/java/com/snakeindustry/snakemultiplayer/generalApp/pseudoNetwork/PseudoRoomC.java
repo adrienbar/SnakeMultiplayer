@@ -1,8 +1,5 @@
 package com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork;
 
-import android.content.Intent;
-
-import com.snakeindustry.snakemultiplayer.Snake.viewAndControl.GamePlayActivity;
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameState;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameThread;

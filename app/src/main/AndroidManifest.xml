@@ -35,7 +35,7 @@
             android:label="@string/title_activity_edit_name" >
         </activity>
         <activity
-            android:name=".Snake.viewAndControl.GamePlayActivity"
+            android:name=".generalApp.game.GamePlayActivity"
             android:label="@string/title_activity_game_play" >
         </activity>
         <activity

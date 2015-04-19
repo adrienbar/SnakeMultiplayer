@@ -7,7 +7,6 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 
 import com.snakeindustry.snakemultiplayer.R;
-import com.snakeindustry.snakemultiplayer.Snake.model.SnakeGameState;
 import com.snakeindustry.snakemultiplayer.generalApp.game.DefaultGame;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameState;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameView;
@@ -16,17 +15,17 @@ import com.snakeindustry.snakemultiplayer.generalApp.game.GameViewAC;
 /**
  * Created by Adrien on 19/04/15.
  */
-public class DummyGame extends DefaultGame {
+public class PacMan extends DefaultGame {
 
 
-    private static DummyGame instance = null;
-    private DummyGame() {
+    private static PacMan instance = null;
+    private PacMan() {
         super("Moke Pacman", R.drawable.pacman);
     }
 
     public static synchronized DefaultGame getInstance() {
         if (instance == null) {
-            instance = new DummyGame();
+            instance = new PacMan();
         }
         return instance;
     }
@@ -42,6 +41,7 @@ public class DummyGame extends DefaultGame {
 
                 canvas.drawColor(Color.BLUE
                 );
+
                 Paint paintScore=new Paint();
                 paintScore.setTextAlign(Paint.Align.CENTER);
                 paintScore.setTextSize(50);
@@ -51,9 +51,8 @@ public class DummyGame extends DefaultGame {
                 double dy=0.10*this.getHeight();
                 int i=1;
 
-                canvas.drawText("Dummy Game",this.getWidth()/2,(float) (y0),paintScore);
+                canvas.drawText(getName(),this.getWidth()/2,(float) (y0),paintScore);
                 paintScore.setTextSize(40);
-
 
 
                 for(String playerName: gameState.getPlayers()){
