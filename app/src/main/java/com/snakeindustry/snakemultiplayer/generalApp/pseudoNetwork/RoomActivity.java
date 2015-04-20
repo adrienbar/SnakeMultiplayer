@@ -96,6 +96,7 @@ public class RoomActivity extends ActionBarActivity {
                 });
 
                 while (true) {
+                    
                     Socket socket = serverSocket.accept();
 
                     ByteArrayOutputStream byteArrayOutputStream =

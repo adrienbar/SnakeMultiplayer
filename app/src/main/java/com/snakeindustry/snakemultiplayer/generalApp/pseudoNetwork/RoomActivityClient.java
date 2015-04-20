@@ -78,6 +78,7 @@ public class RoomActivityClient extends ActionBarActivity {
                 Socket socket = null;
 
                 try {
+
                     socket = new Socket(dstAddress, dstPort);
 
                     OutputStream outputStream = socket.getOutputStream();
