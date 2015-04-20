@@ -69,6 +69,10 @@ public class RoomActivity extends ActionBarActivity {
             }
         });
 
+
+
+
+
         Thread socketServerThread = new Thread(new SocketServerThread());
         socketServerThread.start();
 
@@ -111,7 +115,7 @@ public class RoomActivity extends ActionBarActivity {
                     OutputStream outputStream = socket.getOutputStream();
                     PrintStream printStream = new PrintStream(outputStream);
                     printStream.print("Successfully add to the room");
-                   // printStream.close();
+                    printStream.close();
 
 
                 }

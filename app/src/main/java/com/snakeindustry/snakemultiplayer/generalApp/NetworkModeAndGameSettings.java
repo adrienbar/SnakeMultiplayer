@@ -21,6 +21,8 @@ import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.RoomActivity;
 import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.RoomActivityClient;
 import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.ServerC;
 import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.ServerTest;
+import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.real.ClientRealActivity;
+import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.real.ServerRealActivity;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -72,7 +74,10 @@ public class NetworkModeAndGameSettings extends ActionBarActivity {
             }
         });
 
+
+
         Button serverTest = (Button) findViewById(R.id.testServer);
+        serverTest.setText("ServerReal");
         serverTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,20 +85,21 @@ public class NetworkModeAndGameSettings extends ActionBarActivity {
                 AppSingleton.getInstance().setServer(true);
                 AppSingleton.getInstance().setCurrenGameTread(new GameThread());
 
-                Intent myIntent = new Intent(v.getContext(), ServerTest.class);
+                Intent myIntent = new Intent(v.getContext(), ServerRealActivity.class);
                 v.getContext().startActivity(myIntent);
             }
         });
 
         Button clientTest = (Button) findViewById(R.id.testClient);
+        clientTest.setText("ClientReal");
         clientTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                AppSingleton.getInstance().setServer(true);
+                AppSingleton.getInstance().setServer(false);
                 AppSingleton.getInstance().setCurrenGameTread(new GameThread());
 
-                Intent myIntent = new Intent(v.getContext(), ClientTest.class);
+                Intent myIntent = new Intent(v.getContext(), ClientRealActivity.class);
                 v.getContext().startActivity(myIntent);
             }
         });
