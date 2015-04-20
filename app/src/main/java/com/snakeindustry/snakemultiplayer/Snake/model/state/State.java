@@ -171,14 +171,16 @@ public abstract class State {
 
             switch (cellDirection) {
                 case up:
-
+                    //If cells are not aligned bacause of speed difference
                     if(prev !=null && (newY-speed*length)<prev.getY()){
+                      //Line it back
                       newY=prev.getY();
+                      //Prevent gap between two cells from appearing
                       if(prev.getX()>temp.getX()){
-                          prev.setX(temp.getX()+length);
+                          newX=prev.getX()-length;
                       }
                         else{
-                          prev.setX(temp.getX()-length);
+                          newX=prev.getX()+length;
                       }
                     }else {
                         newY-=speed*length;
@@ -189,10 +191,10 @@ public abstract class State {
                    if(prev !=null && newY+(speed*length)>prev.getY()){
                         newY=prev.getY();
                        if(prev.getX()>temp.getX()){
-                           prev.setX(temp.getX()+length);
+                           newX=prev.getX()-length;
                        }
                        else{
-                           prev.setX(temp.getX()-length);
+                           newX=prev.getX()+length;
                        }
                     }else{
                         newY+=speed*length;
@@ -203,10 +205,10 @@ public abstract class State {
                     if(prev !=null && (newX-speed*length)<prev.getX()){
                         newX=prev.getX();
                         if(prev.getY()>temp.getY()){
-                            prev.setY(temp.getY()+length);
+                            newY=prev.getY()-length;
                         }
                         else{
-                            prev.setY(temp.getY()-length);
+                            newY=prev.getY()+length;
                         }
                     }else{
                         newX-=speed*width;
@@ -217,10 +219,10 @@ public abstract class State {
                     if(prev !=null && (newX+speed*length)>prev.getX()){
                         newX=prev.getX();
                         if(prev.getY()>temp.getY()){
-                            prev.setY(temp.getY()+length);
+                            newY=prev.getY()-length;
                         }
                         else{
-                            prev.setY(temp.getY()-length);
+                            newY=prev.getY()+length;
                         }
                     }else {
                         newX+=speed*width;
@@ -230,7 +232,7 @@ public abstract class State {
             prev=temp;
             temp.setX(newX);
             temp.setY(newY);
-           // prevPostChanges=temp;
+          
 
         }
 
