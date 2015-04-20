@@ -32,6 +32,7 @@ import java.util.List;
 public class RoomActivity extends ActionBarActivity {
 
     TextView ipAndPort;
+    ServerSocket serverSocket;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,12 +82,11 @@ public class RoomActivity extends ActionBarActivity {
 
     private class SocketServerThread extends Thread {
 
-        static final int SocketServerPORT = 32514;
+        static final int SocketServerPORT = 8080;
 
         public void run() {
             try {
-                ServerSocket serverSocket = new ServerSocket(SocketServerPORT);
-
+                serverSocket = new ServerSocket(SocketServerPORT);
                 RoomActivity.this.runOnUiThread(new Runnable() {
 
                     @Override
@@ -112,19 +112,43 @@ public class RoomActivity extends ActionBarActivity {
                         name += byteArrayOutputStream.toString("UTF-8");
                     }
 
-                    OutputStream outputStream = socket.getOutputStream();
-                    PrintStream printStream = new PrintStream(outputStream);
-                    printStream.print("Successfully add to the room");
-                    printStream.close();
-
+                    SocketServerReplyThread socketServerReplyThread = new SocketServerReplyThread(
+                            socket);
+                    socketServerReplyThread.run();
 
                 }
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
-
             }
         }
+    }
+
+    private class SocketServerReplyThread extends Thread {
+
+        private Socket hostThreadSocket;
+
+        SocketServerReplyThread(Socket socket) {
+            hostThreadSocket = socket;
+        }
+
+        @Override
+        public void run() {
+            OutputStream outputStream;
+
+            try {
+                outputStream = hostThreadSocket.getOutputStream();
+                PrintStream printStream = new PrintStream(outputStream);
+                printStream.print("Successfully added !");
+                printStream.close();
+
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+        }
+
     }
 
     private String getIpAddress() {

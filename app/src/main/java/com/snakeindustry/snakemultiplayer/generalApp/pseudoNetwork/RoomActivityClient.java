@@ -82,8 +82,9 @@ public class RoomActivityClient extends ActionBarActivity {
 
                     OutputStream outputStream = socket.getOutputStream();
                     PrintStream printStream = new PrintStream(outputStream);
-                    printStream.print(AppSingleton.getInstance().getPlayer().getName());
-                    printStream.close();
+                    String name = AppSingleton.getInstance().getPlayer().getName();
+                    printStream.print(name);
+                    //printStream.close();
 
                     ByteArrayOutputStream byteArrayOutputStream =
                             new ByteArrayOutputStream(1024);
