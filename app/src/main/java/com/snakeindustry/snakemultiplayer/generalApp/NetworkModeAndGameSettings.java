@@ -16,9 +16,11 @@ import com.snakeindustry.snakemultiplayer.generalApp.mainActivity.ButtonControll
 import com.snakeindustry.snakemultiplayer.Snake.SnakeSettingsActivity;
 import com.snakeindustry.snakemultiplayer.generalApp.player.stats.StatsOneGameActivity;
 import com.snakeindustry.snakemultiplayer.generalApp.player.stats.model.SimpleStats;
+import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.ClientTest;
 import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.RoomActivity;
 import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.RoomActivityClient;
 import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.ServerC;
+import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.ServerTest;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -66,6 +68,32 @@ public class NetworkModeAndGameSettings extends ActionBarActivity {
                 AppSingleton.getInstance().setCurrenGameTread(new GameThread());
 
                 Intent myIntent = new Intent(v.getContext(), RoomActivityClient.class);
+                v.getContext().startActivity(myIntent);
+            }
+        });
+
+        Button serverTest = (Button) findViewById(R.id.testServer);
+        serverTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                AppSingleton.getInstance().setServer(true);
+                AppSingleton.getInstance().setCurrenGameTread(new GameThread());
+
+                Intent myIntent = new Intent(v.getContext(), ServerTest.class);
+                v.getContext().startActivity(myIntent);
+            }
+        });
+
+        Button clientTest = (Button) findViewById(R.id.testClient);
+        clientTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                AppSingleton.getInstance().setServer(true);
+                AppSingleton.getInstance().setCurrenGameTread(new GameThread());
+
+                Intent myIntent = new Intent(v.getContext(), ClientTest.class);
                 v.getContext().startActivity(myIntent);
             }
         });

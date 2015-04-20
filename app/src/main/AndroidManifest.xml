@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -46,6 +48,14 @@
         </activity>
         <activity
             android:name=".generalApp.pseudoNetwork.RoomActivityClient"
+            android:label="@string/title_activity_room_Client" >
+        </activity>
+        <activity
+            android:name=".generalApp.pseudoNetwork.ServerTest"
+            android:label="@string/title_activity_room_Client" >
+        </activity>
+        <activity
+            android:name=".generalApp.pseudoNetwork.ClientTest"
             android:label="@string/title_activity_room_Client" >
         </activity>
         <activity
