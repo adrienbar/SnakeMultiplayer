@@ -53,7 +53,7 @@ public class SnakeViewSwipeControl extends SnakeView {
 
 
 
-
+                  System.out.println("AAAAAAAAAA"+this.getClient());
                 SnakeGameState lastGameState = (SnakeGameState) this.getClient().getLastGameState();
                 Snake snake =lastGameState.getPlayersSnakes().get(AppSingleton.getInstance().getPlayer().getName());
 

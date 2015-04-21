@@ -2,13 +2,14 @@ package com.snakeindustry.snakemultiplayer.Snake.model.eatableObject;
 
 import com.snakeindustry.snakemultiplayer.Snake.model.state.State;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 /**
  * Created by Adrien on 28/03/15.
  */
 
-public abstract class SnakeBonus extends EatableObject {
+public abstract class SnakeBonus extends EatableObject implements Serializable {
 
     protected State state;
     public enum target{all,self,others};

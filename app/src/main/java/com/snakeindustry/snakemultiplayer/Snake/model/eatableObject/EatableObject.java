@@ -1,9 +1,11 @@
 package com.snakeindustry.snakemultiplayer.Snake.model.eatableObject;
 
+import java.io.Serializable;
+
 /**
  * Created by Adrien on 28/03/15.
  */
-public abstract class  EatableObject {
+public abstract class  EatableObject implements Serializable {
 
     private double x,y,width,height;
 

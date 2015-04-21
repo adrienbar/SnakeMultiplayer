@@ -50,7 +50,7 @@ public class RoomActivity extends ActionBarActivity {
 
         ListView listView = (ListView) findViewById(R.id.players);
 
-        List<String> playersName =AppSingleton.getInstance().getCurrenGameTread().getServer().getRoom().getPlayersName();
+        List<String> playersName =AppSingleton.getInstance().getRoomServer().getAllPlayer();
         int i= playersName.indexOf(AppSingleton.getInstance().getPlayer().getName());
         playersName.set(i,playersName.get(i) + " (Me!)");
 
@@ -65,7 +65,7 @@ public class RoomActivity extends ActionBarActivity {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AppSingleton.getInstance().getCurrenGameTread().getServer().getRoom().startTheGame();
+                AppSingleton.getInstance().getRoomServer().startGame(RoomActivity.this);
                 v.getContext().startActivity(new Intent(v.getContext(), GamePlayActivity.class));
             }
         });

@@ -35,7 +35,7 @@ public abstract class DefaultGame implements Game {
             }
 
             @Override
-            public void nextStep(HashMap<String, Integer> playerCommand, long threadTime) {
+            public void nextStep(HashMap<String, String> playerCommand, long threadTime) {
             gameOver=true;
             }
 

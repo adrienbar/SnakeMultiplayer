@@ -18,7 +18,7 @@ public int getIdIcon();
 //public GameView getGameView();
 public GameStats createStats();
 public GameState getGameState();
-//public void resetGameState();
+public void resetGameState();
 public GameSettings createSettings();
 public Class getSettingsActivity();
 

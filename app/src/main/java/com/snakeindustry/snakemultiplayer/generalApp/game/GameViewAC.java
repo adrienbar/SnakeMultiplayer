@@ -23,6 +23,7 @@ public abstract class GameViewAC extends SurfaceView implements GameView,Surface
     public GameViewAC(Context context, AttributeSet attrs) {
         super(context, attrs);
 
+        client=AppSingleton.getInstance().getClient();
         //this as callback
         this.getHolder().addCallback(this);
 
@@ -32,7 +33,7 @@ public abstract class GameViewAC extends SurfaceView implements GameView,Surface
         SurfaceHolder holder = this.getHolder();
         holder.addCallback(this);
 
-
+/*
         //SET CLIENT ACCORDING TO WHERE IS THE SERVER
         if(AppSingleton.getInstance().isServer()) {
             LocalClient localClient = new LocalClient(this,AppSingleton.getInstance().getCurrentGame().getGameState());
@@ -42,7 +43,9 @@ public abstract class GameViewAC extends SurfaceView implements GameView,Surface
         else {
             //distant client no implemented yet
         }
+*/
 
+        AppSingleton.getInstance().getClient().setView(this);
     }
 
 
@@ -50,7 +53,7 @@ public abstract class GameViewAC extends SurfaceView implements GameView,Surface
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         if(AppSingleton.getInstance().isServer()) {
-            AppSingleton.getInstance().getCurrenGameTread().start();
+            //AppSingleton.getInstance().getCurrenGameTread().start();
         }
     }
 

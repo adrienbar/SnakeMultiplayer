@@ -74,6 +74,14 @@
             android:name=".generalApp.pseudoNetwork.real.ServerRealActivity"
             android:label="@string/title_activity_server_real" >
         </activity>
+        <activity
+            android:name=".generalApp.pseudoNetwork.finale.ServerRoomActivity"
+            android:label="@string/title_activity_server_room" >
+        </activity>
+        <activity
+            android:name=".generalApp.pseudoNetwork.finale.client.ClientConnectActivity"
+            android:label="@string/title_activity_client_connect" >
+        </activity>
     </application>
 
 </manifest>

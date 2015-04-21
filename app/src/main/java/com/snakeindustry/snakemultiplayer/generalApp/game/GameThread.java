@@ -7,6 +7,7 @@ import com.snakeindustry.snakemultiplayer.Snake.model.SnakeGameState;
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
 import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.Server;
 import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.ServerC;
+import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.RoomServer;
 
 import java.util.HashMap;
 import java.util.Timer;
@@ -17,15 +18,15 @@ import java.util.TimerTask;
  */
 public class GameThread extends Thread{
 
-    private GameState gameState;
+    //private GameState gameState;
     private int refreshInterval;
-    private Server server;
+   // private Server server;
     private boolean running;
 
     public GameThread() {
         super();
-        this.server = new ServerC(null,this);
-        this.gameState = AppSingleton.getInstance().getCurrentGame().getGameState();
+        //this.server = new ServerC(null,this);
+        //this.gameState = AppSingleton.getInstance().getCurrentGame().getGameState();
         this.refreshInterval = (int) (1000/AppSingleton.getInstance().getPlayer().getSettings().getSpeed(AppSingleton.getInstance().getCurrentGame().getName())); //ms
         this.running=true;
     }
@@ -36,6 +37,13 @@ public class GameThread extends Thread{
         //nothing to do yet
 
 
+        System.out.println("THREAD RUNNING");
+
+        AppSingleton.getInstance().getCurrentGame().getGameState().configure(AppSingleton.getInstance().getRoomServer().getAllPlayer());
+
+        GameState gameState=AppSingleton.getInstance().getCurrentGame().getGameState();
+        RoomServer roomServer= AppSingleton.getInstance().getRoomServer();
+
         //Start the food & bonus spawning timed task
        // Timer timer = new Timer(true);
        // timer.scheduleAtFixedRate(new SpawnBonus(this.getGameState()), 0, 10*1000);
@@ -43,21 +51,27 @@ public class GameThread extends Thread{
 
 
         //GAME LOOP
-        while ((!this.getGameState().isGameOver())&this.isRunning()) {
-
+        while ((!gameState.isGameOver())&this.isRunning()) {
+            System.out.println("THREAD IN the LOOP");
 
             long time0=SystemClock.elapsedRealtime();
             long startTime = SystemClock.currentThreadTimeMillis();
 
+
+
+            roomServer.sendGameStateToAllClients(gameState);
+            System.out.println("THREAD GAMESTATE SENT");
+
             //UPDATE
-            this.getGameState().nextStep(this.getServer().getRoom().getAndResetPlayersCommand(),time0);
+            gameState.nextStep(roomServer.getAndResetPlayersCommands(), time0);
+            System.out.println("THREAD COMMANDS OK");
 
             long time1=SystemClock.currentThreadTimeMillis();
 
 
             //send GameStatToClients
             //at the reception, clients are supposed to refresh the View
-            this.getServer().getRoom().sendToAllClients(this.getGameState());
+
 
 
             long time2=SystemClock.currentThreadTimeMillis();
@@ -94,13 +108,7 @@ public class GameThread extends Thread{
 
     //Getters AND Setters
 
-    public GameState getGameState() {
-        return gameState;
-    }
 
-    public void setGameState(GameState gameState) {
-        this.gameState = gameState;
-    }
 
     public int getRefreshInterval() {
         return refreshInterval;
@@ -110,13 +118,6 @@ public class GameThread extends Thread{
         this.refreshInterval = refreshInterval;
     }
 
-    public Server getServer() {
-        return server;
-    }
-
-    public void setServer(Server server) {
-        this.server = server;
-    }
 
     public boolean isRunning() {
         return running;

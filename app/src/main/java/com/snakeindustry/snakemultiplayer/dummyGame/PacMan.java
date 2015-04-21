@@ -31,6 +31,11 @@ public class PacMan extends DefaultGame {
     }
 
     @Override
+    public void resetGameState() {
+
+    }
+
+    @Override
     public GameView getGameView(Context context, AttributeSet attributeSet) {
         return new GameViewAC(context,attributeSet) {
 

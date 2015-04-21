@@ -1,5 +1,7 @@
 package com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork;
 
+import android.content.Context;
+
 import com.snakeindustry.snakemultiplayer.Snake.model.SnakeGameState;
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameState;
@@ -24,18 +26,35 @@ public class LocalClient implements LocalClientI {
     @Override
     public void receive(GameState gameState) {
         this.lastGameState=gameState;
-        this.gameView.draw(gameState);
+if (gameView!=null){
+    this.gameView.draw(gameState);
+
+}
+        else {
+    System.out.println("VIEW NULL !!!!");
+        }
     }
 
     @Override
-    public void sendCommand(int command) {
-        AppSingleton.getInstance().getCurrenGameTread().getServer().getRoom().setPlayerCommand(AppSingleton.getInstance().getPlayer().getName(),command);
+    public void sendCommand(String command) {
+        AppSingleton.getInstance().getRoomServer().setLocalPlayerCommand(command);
         //System.out.println("LOCAL CLIENT command sent : " + command);
     }
+
 
     @Override
     public GameState getLastGameState() {
         return lastGameState;
+    }
+
+    @Override
+    public void setView(GameView gameView) {
+        this.gameView=gameView;
+    }
+
+    @Override
+    public void startServer(Context context) {
+
     }
 
 }

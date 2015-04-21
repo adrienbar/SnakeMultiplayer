@@ -1,9 +1,11 @@
 package com.snakeindustry.snakemultiplayer.Snake.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Maxime on 03/04/2015.
  */
-public class SnakeCell {
+public class SnakeCell implements Serializable {
 
     private double x,y;
 

@@ -30,13 +30,13 @@ import java.util.TimerTask;
  */
 public class SnakeGameState extends GameState {
 
-    public final static int SNAKE_GO_UP=0;
-    public final static int SNAKE_GO_RIGHT=1;
-    public final static int SNAKE_GO_DOWN=2;
-    public final static int SNAKE_GO_LEFT=3;
+    public final static String SNAKE_GO_UP="GO_UP";
+    public final static String SNAKE_GO_RIGHT="GO_RIGHT";
+    public final static String SNAKE_GO_DOWN="GO_DOWN";
+    public final static String SNAKE_GO_LEFT="GO_LEFT";
 
-    public final static int SNAKE_TURN_LEFT=4;
-    public final static int SNAKE_TURN_RIGHT=5;
+    public final static String SNAKE_TURN_LEFT="TURN_LEFT";
+    public final static String SNAKE_TURN_RIGHT="TURN_RIGHT";
 
 
     List<SnakeBonus> spawnedBonuses, activeBonuses;
@@ -306,7 +306,7 @@ public class SnakeGameState extends GameState {
     }
 
     @Override
-    public void nextStep(HashMap<String, Integer> playerCommand,long threadTime) {
+    public void nextStep(HashMap<String, String> playerCommand,long threadTime) {
 
 
         performeActionTime(threadTime);
@@ -356,7 +356,7 @@ public class SnakeGameState extends GameState {
 
 
 
-    private void performeActionCode(Snake snake,Integer commande) {
+    private void performeActionCode(Snake snake,String commande) {
         if(commande!=null) {
             switch (commande) {
 

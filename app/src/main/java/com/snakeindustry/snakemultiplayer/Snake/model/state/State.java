@@ -4,6 +4,7 @@ import com.snakeindustry.snakemultiplayer.Snake.model.Snake;
 import com.snakeindustry.snakemultiplayer.Snake.model.SnakeCell;
 import com.snakeindustry.snakemultiplayer.Snake.model.eatableObject.SnakeBonus;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
 /**
  * Created by Adrien on 28/03/15.
  */
-public abstract class State {
+public abstract class State implements Serializable {
 
 
     protected double width; //Cell width

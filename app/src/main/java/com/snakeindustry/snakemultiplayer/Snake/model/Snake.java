@@ -6,6 +6,7 @@ import com.snakeindustry.snakemultiplayer.Snake.model.eatableObject.SnakeBonus;
 import com.snakeindustry.snakemultiplayer.Snake.model.state.NormalState;
 import com.snakeindustry.snakemultiplayer.Snake.model.state.State;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
 
@@ -14,7 +15,7 @@ import java.util.LinkedList;
  */
 
 
-public class Snake {
+public class Snake implements Serializable {
 
     private State state;
 

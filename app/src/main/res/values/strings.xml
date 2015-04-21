@@ -15,5 +15,7 @@
     <string name="title_activity_default_settings">DefaultSettingsActivity</string>
     <string name="title_activity_client_real">ClientRealActivity</string>
     <string name="title_activity_server_real">ServerRealActivity</string>
+    <string name="title_activity_server_room">ServerRoomActivity</string>
+    <string name="title_activity_client_connect">ClientConnectActivity</string>
 
 </resources>

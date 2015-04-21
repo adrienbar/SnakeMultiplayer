@@ -8,6 +8,7 @@ import com.snakeindustry.snakemultiplayer.generalApp.player.Player;
 import com.snakeindustry.snakemultiplayer.generalApp.player.stats.model.GameStats;
 import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.Server;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
 /**
  * Created by Adrien on 28/03/15.
  */
-public abstract class GameState {
+public abstract class GameState implements Serializable {
 
 
     private List<String> players;
@@ -36,7 +37,7 @@ public abstract class GameState {
     public abstract boolean isGameOver();
 
 
-    public abstract void nextStep(HashMap<String, Integer> playerCommand, long threadTime);
+    public abstract void nextStep(HashMap<String, String> playerCommand, long threadTime);
 
     public abstract void gameOverAction();
 

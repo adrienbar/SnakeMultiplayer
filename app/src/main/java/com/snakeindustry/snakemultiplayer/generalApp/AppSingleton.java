@@ -9,7 +9,9 @@ import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameThread;
 import com.snakeindustry.snakemultiplayer.generalApp.player.DefaultPlayer;
 import com.snakeindustry.snakemultiplayer.generalApp.player.Player;
+import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.Client;
 import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.LocalClient;
+import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.RoomServer;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -36,18 +38,23 @@ public class AppSingleton {
 
     private boolean isServer;
     private GameThread currenGameTread;
-    private LocalClient localClient;
+    private Client client;
+    private RoomServer roomServer;
   //  private PlayerDAO db;
 
     //APPLICATION'S PARAMETERS
     private AppSingleton() {
+        System.out.println("INITIALISATION");
         this.player=new DefaultPlayer();
         this.availabeGames=new ArrayList<Game>();
         this.availabeGames.add(GameSnake.getInstance());
         this.availabeGames.add(PacMan.getInstance());
         this.isServer=false;
         this.currenGameTread=null;
-        this.localClient=null;
+        this.client=null;
+        this.roomServer=null;
+
+        System.out.println("INITIALISATION ok");
         //System.out.println("AAAAAAAA "+this.getAvailabeGames());
     }
 
@@ -215,5 +222,21 @@ public class AppSingleton {
 
     public void setCurrenGameTread(GameThread currenGameTread) {
         this.currenGameTread = currenGameTread;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public RoomServer getRoomServer() {
+        return roomServer;
+    }
+
+    public void setRoomServer(RoomServer roomServer) {
+        this.roomServer = roomServer;
     }
 }

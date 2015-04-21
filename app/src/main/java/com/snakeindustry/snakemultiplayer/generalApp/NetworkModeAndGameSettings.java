@@ -17,10 +17,15 @@ import com.snakeindustry.snakemultiplayer.Snake.SnakeSettingsActivity;
 import com.snakeindustry.snakemultiplayer.generalApp.player.stats.StatsOneGameActivity;
 import com.snakeindustry.snakemultiplayer.generalApp.player.stats.model.SimpleStats;
 import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.ClientTest;
+import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.LocalClient;
 import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.RoomActivity;
 import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.RoomActivityClient;
 import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.ServerC;
 import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.ServerTest;
+import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.RoomServer;
+import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.ServerRoomActivity;
+import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.client.ClientConnectActivity;
+import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.client.DistantClientC;
 import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.real.ClientRealActivity;
 import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.real.ServerRealActivity;
 
@@ -77,29 +82,31 @@ public class NetworkModeAndGameSettings extends ActionBarActivity {
 
 
         Button serverTest = (Button) findViewById(R.id.testServer);
-        serverTest.setText("ServerReal");
+        serverTest.setText("ServerTEST");
         serverTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 AppSingleton.getInstance().setServer(true);
                 AppSingleton.getInstance().setCurrenGameTread(new GameThread());
+                AppSingleton.getInstance().setRoomServer(new RoomServer());
+                AppSingleton.getInstance().setClient(new LocalClient(null,AppSingleton.getInstance().getCurrentGame().getGameState()));
 
-                Intent myIntent = new Intent(v.getContext(), ServerRealActivity.class);
+                Intent myIntent = new Intent(v.getContext(), ServerRoomActivity.class);
                 v.getContext().startActivity(myIntent);
             }
         });
 
         Button clientTest = (Button) findViewById(R.id.testClient);
-        clientTest.setText("ClientReal");
+        clientTest.setText("ClientTEST");
         clientTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 AppSingleton.getInstance().setServer(false);
                 AppSingleton.getInstance().setCurrenGameTread(new GameThread());
-
-                Intent myIntent = new Intent(v.getContext(), ClientRealActivity.class);
+                AppSingleton.getInstance().setClient(new DistantClientC());
+                Intent myIntent = new Intent(v.getContext(), ClientConnectActivity.class);
                 v.getContext().startActivity(myIntent);
             }
         });
