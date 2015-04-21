@@ -1,9 +1,4 @@
-package com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.real;
-
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+package com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.old;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -21,7 +16,7 @@ import android.widget.TextView;
 
 import com.snakeindustry.snakemultiplayer.R;
 
-public class ServerRealActivity extends ActionBarActivity {
+public class ServerTest extends Activity {
 
     TextView info, infoip, msg;
     String message = "";
@@ -30,7 +25,7 @@ public class ServerRealActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_server_real);
+        setContentView(R.layout.activity_server_test);
         info = (TextView) findViewById(R.id.info);
         infoip = (TextView) findViewById(R.id.infoip);
         msg = (TextView) findViewById(R.id.msg);
@@ -55,23 +50,20 @@ public class ServerRealActivity extends ActionBarActivity {
         }
     }
 
-
-
-
     private class SocketServerThread extends Thread {
 
-        static final int SocketServerPORT = 8080;
+        static final int SocketServerPORT = 32514;
         int count = 0;
 
         @Override
         public void run() {
             try {
                 serverSocket = new ServerSocket(SocketServerPORT);
-                ServerRealActivity.this.runOnUiThread(new Runnable() {
+                ServerTest.this.runOnUiThread(new Runnable() {
 
                     @Override
                     public void run() {
-                        info.setText("I'm waiting here: "
+                        info.setText("port: "
                                 + serverSocket.getLocalPort());
                     }
                 });
@@ -82,7 +74,7 @@ public class ServerRealActivity extends ActionBarActivity {
                     message += "#" + count + " from " + socket.getInetAddress()
                             + ":" + socket.getPort() + "\n";
 
-                    ServerRealActivity.this.runOnUiThread(new Runnable() {
+                    ServerTest.this.runOnUiThread(new Runnable() {
 
                         @Override
                         public void run() {
@@ -116,9 +108,10 @@ public class ServerRealActivity extends ActionBarActivity {
         @Override
         public void run() {
             OutputStream outputStream;
-            String msgReply = "Hello from Android, you are #" + cnt;
+            String msgReply = "Communication successful";
 
             try {
+
                 outputStream = hostThreadSocket.getOutputStream();
                 PrintStream printStream = new PrintStream(outputStream);
                 printStream.print(msgReply);
@@ -126,7 +119,7 @@ public class ServerRealActivity extends ActionBarActivity {
 
                 message += "replayed: " + msgReply + "\n";
 
-                ServerRealActivity.this.runOnUiThread(new Runnable() {
+                ServerTest.this.runOnUiThread(new Runnable() {
 
                     @Override
                     public void run() {
@@ -140,7 +133,7 @@ public class ServerRealActivity extends ActionBarActivity {
                 message += "Something wrong! " + e.toString() + "\n";
             }
 
-            ServerRealActivity.this.runOnUiThread(new Runnable() {
+            ServerTest.this.runOnUiThread(new Runnable() {
 
                 @Override
                 public void run() {
@@ -150,8 +143,6 @@ public class ServerRealActivity extends ActionBarActivity {
         }
 
     }
-
-
 
     private String getIpAddress() {
         String ip = "";
@@ -167,7 +158,7 @@ public class ServerRealActivity extends ActionBarActivity {
                     InetAddress inetAddress = enumInetAddress.nextElement();
 
                     if (inetAddress.isSiteLocalAddress()) {
-                        ip += "SiteLocalAddress: "
+                        ip += "ip: "
                                 + inetAddress.getHostAddress() + "\n";
                     }
 
@@ -184,4 +175,3 @@ public class ServerRealActivity extends ActionBarActivity {
         return ip;
     }
 }
-

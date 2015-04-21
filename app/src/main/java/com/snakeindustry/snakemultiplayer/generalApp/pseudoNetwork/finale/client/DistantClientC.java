@@ -5,7 +5,6 @@ import android.content.Context;
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameState;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameView;
-import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.DistantClientI;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

@@ -1,11 +1,9 @@
-package com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork;
+package com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.client;
 
 import android.content.Context;
 
-import com.snakeindustry.snakemultiplayer.Snake.model.SnakeGameState;
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameState;
-import com.snakeindustry.snakemultiplayer.generalApp.game.GameThread;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameView;
 
 /**

@@ -15,7 +15,9 @@ import android.widget.TextView;
 import com.snakeindustry.snakemultiplayer.R;
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GamePlayActivity;
+import com.snakeindustry.snakemultiplayer.generalApp.game.GameThread;
 import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.client.ClientConnectActivity;
+import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.client.LocalClient;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -52,12 +54,8 @@ public class ServerRoomActivity extends ActionBarActivity {
 
 
         playersListVew = (ListView) findViewById(R.id.playersListView);
-        adapter=new ArrayAdapter(this,android.R.layout.simple_list_item_1,getRoomServer().getDistantPlayers().toArray());
+        adapter=new ArrayAdapter(this,android.R.layout.simple_list_item_1,getRoomServer().getAllPlayer().toArray());
         playersListVew.setAdapter(adapter);
-
-        ListView players= (ListView) findViewById(R.id.playersListView);
-        adapter=new ArrayAdapter(this,android.R.layout.simple_list_item_1, AppSingleton.getInstance().getRoomServer().getAllPlayer());
-        players.setAdapter(adapter);
 
 
         Button start = (Button) findViewById(R.id.start);
@@ -65,8 +63,10 @@ public class ServerRoomActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 AppSingleton.getInstance().getCurrentGame().getGameState().configure(AppSingleton.getInstance().getRoomServer().getAllPlayer());
+                System.out.println("PLAYERS "+AppSingleton.getInstance().getRoomServer().getAllPlayer());
                 Intent myIntent = new Intent(v.getContext(), GamePlayActivity.class);
                 v.getContext().startActivity(myIntent);
+                AppSingleton.getInstance().setCurrenGameTread(new GameThread());
                 AppSingleton.getInstance().getCurrenGameTread().start();
                 //AppSingleton.getInstance().getRoomServer().startGame(v.getContext());
 
@@ -106,9 +106,13 @@ public class ServerRoomActivity extends ActionBarActivity {
     @Override
     public void onResume(){
         super.onResume();
-        ListView players= (ListView) findViewById(R.id.playersListView);
+
+        AppSingleton.getInstance().getRoomServer().clean();
+        playersListVew= (ListView) findViewById(R.id.playersListView);
         adapter=new ArrayAdapter(this,android.R.layout.simple_list_item_1, AppSingleton.getInstance().getRoomServer().getAllPlayer());
-        players.setAdapter(adapter);
+        playersListVew.setAdapter(adapter);
+
+
     }
 
 

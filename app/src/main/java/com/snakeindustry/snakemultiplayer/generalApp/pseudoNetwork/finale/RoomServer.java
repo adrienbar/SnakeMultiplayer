@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameState;
-import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.LocalClientI;
+import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.client.LocalClientI;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -50,6 +50,9 @@ public class RoomServer {
     }
 
     public void clean() {
+
+        this.setMessages(new ArrayList<String>());
+        this.setPlayersSocket(new HashMap<String, Socket>());
     }
 
     public boolean alreadyInTheRoom(String name){

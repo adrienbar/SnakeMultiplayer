@@ -3,15 +3,8 @@ package com.snakeindustry.snakemultiplayer.generalApp.game;
 import android.os.SystemClock;
 import android.util.Log;
 
-import com.snakeindustry.snakemultiplayer.Snake.model.SnakeGameState;
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
-import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.Server;
-import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.ServerC;
 import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.RoomServer;
-
-import java.util.HashMap;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Created by Adrien on 28/03/15.
@@ -100,6 +93,7 @@ public class GameThread extends Thread{
 
 
         //SEND GAME OVER TO ALL CLIENT
+        roomServer.sendGameStateToAllClients(gameState);
 
 
     }

@@ -13,25 +13,15 @@ import android.widget.TextView;
 import com.snakeindustry.snakemultiplayer.R;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameThread;
 import com.snakeindustry.snakemultiplayer.generalApp.mainActivity.ButtonController;
-import com.snakeindustry.snakemultiplayer.Snake.SnakeSettingsActivity;
 import com.snakeindustry.snakemultiplayer.generalApp.player.stats.StatsOneGameActivity;
 import com.snakeindustry.snakemultiplayer.generalApp.player.stats.model.SimpleStats;
-import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.ClientTest;
-import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.LocalClient;
-import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.RoomActivity;
-import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.RoomActivityClient;
-import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.ServerC;
-import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.ServerTest;
+import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.client.LocalClient;
+import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.old.RoomActivity;
+import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.old.RoomActivityClient;
 import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.RoomServer;
 import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.ServerRoomActivity;
 import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.client.ClientConnectActivity;
 import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.client.DistantClientC;
-import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.real.ClientRealActivity;
-import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.real.ServerRealActivity;
-
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
 
 public class NetworkModeAndGameSettings extends ActionBarActivity {
 
@@ -71,7 +61,7 @@ public class NetworkModeAndGameSettings extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                AppSingleton.getInstance().setServer(true);
+                AppSingleton.getInstance().setServer(false);
                 AppSingleton.getInstance().setCurrenGameTread(new GameThread());
 
                 Intent myIntent = new Intent(v.getContext(), RoomActivityClient.class);

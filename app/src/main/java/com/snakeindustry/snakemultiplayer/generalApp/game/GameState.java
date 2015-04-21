@@ -2,11 +2,8 @@ package com.snakeindustry.snakemultiplayer.generalApp.game;
 
 import android.os.SystemClock;
 
-import com.snakeindustry.snakemultiplayer.Snake.SnakeStats;
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
-import com.snakeindustry.snakemultiplayer.generalApp.player.Player;
 import com.snakeindustry.snakemultiplayer.generalApp.player.stats.model.GameStats;
-import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.Server;
 
 import java.io.Serializable;
 import java.util.ArrayList;

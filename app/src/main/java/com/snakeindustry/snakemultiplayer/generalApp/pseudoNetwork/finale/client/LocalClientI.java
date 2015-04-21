@@ -1,7 +1,6 @@
-package com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork;
+package com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.client;
 
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameState;
-import com.snakeindustry.snakemultiplayer.generalApp.game.GameThread;
 
 /**
  * Created by Adrien on 10/04/15.

@@ -1,10 +1,10 @@
-package com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork;
+package com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.old;
 
-import com.snakeindustry.snakemultiplayer.generalApp.game.GameState;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameThread;
+import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.client.DistantClientI;
+import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.client.LocalClientI;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**

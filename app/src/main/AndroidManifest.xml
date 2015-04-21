@@ -43,19 +43,19 @@
             android:label="@string/title_activity_game_play" >
         </activity>
         <activity
-            android:name=".generalApp.pseudoNetwork.RoomActivity"
+            android:name=".generalApp.pseudoNetwork.old.RoomActivity"
             android:label="@string/title_activity_room" >
         </activity>
         <activity
-            android:name=".generalApp.pseudoNetwork.RoomActivityClient"
+            android:name=".generalApp.pseudoNetwork.old.RoomActivityClient"
             android:label="@string/title_activity_room_Client" >
         </activity>
         <activity
-            android:name=".generalApp.pseudoNetwork.ServerTest"
+            android:name=".generalApp.pseudoNetwork.old.ServerTest"
             android:label="@string/title_activity_room_Client" >
         </activity>
         <activity
-            android:name=".generalApp.pseudoNetwork.ClientTest"
+            android:name=".generalApp.pseudoNetwork.old.ClientTest"
             android:label="@string/title_activity_room_Client" >
         </activity>
         <activity
@@ -67,11 +67,11 @@
             android:label="@string/title_activity_default_settings" >
         </activity>
         <activity
-            android:name=".generalApp.pseudoNetwork.real.ClientRealActivity"
+            android:name=".generalApp.pseudoNetwork.old.real.ClientRealActivity"
             android:label="@string/title_activity_client_real" >
         </activity>
         <activity
-            android:name=".generalApp.pseudoNetwork.real.ServerRealActivity"
+            android:name=".generalApp.pseudoNetwork.old.real.ServerRealActivity"
             android:label="@string/title_activity_server_real" >
         </activity>
         <activity

@@ -1,4 +1,4 @@
-package com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork;
+package com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.client;
 
 import android.content.Context;
 

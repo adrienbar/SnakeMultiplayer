@@ -8,11 +8,11 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.provider.CalendarContract;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.view.SurfaceHolder;
 
 import com.snakeindustry.snakemultiplayer.R;
-import com.snakeindustry.snakemultiplayer.Snake.SnakeStats;
 import com.snakeindustry.snakemultiplayer.Snake.model.Snake;
 import com.snakeindustry.snakemultiplayer.Snake.model.SnakeGameState;
 import com.snakeindustry.snakemultiplayer.Snake.model.eatableObject.*;
@@ -22,26 +22,18 @@ import com.snakeindustry.snakemultiplayer.Snake.model.state.NormalState;
 import com.snakeindustry.snakemultiplayer.Snake.model.state.ReverseState;
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameState;
-import com.snakeindustry.snakemultiplayer.generalApp.game.GameThread;
-import com.snakeindustry.snakemultiplayer.generalApp.game.GameView;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameViewAC;
-import com.snakeindustry.snakemultiplayer.generalApp.player.Player;
-import com.snakeindustry.snakemultiplayer.generalApp.player.stats.model.SimpleStats;
-import com.snakeindustry.snakemultiplayer.generalApp.player.stats.model.SimpleStatsC;
-import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.LocalClient;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Adrien on 28/03/15.
  */
-public abstract class SnakeView extends GameViewAC {
+public abstract class SnakeView extends GameViewAC implements SurfaceHolder.Callback {
 
     private Bitmap none,invincible,reverse,fast;
     private Bitmap food,bonusOthers,bonusSelf,bonusAll;
     private Bitmap body,head,bodyControlled,headControlled;
     private Bitmap background;
+
 
 
     public SnakeView(Context context, AttributeSet attrs) {
@@ -76,8 +68,11 @@ public abstract class SnakeView extends GameViewAC {
         gameOverAction(gameState);
         //
 
-        Canvas canvas = this.getHolder().lockCanvas();
 
+       Canvas canvas = this.getHolder().lockCanvas();
+
+
+       // while ()
 
         drawBackground(canvas);
         Paint paintScore=new Paint();
@@ -152,8 +147,6 @@ public abstract class SnakeView extends GameViewAC {
             paintText.setTextScaleX(2);
             String score="Your Score : "+snakeGameState.getScore(AppSingleton.getInstance().getPlayer().getName());
             canvas.drawText(score,this.getWidth()/2,(float) (0.05*this.getHeight()),paintText);
-
-
         //Loose
 
        if(!snakeGameState.getSnakes().contains(snakeGameState.getPlayersSnakes().get(AppSingleton.getInstance().getPlayer().getName()))){
@@ -290,10 +283,10 @@ public void drawBonus(SnakeBonus bonus,Canvas canvas) {
         Bitmap head=this.head;
 
 
-        if(name== AppSingleton.getInstance().getPlayer().getName()) {
+        if(name.equals(AppSingleton.getInstance().getPlayer().getName())) {
             //paintBody.setColor(Color.LTGRAY);
             body=this.bodyControlled;
-            head=headControlled;
+            head=this.headControlled;
             name="";
         }
 
@@ -367,9 +360,12 @@ public void drawBonus(SnakeBonus bonus,Canvas canvas) {
 
         //put Name
         Paint paintName=new Paint();
+        paintName.setTextSize(20);
         paintName.setColor(Color.BLUE);
         canvas.drawText(name,x1,y1,paintName);
     }
+
+
 
 
 }

@@ -3,8 +3,6 @@ package com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.clien
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,7 +13,6 @@ import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GamePlayActivity;
 import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.RoomServer;
 import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.SocketServerThread;
-import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.real.ClientRealActivity;
 
 import java.io.BufferedReader;
 import java.io.IOException;

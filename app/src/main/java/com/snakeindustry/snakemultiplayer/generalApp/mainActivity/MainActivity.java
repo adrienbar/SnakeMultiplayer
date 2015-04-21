@@ -66,14 +66,14 @@ public class MainActivity extends ActionBarActivity {
         //welcome
         TextView welcome=(TextView) findViewById(R.id.welcome);
         welcome.setText("Welcome to GameBox "+AppSingleton.getInstance().getPlayer().getName()+" !");
+        TextView profileText = (TextView) findViewById(R.id.profileText);
+        if(profileText.getText().toString().equals(DefaultPlayer.DEFAULT_NAME) ) {
 
-        if(AppSingleton.getInstance().getPlayer().getName().equals(DefaultPlayer.DEFAULT_NAME) ) {
-            TextView profileText = (TextView) findViewById(R.id.profileText);
             profileText.setText(profileText.getText() + " - Set your Name Here");
             profileText.setTextColor(Color.RED);
         }
         else {
-            TextView profileText = (TextView) findViewById(R.id.profileText);
+            profileText = (TextView) findViewById(R.id.profileText);
             profileText.setTextColor(defaultProfileColor);
             profileText.setText(defaultProfileText);
         }

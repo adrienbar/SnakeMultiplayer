@@ -44,4 +44,29 @@ public class GamePlayActivity extends ActionBarActivity {
     }
 
 
+
+
+    @Override
+    public void onPause(){
+       super.onPause();
+
+        System.out.println("------"+AppSingleton.getInstance().getCurrentGame().getName());
+        boolean retry=true;
+        AppSingleton.getInstance().getCurrenGameTread().setRunning(false);
+        while (retry)
+        try {
+            AppSingleton.getInstance().getCurrenGameTread().join();
+            retry=false;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+
+        }
+
+        //moveTaskToBack(true);
+
+        //this.finish();
+        //System.exit(0);
+
+    }
+
 }

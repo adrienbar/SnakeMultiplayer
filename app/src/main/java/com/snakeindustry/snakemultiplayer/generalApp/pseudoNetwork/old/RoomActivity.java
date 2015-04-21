@@ -1,4 +1,4 @@
-package com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork;
+package com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.old;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;

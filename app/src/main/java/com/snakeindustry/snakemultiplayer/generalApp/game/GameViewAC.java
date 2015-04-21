@@ -6,9 +6,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
-import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.Client;
-import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.LocalClient;
-import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.LocalClientI;
+import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.client.Client;
 
 /**
  * Created by Adrien on 10/04/15.

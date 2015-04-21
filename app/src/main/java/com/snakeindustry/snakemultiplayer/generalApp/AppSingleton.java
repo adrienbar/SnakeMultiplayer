@@ -9,8 +9,7 @@ import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameThread;
 import com.snakeindustry.snakemultiplayer.generalApp.player.DefaultPlayer;
 import com.snakeindustry.snakemultiplayer.generalApp.player.Player;
-import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.Client;
-import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.LocalClient;
+import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.client.Client;
 import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.RoomServer;
 
 import java.io.BufferedReader;
