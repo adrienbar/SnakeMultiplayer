@@ -54,7 +54,7 @@ public abstract class GameViewAC extends SurfaceView implements GameView,Surface
             canvas.drawColor(Color.WHITE);
 
             Bitmap bitmap=BitmapFactory.decodeResource(this.getResources(),AppSingleton.getInstance().getCurrentGame().getIdIcon());
-            Rect des= new  Rect (this.getWidth()/2-this.getWidth()/4,  this.getHeight()/10, this.getWidth()/2+this.getWidth()/4, this.getHeight()/10+this.getWidth()/4);
+            Rect des= new  Rect (this.getWidth()/2-this.getWidth()/4,  this.getHeight()/10, this.getWidth()/2+this.getWidth()/4, this.getHeight()/10+this.getWidth()/2);
             Rect src=new Rect (0,0,bitmap.getWidth(),bitmap.getHeight());
 
             canvas.drawBitmap(bitmap,src,des,new Paint());
@@ -62,7 +62,7 @@ public abstract class GameViewAC extends SurfaceView implements GameView,Surface
             Paint paint=new Paint();
             paint.setTextSize(25);
             paint.setTextAlign(Paint.Align.CENTER);
-            canvas.drawText("Waiting for server ..",this.getWidth()/3*2,this.getHeight()/3,paint);
+            canvas.drawText("Waiting for server ..",this.getWidth()/3*2,this.getHeight()*2/3,paint);
 
             this.getHolder().unlockCanvasAndPost(canvas);
         }
