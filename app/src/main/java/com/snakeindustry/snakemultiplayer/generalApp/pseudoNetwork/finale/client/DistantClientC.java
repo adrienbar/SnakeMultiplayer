@@ -69,20 +69,20 @@ public class DistantClientC extends Thread implements DistantClientI {
     public void run() {
         super.run();
         while (running){
-            System.out.println("DISTANT SERVER Running");
+            //System.out.println("DISTANT SERVER Running");
             try {
-                System.out.println("DISTANT SERVER try 1");
+             //   System.out.println("DISTANT SERVER try 1");
 
                 out = new PrintWriter(socket.getOutputStream());
 
-                System.out.println("DISTANT SERVER out");
+            //    System.out.println("DISTANT SERVER out");
                 in = new ObjectInputStream(socket.getInputStream());
 
-                System.out.println("DISTANT SERVER in,out");
+               // System.out.println("DISTANT SERVER in,out");
                 try {
-                    System.out.println("DISTANT SERVER gamestate ready to be read");
+                   // System.out.println("DISTANT SERVER gamestate ready to be read");
                     GameState gameState = (GameState) in.readObject();
-                    System.out.println("DISTANT SERVER game state read");
+                   // System.out.println("DISTANT SERVER game state read");
                     if(gameState!=null) {
                         this.setLastGameState(gameState);
                     }
@@ -90,21 +90,21 @@ public class DistantClientC extends Thread implements DistantClientI {
                     e.printStackTrace();
                 }
 
-                System.out.println("DISTANT SERVER game Sate received");
-                System.out.println("DISTANT SERVER game Sate received "+this.gameView);
-                System.out.println("DISTANT SERVER game Sate received");
+               // System.out.println("DISTANT SERVER game Sate received");
+             //   System.out.println("DISTANT SERVER game Sate received "+this.gameView);
+               // System.out.println("DISTANT SERVER game Sate received");
                 if(gameView!=null) {
                     this.gameView.draw(getLastGameState());
                 }
 
-                System.out.println("DISTANT SERVER GameStat Drawn");
+               // System.out.println("DISTANT SERVER GameStat Drawn");
 
                 out.println(this.getCommand());
-                System.out.println("DISTANT SERVER COMMANDE IN out");
+              //  System.out.println("DISTANT SERVER COMMANDE IN out");
                 this.setCommand(null);
-                System.out.println("DISTANT SERVER COMMAND RESETED");
+             //   System.out.println("DISTANT SERVER COMMAND RESETED");
                 out.flush();
-                System.out.println("DISTANT SERVER flushed");
+             //   System.out.println("DISTANT SERVER flushed");
 
 
             } catch (UnknownHostException e) {
