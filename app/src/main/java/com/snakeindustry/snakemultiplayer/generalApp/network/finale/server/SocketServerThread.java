@@ -1,11 +1,8 @@
-package com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale;
+package com.snakeindustry.snakemultiplayer.generalApp.network.finale.server;
 
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 

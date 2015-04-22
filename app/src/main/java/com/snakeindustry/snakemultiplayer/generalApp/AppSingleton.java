@@ -9,9 +9,9 @@ import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameThread;
 import com.snakeindustry.snakemultiplayer.generalApp.player.DefaultPlayer;
 import com.snakeindustry.snakemultiplayer.generalApp.player.Player;
-import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.SocketServerThread;
-import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.client.Client;
-import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.RoomServer;
+import com.snakeindustry.snakemultiplayer.generalApp.network.finale.server.SocketServerThread;
+import com.snakeindustry.snakemultiplayer.generalApp.network.finale.client.Client;
+import com.snakeindustry.snakemultiplayer.generalApp.network.finale.server.RoomServer;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -19,7 +19,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 

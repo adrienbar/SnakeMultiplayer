@@ -1,10 +1,10 @@
-package com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale;
+package com.snakeindustry.snakemultiplayer.generalApp.network.finale.server;
 
 import android.content.Context;
 
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameState;
-import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.client.LocalClientI;
+import com.snakeindustry.snakemultiplayer.generalApp.network.finale.client.LocalClientI;
 
 import java.io.BufferedReader;
 import java.io.IOException;

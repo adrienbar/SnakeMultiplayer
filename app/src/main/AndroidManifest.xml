@@ -42,19 +42,19 @@
             android:label="@string/title_activity_game_play" >
         </activity>
         <activity
-            android:name=".generalApp.pseudoNetwork.old.RoomActivity"
+            android:name=".generalApp.network.old.RoomActivity"
             android:label="@string/title_activity_room" >
         </activity>
         <activity
-            android:name=".generalApp.pseudoNetwork.old.RoomActivityClient"
+            android:name=".generalApp.network.old.RoomActivityClient"
             android:label="@string/title_activity_room_Client" >
         </activity>
         <activity
-            android:name=".generalApp.pseudoNetwork.old.ServerTest"
+            android:name=".generalApp.network.old.ServerTest"
             android:label="@string/title_activity_room_Client" >
         </activity>
         <activity
-            android:name=".generalApp.pseudoNetwork.old.ClientTest"
+            android:name=".generalApp.network.old.ClientTest"
             android:label="@string/title_activity_room_Client" >
         </activity>
         <activity
@@ -66,19 +66,19 @@
             android:label="@string/title_activity_default_settings" >
         </activity>
         <activity
-            android:name=".generalApp.pseudoNetwork.old.real.ClientRealActivity"
+            android:name=".generalApp.network.old.real.ClientRealActivity"
             android:label="@string/title_activity_client_real" >
         </activity>
         <activity
-            android:name=".generalApp.pseudoNetwork.old.real.ServerRealActivity"
+            android:name=".generalApp.network.old.real.ServerRealActivity"
             android:label="@string/title_activity_server_real" >
         </activity>
         <activity
-            android:name=".generalApp.pseudoNetwork.finale.ServerRoomActivity"
+            android:name=".generalApp.network.finale.server.ServerRoomActivity"
             android:label="@string/title_activity_server_room" >
         </activity>
         <activity
-            android:name=".generalApp.pseudoNetwork.finale.client.ClientConnectActivity"
+            android:name=".generalApp.network.finale.client.ClientConnectActivity"
             android:label="@string/title_activity_client_connect" >
         </activity>
     </application>

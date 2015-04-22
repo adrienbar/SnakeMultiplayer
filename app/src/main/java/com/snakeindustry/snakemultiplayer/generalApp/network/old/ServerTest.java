@@ -1,4 +1,4 @@
-package com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.old;
+package com.snakeindustry.snakemultiplayer.generalApp.network.old;
 
 import java.io.IOException;
 import java.io.OutputStream;

@@ -1,4 +1,4 @@
-package com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale;
+package com.snakeindustry.snakemultiplayer.generalApp.network.finale.server;
 
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
 

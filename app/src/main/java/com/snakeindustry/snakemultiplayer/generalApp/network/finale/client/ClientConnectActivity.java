@@ -1,4 +1,4 @@
-package com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.client;
+package com.snakeindustry.snakemultiplayer.generalApp.network.finale.client;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -14,15 +14,10 @@ import android.widget.TextView;
 import com.snakeindustry.snakemultiplayer.R;
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GamePlayActivity;
-import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.RoomServer;
-import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.SocketServerThread;
+import com.snakeindustry.snakemultiplayer.generalApp.network.finale.server.RoomServer;
+import com.snakeindustry.snakemultiplayer.generalApp.network.finale.server.SocketServerThread;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.Socket;
-import java.net.UnknownHostException;
 
 public class ClientConnectActivity extends ActionBarActivity {
 
@@ -97,55 +92,7 @@ public class ClientConnectActivity extends ActionBarActivity {
                 @Override
                 public void onClick(View arg0) {
 
-
-
-                    /*
-                    System.out.println("MY CLIENT TASK clik");
-
-                    PrintWriter out;
-                    BufferedReader in;
-
-                    try {
-                        dstAddress=(String) editTextAddress.getText().toString();
-                        dstPort=  Integer.parseInt(editTextPort.getText().toString());
-
-                        System.out.println("MY CLIENT TASK "+dstAddress +":"+dstPort);
-                        socket = new Socket(dstAddress, dstPort);
-                        System.out.println("MY CLIENT TASK socket ok");
-                        out = new PrintWriter(socket.getOutputStream());
-                        in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-
-
-                        out.println(AppSingleton.getInstance().getPlayer().getName());
-                        out.println(AppSingleton.getInstance().getCurrentGame().getName());
-                        out.flush();
-
-                        System.out.println("MY CLIENT TASK out ok");
-
-
-                        response=in.readLine();
-                        textResponse.setText(response);
-                        System.out.println("MY CLIENT TASK "+response);
-
-                        if (response!=null&&response.equals(RoomServer.START_COMMAND)) {
-
-                            DistantClientC dc= new DistantClientC(socket);
-                            AppSingleton.getInstance().setClient(dc);
-                            dc.start();
-                            ClientConnectActivity.this.startActivity(new Intent(ClientConnectActivity.this, GamePlayActivity.class));
-                        }
-
-
-                    } catch (UnknownHostException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-
-
-                    /*
-*/
+                    AppSingleton.getInstance().setLasteIP(editTextAddress.getText().toString());
 
                     myClientTask = new MyClientTask(
                             editTextAddress.getText().toString(),

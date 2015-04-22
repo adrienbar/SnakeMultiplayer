@@ -1,4 +1,4 @@
-package com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.client;
+package com.snakeindustry.snakemultiplayer.generalApp.network.finale.client;
 
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameState;
 

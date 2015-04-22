@@ -1,10 +1,8 @@
-package com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.client;
+package com.snakeindustry.snakemultiplayer.generalApp.network.finale.client;
 
 import android.os.AsyncTask;
 
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
-import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.RoomServer;
-import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.SocketServerThread;
 
 import java.io.BufferedReader;
 import java.io.IOException;

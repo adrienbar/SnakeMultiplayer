@@ -1,4 +1,4 @@
-package com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.old;
+package com.snakeindustry.snakemultiplayer.generalApp.network.old;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,7 +14,6 @@ import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.ObjectInputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.Socket;

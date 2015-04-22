@@ -1,6 +1,6 @@
-package com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.old;
+package com.snakeindustry.snakemultiplayer.generalApp.network.old;
 
-import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.client.LocalClientI;
+import com.snakeindustry.snakemultiplayer.generalApp.network.finale.client.LocalClientI;
 
 /**
  * Created by Adrien on 10/04/15.

@@ -15,13 +15,11 @@ import com.snakeindustry.snakemultiplayer.generalApp.game.GameThread;
 import com.snakeindustry.snakemultiplayer.generalApp.mainActivity.ButtonController;
 import com.snakeindustry.snakemultiplayer.generalApp.player.stats.StatsOneGameActivity;
 import com.snakeindustry.snakemultiplayer.generalApp.player.stats.model.SimpleStats;
-import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.client.LocalClient;
-import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.old.RoomActivity;
-import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.old.RoomActivityClient;
-import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.RoomServer;
-import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.ServerRoomActivity;
-import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.client.ClientConnectActivity;
-import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.client.DistantClientC;
+import com.snakeindustry.snakemultiplayer.generalApp.network.finale.client.LocalClient;
+import com.snakeindustry.snakemultiplayer.generalApp.network.finale.server.RoomServer;
+import com.snakeindustry.snakemultiplayer.generalApp.network.finale.server.ServerRoomActivity;
+import com.snakeindustry.snakemultiplayer.generalApp.network.finale.client.ClientConnectActivity;
+import com.snakeindustry.snakemultiplayer.generalApp.network.finale.client.DistantClientC;
 
 public class NetworkModeAndGameSettings extends ActionBarActivity {
 

@@ -1,7 +1,7 @@
-package com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.old;
+package com.snakeindustry.snakemultiplayer.generalApp.network.old;
 
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameState;
-import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.client.LocalClientI;
+import com.snakeindustry.snakemultiplayer.generalApp.network.finale.client.LocalClientI;
 
 import java.util.HashMap;
 import java.util.List;

@@ -4,7 +4,7 @@ import android.os.SystemClock;
 import android.util.Log;
 
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
-import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.RoomServer;
+import com.snakeindustry.snakemultiplayer.generalApp.network.finale.server.RoomServer;
 
 /**
  * Created by Adrien on 28/03/15.

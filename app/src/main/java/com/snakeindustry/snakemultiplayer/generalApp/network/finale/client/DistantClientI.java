@@ -1,4 +1,4 @@
-package com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.client;
+package com.snakeindustry.snakemultiplayer.generalApp.network.finale.client;
 
 /**
  * Created by Adrien on 10/04/15.

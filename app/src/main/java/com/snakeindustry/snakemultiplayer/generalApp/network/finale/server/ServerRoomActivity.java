@@ -1,4 +1,4 @@
-package com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale;
+package com.snakeindustry.snakemultiplayer.generalApp.network.finale.server;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -10,21 +10,17 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.snakeindustry.snakemultiplayer.R;
 import com.snakeindustry.snakemultiplayer.generalApp.AppSingleton;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GamePlayActivity;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameThread;
-import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.client.ClientConnectActivity;
-import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.client.LocalClient;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.ServerSocket;
 import java.net.SocketException;
-import java.util.ArrayList;
 import java.util.Enumeration;
 
 
@@ -112,6 +108,9 @@ public class ServerRoomActivity extends ActionBarActivity {
     @Override
     public void onResume(){
         super.onResume();
+
+        AppSingleton.getInstance().getCurrentGame().resetGameState();
+
         AppSingleton.getInstance().getRoomServer().clean();
         if (roomServer!=null){
             roomServer.clean();
