@@ -48,11 +48,11 @@ public abstract class SnakeView extends GameViewAC implements SurfaceHolder.Call
         bonusAll=BitmapFactory.decodeResource(this.getResources(), R.drawable.food);
         bonusSelf=BitmapFactory.decodeResource(this.getResources(), R.drawable.bonusself);
 
-        body=BitmapFactory.decodeResource(this.getResources(), R.drawable.body);
-        head=BitmapFactory.decodeResource(this.getResources(), R.drawable.head);
+        body=BitmapFactory.decodeResource(this.getResources(), R.drawable.bodycontrolled);
+        head=BitmapFactory.decodeResource(this.getResources(), R.drawable.headcontrolled);
 
-        bodyControlled=BitmapFactory.decodeResource(this.getResources(), R.drawable.bodycontrolled);
-        headControlled=BitmapFactory.decodeResource(this.getResources(), R.drawable.headcontrolled);
+        bodyControlled=BitmapFactory.decodeResource(this.getResources(), R.drawable.body);
+        headControlled=BitmapFactory.decodeResource(this.getResources(), R.drawable.head);
 
         background=BitmapFactory.decodeResource(this.getResources(), R.drawable.background);
 
@@ -165,7 +165,7 @@ public abstract class SnakeView extends GameViewAC implements SurfaceHolder.Call
         }
 
         else {
-            System.out.println("CANVAS NULL");
+            System.out.println("SNAKEVIEW CANVAS NULL");
         }
 
 
@@ -371,8 +371,13 @@ public void drawBonus(SnakeBonus bonus,Canvas canvas) {
         //put Name
         Paint paintName=new Paint();
         paintName.setTextSize(20);
-        paintName.setColor(Color.BLUE);
+        paintName.setTextAlign(Paint.Align.CENTER);
+        paintName.setColor(Color.RED);
+
+        x1= (float) (snake.getState().getBody().get(0).getX()*this.getWidth());
+        y1 = (float) (snake.getState().getBody().get(0).getY()*this.getHeight());
         canvas.drawText(name,x1,y1,paintName);
+
     }
 
 

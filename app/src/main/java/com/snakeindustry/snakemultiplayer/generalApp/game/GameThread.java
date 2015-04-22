@@ -45,7 +45,7 @@ public class GameThread extends Thread{
 
         //GAME LOOP
         while ((!gameState.isGameOver())&this.isRunning()) {
-          //  System.out.println("THREAD IN the LOOP");
+            System.out.println("THREAD IN the LOOP" + AppSingleton.getInstance().getRoomServer().getAllPlayer());
 
             long time0=SystemClock.elapsedRealtime();
             long startTime = SystemClock.currentThreadTimeMillis();
@@ -53,11 +53,11 @@ public class GameThread extends Thread{
 
 
             roomServer.sendGameStateToAllClients(gameState);
-        //    System.out.println("THREAD GAMESTATE SENT");
+            System.out.println("THREAD GAMESTATE SENT");
 
             //UPDATE
             gameState.nextStep(roomServer.getAndResetPlayersCommands(), time0);
-         //   System.out.println("THREAD COMMANDS OK");
+            System.out.println("THREAD COMMANDS OK");
 
             long time1=SystemClock.currentThreadTimeMillis();
 

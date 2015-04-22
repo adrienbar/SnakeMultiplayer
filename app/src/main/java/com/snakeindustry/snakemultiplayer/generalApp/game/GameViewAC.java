@@ -31,18 +31,6 @@ public abstract class GameViewAC extends SurfaceView implements GameView,Surface
         SurfaceHolder holder = this.getHolder();
         holder.addCallback(this);
 
-/*
-        //SET CLIENT ACCORDING TO WHERE IS THE SERVER
-        if(AppSingleton.getInstance().isServer()) {
-            LocalClient localClient = new LocalClient(this,AppSingleton.getInstance().getCurrentGame().getGameState());
-            this.client = localClient;
-            AppSingleton.getInstance().getCurrenGameTread().getServer().setLocalClientI(localClient);
-        }
-        else {
-            //distant client no implemented yet
-        }
-*/
-
         AppSingleton.getInstance().getClient().setView(this);
     }
 
@@ -62,9 +50,8 @@ public abstract class GameViewAC extends SurfaceView implements GameView,Surface
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
-
         //close Thread properly
-
+        /*
          if(AppSingleton.getInstance().isServer()) {
              AppSingleton.getInstance().getCurrenGameTread().setRunning(false);
             boolean retry = true;
@@ -78,10 +65,12 @@ public abstract class GameViewAC extends SurfaceView implements GameView,Surface
         }
 
         }
+        */
     }
 
     @Override
     public void draw(GameState gameState) {
+        System.out.println("GAMEVIEW DRAW");
         if(gameState.isGameOver()){
             gameOverAction(gameState);
             drawGameOver(gameState);

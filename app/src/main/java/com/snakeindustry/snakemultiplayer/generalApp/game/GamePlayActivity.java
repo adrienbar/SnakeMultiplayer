@@ -17,8 +17,12 @@ public class GamePlayActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        System.out.println("GAMEPLAY ");
         GameViewAC gameView = (GameViewAC) AppSingleton.getInstance().getCurrentGame().getGameView(this, null);
         setContentView(gameView);
+
+        System.out.println("GAMEPLAY "+gameView);
+
     }
 
     @Override

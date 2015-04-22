@@ -51,8 +51,6 @@ public class RoomServer {
 
     public void clean() {
 
-        this.setMessages(new ArrayList<String>());
-
         for (Socket s:getPlayersSocket().values()){
             if(s!=null){
                 boolean retry=true;
@@ -68,6 +66,7 @@ public class RoomServer {
 
         }
 
+        this.setMessages(new ArrayList<String>());
 
         this.setPlayersSocket(new HashMap<String, Socket>());
     }
@@ -155,29 +154,30 @@ public class RoomServer {
 
 
 
-    public void sendGameStateToAllClients(GameState gameState){
+    public void sendGameStateToAllClients(GameState gameState) {
         // System.out.println("GAMESTATE READY TO BE SENT");
-        for(String player : this.getDistantPlayers()){
+        for (String player : this.getDistantPlayers()) {
+
+            Socket s = getPlayersSocket().get(player);
+
             //   System.out.println("GAMESTATE READY TO BE SENT to "+player);
             ObjectOutputStream out = null;
+            if ((!s.isClosed()) && s.isConnected()) {
+
+            }
+
             try {
                 out = new ObjectOutputStream(this.getPlayersSocket().get(player).getOutputStream());
                 //   System.out.println("GAMESTATE READY TO BE SENT to "+player+"Soket ok");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            try {
                 out.writeObject(gameState);
                 //  System.out.println("GAMESTATE READY TO BE SENT to "+player+"Soket ok"+" Written");
                 out.flush();
-                //   System.out.println("GAMESTATE READY TO BE SENT to "+player+"Soket ok"+" Flush");
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            //System.out.println("GAMESTATE SENT");
         }
-
         ((LocalClientI) AppSingleton.getInstance().getClient()).receive(gameState);
-        //System.out.println("GAMESTATE SENT");
     }
 
 
@@ -188,31 +188,25 @@ public class RoomServer {
         HashMap<String,String> playersCommandes = new HashMap<>();
         // System.out.println("COMMANDS READY TO BE RECEIVED");
         for (String player : this.getDistantPlayers()){
-
+            Socket s=getPlayersSocket().get(player);
             //     System.out.println("COMMANDS READY TO BE RECEIVED from " +player);
             BufferedReader in = null;
             String command="";
-            try {
-                // in = new ObjectInputStream(this.getPlayersSocket().get(player).getInputStream());
 
-                in = new BufferedReader(new InputStreamReader(this.getPlayersSocket().get(player).getInputStream()));
+            if((!s.isClosed())&&s.isConnected()) {
+                try {
+                    // in = new ObjectInputStream(this.getPlayersSocket().get(player).getInputStream());
 
-                //  System.out.println("COMMANDS READY TO BE RECEIVED from " +player+ " inputStream ok");
-            } catch (IOException e) {
-                e.printStackTrace();
+                    in = new BufferedReader(new InputStreamReader(this.getPlayersSocket().get(player).getInputStream()));
+                    command =  in.readLine();
+                    //  System.out.println("COMMANDS READY TO BE RECEIVED from " +player+ " inputStream ok");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                playersCommandes.put(player,command);
             }
-            try {
-                // System.out.println("COMMANDS READY TO BE RECEIVED from " +player+ " ready to read");
-                command =  in.readLine();
-                //  System.out.println("COMMANDS READY TO BE RECEIVED from " +player+ " read !");
-
-            } catch (IOException e) {
-                e.printStackTrace();
             }
-
-            playersCommandes.put(player,command);
-
-        }
 
         playersCommandes.put(AppSingleton.getInstance().getPlayer().getName(),getLocalPlayerCommand());
         //  System.out.println("COMMANDS RECEIVED");
@@ -226,6 +220,14 @@ public class RoomServer {
     public synchronized void setLocalPlayerCommand(String localPlayerCommand) {
         this.localPlayerCommand = localPlayerCommand;
     }
+
+
+
+
+
+
+
+
 
 
 

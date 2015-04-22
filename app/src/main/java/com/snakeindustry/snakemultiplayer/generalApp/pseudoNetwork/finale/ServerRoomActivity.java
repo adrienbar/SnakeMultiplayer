@@ -38,6 +38,7 @@ public class ServerRoomActivity extends ActionBarActivity {
     private RoomServer roomServer;
     private ArrayAdapter adapter;
     private ListView playersListVew;
+    private SocketServerThread socketServerThread;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,13 +50,12 @@ public class ServerRoomActivity extends ActionBarActivity {
         infoip = (TextView) findViewById(R.id.infoip);
         infoip.setText(getIpAddress());
 
-
         msg = (TextView) findViewById(R.id.textView);
-
 
         playersListVew = (ListView) findViewById(R.id.playersListView);
         adapter=new ArrayAdapter(this,android.R.layout.simple_list_item_1,getRoomServer().getAllPlayer().toArray());
         playersListVew.setAdapter(adapter);
+
 
 
         Button start = (Button) findViewById(R.id.start);
@@ -72,11 +72,6 @@ public class ServerRoomActivity extends ActionBarActivity {
 
             }
         });
-
-
-
-        Thread socketServerThread = new Thread(new SocketServerThread(this));
-        socketServerThread.start();
     }
 
 
@@ -109,14 +104,43 @@ public class ServerRoomActivity extends ActionBarActivity {
     @Override
     public void onResume(){
         super.onResume();
-
         AppSingleton.getInstance().getRoomServer().clean();
+        if (roomServer!=null){
+            roomServer.clean();
+        }
+        AppSingleton.getInstance().setRoomServer(new RoomServer());
+        roomServer=AppSingleton.getInstance().getRoomServer();
+
+
+        if(socketServerThread!=null&&socketServerThread.isAlive()){
+            socketServerThread.setRunning(false);
+
+
+            boolean retry=true;
+            while (retry){
+
+                    System.out.println("try to joind thread");
+                    SocketServerThread socketServerThread1=socketServerThread;
+                    socketServerThread1.interrupt();
+                    retry=false;
+                    System.out.println("joind ok");
+
+            }
+        }
+        // socketServerThread = new Thread(new SocketServerThread(this));
+        //socketServerThread=new SocksocketServerThread=new SocketServerThread(this);etServerThread(this);
+
+
+        socketServerThread=new SocketServerThread(this);
+        socketServerThread.start();
+
+
+
         playersListVew= (ListView) findViewById(R.id.playersListView);
         adapter=new ArrayAdapter(this,android.R.layout.simple_list_item_1, AppSingleton.getInstance().getRoomServer().getAllPlayer());
         playersListVew.setAdapter(adapter);
 
         AppSingleton.getInstance().closeServerAndConnections();
-
 
     }
 
@@ -154,12 +178,8 @@ public class ServerRoomActivity extends ActionBarActivity {
     }
 
 
-    public void addPlayer(String name){
-        this.getRoomServer().addPlayer(name);
-        adapter.notifyDataSetChanged();
-    }
 
-    public RoomServer getRoomServer() {
+    public synchronized RoomServer getRoomServer() {
         return roomServer;
     }
 
@@ -175,7 +195,7 @@ public class ServerRoomActivity extends ActionBarActivity {
         this.info = info;
     }
 
-    public TextView getMsg() {
+    public synchronized TextView getMsg() {
         return msg;
     }
 
@@ -184,9 +204,10 @@ public class ServerRoomActivity extends ActionBarActivity {
     }
 
 
-    public void notifyAdapter(){
+    public synchronized void notifyAdapter(){
         ListView players= (ListView) findViewById(R.id.playersListView);
         adapter=new ArrayAdapter(this,android.R.layout.simple_list_item_1, AppSingleton.getInstance().getRoomServer().getAllPlayer());
         players.setAdapter(adapter);
+        System.out.println("CCCCCCCCC ADAPTER NOTIFIED");
     }
 }

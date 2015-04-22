@@ -18,12 +18,9 @@ public class SocketServerThread extends Thread {
     private ServerSocket serverSocket;
     private boolean running;
 
-    private String serverLog="";
-    private String name="";
     ServerRoomActivity parentActivity;
 
-    private PrintWriter out;
-    private BufferedReader in;
+
 
     private boolean roomOpen;
     private boolean startGame;
@@ -50,61 +47,10 @@ public class SocketServerThread extends Thread {
 
                 while (!startGame&& AppSingleton.getInstance().isServer()) {
                     Socket socket = serverSocket.accept();
-
                     AppSingleton.getInstance().getRoomServer().removeClosedSocket();
 
-                    out = new PrintWriter(socket.getOutputStream());
-                    in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-
-                    name=in.readLine();
-                    String game=in.readLine();
-                    System.out.println("SERVERTHREAD Read");
-
-
-                    String responseToClient="";
-                    serverLog=name+"@"+socket.getInetAddress()+" is connected";
-                    boolean canJoin=true;
-
-
-                    if(AppSingleton.getInstance().getRoomServer().getAllPlayer().contains(name)){
-                        canJoin=false;
-                        responseToClient="Sorry, username Already taken";
-                        serverLog=name+"@"+socket.getInetAddress()+"username already taken";
-                        if(AppSingleton.getInstance().getRoomServer().getDistantPlayers().contains(name)&&AppSingleton.getInstance().getRoomServer().getPlayersSocket().get(name).getInetAddress().equals(socket.getInetAddress())){
-                            responseToClient="You are already in !";
-                            serverLog=name+"@"+socket.getInetAddress()+"already in";
-                        }
-                    }
-
-                    if (!game.equals(AppSingleton.getInstance().getCurrentGame().getName())){
-                        canJoin=false;
-                        responseToClient="Sorry, the host wants to play "+AppSingleton.getInstance().getCurrentGame().getName() + " and not "+game;
-                        serverLog=name+"@"+socket.getInetAddress()+"would like to play"+game;
-                    }
-
-
-                    if(canJoin){
-                        if(AppSingleton.getInstance().getRoomServer().addSocket(name,socket)){
-                            responseToClient=RoomServer.START_COMMAND;
-
-                        }
-                        else{
-                            responseToClient="Sorry, the room is full";
-                        }
-                    }
-
-                    System.out.println("SERVERTHREAD ready to send "+responseToClient);
-
-                    out.println(responseToClient);
-                    out.flush();
-                    System.out.println("SERVERTHREAD flushed");
-
-
-                    //retrieveInformationFromSocket(socket);
-                    this.run();
-                    updateParentActivity();
-                    // respondToClient(socket);
-
+                    NewConnection newConnection = new NewConnection(parentActivity,socket);
+                    newConnection.run();
                 }
 
 
@@ -120,16 +66,6 @@ public class SocketServerThread extends Thread {
 
 
 
-    private void updateParentActivity() {
-        parentActivity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                parentActivity.getMsg().setText(serverLog);
-                parentActivity.notifyAdapter();
-            }
-        });
-
-    }
 
 
     public boolean isRunning() {

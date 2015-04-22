@@ -26,7 +26,6 @@ public class LocalClient implements LocalClientI {
         this.lastGameState=gameState;
 if (gameView!=null){
     this.gameView.draw(gameState);
-
 }
         else {
     System.out.println("VIEW NULL !!!!");
