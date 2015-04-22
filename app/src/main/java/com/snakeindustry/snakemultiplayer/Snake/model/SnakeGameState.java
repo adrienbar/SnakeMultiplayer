@@ -323,6 +323,10 @@ public class SnakeGameState extends GameState {
             s.getState().moveCurrentDirectionSpeed();
         }
         //update collisions
+
+        List<Snake> tobeDeleted =new ArrayList<>();
+
+
         for(Snake s : snakes){
             if(s.getState().collisionManagement(snakes)==true){
 
@@ -333,9 +337,13 @@ public class SnakeGameState extends GameState {
                     }
                 }
 
-                snakes.remove(s);
+                tobeDeleted.add(s);
+                //snakes.remove(s);
 
             }
+        }
+        for(Snake s : tobeDeleted){
+            snakes.remove(s);
         }
         checkFood();
         checkBonuses();

@@ -13,15 +13,11 @@ public class ReverseState extends State{
 
         super(body,width,length);
 
-
-
     }
 
     public ReverseState (double width, double length){
 
         super(width,length);
-
-
 
     }
 
