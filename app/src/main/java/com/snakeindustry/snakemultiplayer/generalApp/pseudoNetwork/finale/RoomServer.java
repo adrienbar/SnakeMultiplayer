@@ -213,6 +213,14 @@ public class RoomServer {
         return playersCommandes;
     }
 
+
+
+
+
+
+
+
+
     public synchronized String getLocalPlayerCommand() {
         return localPlayerCommand;
     }

@@ -36,7 +36,7 @@ public class NewConnection extends Thread {
 
             name=in.readLine();
             String game=in.readLine();
-            System.out.println("CCCCCCC Read");
+
 
 
             String responseToClient="";
@@ -71,18 +71,15 @@ public class NewConnection extends Thread {
                 }
             }
 
-            System.out.println("CCCCCCCCCCC ready to send "+responseToClient);
-
             out.println(responseToClient);
             out.flush();
-            System.out.println("CCCCCCCCC flushed");
+
 
             parentActivity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     parentActivity.getMsg().setText(serverLog);
                     parentActivity.notifyAdapter();
-                    System.out.println("CCCCCCCCC notify");
                 }
             });
         }

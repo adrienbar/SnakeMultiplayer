@@ -208,6 +208,5 @@ public class ServerRoomActivity extends ActionBarActivity {
         ListView players= (ListView) findViewById(R.id.playersListView);
         adapter=new ArrayAdapter(this,android.R.layout.simple_list_item_1, AppSingleton.getInstance().getRoomServer().getAllPlayer());
         players.setAdapter(adapter);
-        System.out.println("CCCCCCCCC ADAPTER NOTIFIED");
     }
 }
