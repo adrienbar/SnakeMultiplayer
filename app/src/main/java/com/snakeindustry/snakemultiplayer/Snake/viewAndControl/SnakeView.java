@@ -66,36 +66,36 @@ public abstract class SnakeView extends GameViewAC implements SurfaceHolder.Call
 
         //SHOULD NOT BE THERE, just for testing
         gameOverAction(gameState);
-        //
+
 
 
        Canvas canvas = this.getHolder().lockCanvas();
 
+        if(canvas!=null){
 
-       // while ()
-
-        drawBackground(canvas);
-        Paint paintScore=new Paint();
-        paintScore.setTextAlign(Paint.Align.CENTER);
-        paintScore.setTextSize(50);
-        paintScore.setColor(Color.BLUE);
-
-
-        double y0=this.getHeight()*0.25;
-        double dy=0.10*this.getHeight();
-        int i=1;
-        canvas.drawText("GAME OVER",this.getWidth()/2,(float) (y0),paintScore);
-        paintScore.setTextSize(40);
+            drawBackground(canvas);
+            Paint paintScore=new Paint();
+            paintScore.setTextAlign(Paint.Align.CENTER);
+            paintScore.setTextSize(50);
+            paintScore.setColor(Color.BLUE);
 
 
+            double y0=this.getHeight()*0.25;
+            double dy=0.10*this.getHeight();
+            int i=1;
+            canvas.drawText("GAME OVER",this.getWidth()/2,(float) (y0),paintScore);
+            paintScore.setTextSize(40);
 
-        for(String playerName: gameState.getPlayers()){
-            String text=playerName+" "+gameState.getScore(playerName);
-            canvas.drawText(text,this.getWidth()/2,(float) (y0+i*dy),paintScore);
-            i++;
+            for(String playerName: gameState.getPlayers()){
+                String text=playerName+" "+gameState.getScore(playerName);
+                canvas.drawText(text,this.getWidth()/2,(float) (y0+i*dy),paintScore);
+                i++;
+            }
+
+            this.getHolder().unlockCanvasAndPost(canvas);
         }
 
-        this.getHolder().unlockCanvasAndPost(canvas);
+
 
     }
 
@@ -110,35 +110,37 @@ public abstract class SnakeView extends GameViewAC implements SurfaceHolder.Call
 
         Canvas canvas = this.getHolder().lockCanvas();
 
-        this.drawBackground(canvas);
 
-        SnakeGameState snakeGameState=(SnakeGameState) gameState;
+        if(canvas!=null){
+            this.drawBackground(canvas);
 
-        //FOOD
-        if(snakeGameState.getSpawnedFood()!=null){
-            for(Food food : snakeGameState.getSpawnedFood()){
-                this.drawEatableObject(food,canvas);
-            }
-        }
+            SnakeGameState snakeGameState=(SnakeGameState) gameState;
 
-        //BONUS
-        if(snakeGameState.getSpawnedBonuses()!=null){
-            for(SnakeBonus snakeBonus: snakeGameState.getSpawnedBonuses()){
-                this.drawBonus(snakeBonus,canvas);
-            }
-        }
-
-        //SNAKES
-        if(snakeGameState.getSnakes()!=null) {
-            for (String playerName : snakeGameState.getPlayersSnakes().keySet()) {
-                Snake snake=snakeGameState.getPlayersSnakes().get(playerName);
-                if(((SnakeGameState) gameState).getSnakes().contains(snake)){
-                    this.drawSnake(snake,canvas,playerName);
+            //FOOD
+            if(snakeGameState.getSpawnedFood()!=null){
+                for(Food food : snakeGameState.getSpawnedFood()){
+                    this.drawEatableObject(food,canvas);
                 }
             }
-        }
 
-        //Score
+            //BONUS
+            if(snakeGameState.getSpawnedBonuses()!=null){
+                for(SnakeBonus snakeBonus: snakeGameState.getSpawnedBonuses()){
+                    this.drawBonus(snakeBonus,canvas);
+                }
+            }
+
+            //SNAKES
+            if(snakeGameState.getSnakes()!=null) {
+                for (String playerName : snakeGameState.getPlayersSnakes().keySet()) {
+                    Snake snake=snakeGameState.getPlayersSnakes().get(playerName);
+                    if(((SnakeGameState) gameState).getSnakes().contains(snake)){
+                        this.drawSnake(snake,canvas,playerName);
+                    }
+                }
+            }
+
+            //Score
             Paint paintText = new Paint();
             paintText.setColor(Color.BLACK);
             //paintText.setTextSize(100);
@@ -147,19 +149,27 @@ public abstract class SnakeView extends GameViewAC implements SurfaceHolder.Call
             paintText.setTextScaleX(2);
             String score="Your Score : "+snakeGameState.getScore(AppSingleton.getInstance().getPlayer().getName());
             canvas.drawText(score,this.getWidth()/2,(float) (0.05*this.getHeight()),paintText);
-        //Loose
+            //Loose
 
-       if(!snakeGameState.getSnakes().contains(snakeGameState.getPlayersSnakes().get(AppSingleton.getInstance().getPlayer().getName()))){
-           Paint paintLost = new Paint();
-           paintLost.setColor(Color.RED);
-           paintLost.setTextSize(50);
-           paintLost.setTextAlign(Paint.Align.CENTER);
-           //paintLost.setTextScaleX(7);
-           String lost="YOU LOST";
-           canvas.drawText(lost,this.getWidth()/2,this.getHeight()/2,paintLost);
-       }
+            if(!snakeGameState.getSnakes().contains(snakeGameState.getPlayersSnakes().get(AppSingleton.getInstance().getPlayer().getName()))){
+                Paint paintLost = new Paint();
+                paintLost.setColor(Color.RED);
+                paintLost.setTextSize(50);
+                paintLost.setTextAlign(Paint.Align.CENTER);
+                //paintLost.setTextScaleX(7);
+                String lost="YOU LOST";
+                canvas.drawText(lost,this.getWidth()/2,this.getHeight()/2,paintLost);
+            }
 
-        this.getHolder().unlockCanvasAndPost(canvas);
+            this.getHolder().unlockCanvasAndPost(canvas);
+        }
+
+        else {
+            System.out.println("CANVAS NULL");
+        }
+
+
+
 
     }
 
