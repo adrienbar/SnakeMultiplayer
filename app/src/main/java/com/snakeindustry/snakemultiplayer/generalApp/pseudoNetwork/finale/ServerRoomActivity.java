@@ -80,6 +80,9 @@ public class ServerRoomActivity extends ActionBarActivity {
     }
 
 
+
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -111,6 +114,8 @@ public class ServerRoomActivity extends ActionBarActivity {
         playersListVew= (ListView) findViewById(R.id.playersListView);
         adapter=new ArrayAdapter(this,android.R.layout.simple_list_item_1, AppSingleton.getInstance().getRoomServer().getAllPlayer());
         playersListVew.setAdapter(adapter);
+
+        AppSingleton.getInstance().closeServerAndConnections();
 
 
     }

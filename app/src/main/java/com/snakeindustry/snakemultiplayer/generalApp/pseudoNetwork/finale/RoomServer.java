@@ -52,6 +52,23 @@ public class RoomServer {
     public void clean() {
 
         this.setMessages(new ArrayList<String>());
+
+        for (Socket s:getPlayersSocket().values()){
+            if(s!=null){
+                boolean retry=true;
+                while (retry&!s.isClosed()){
+                    try {
+                        s.close();
+                        retry=false;
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+        }
+
+
         this.setPlayersSocket(new HashMap<String, Socket>());
     }
 

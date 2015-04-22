@@ -9,14 +9,17 @@ import com.snakeindustry.snakemultiplayer.generalApp.game.Game;
 import com.snakeindustry.snakemultiplayer.generalApp.game.GameThread;
 import com.snakeindustry.snakemultiplayer.generalApp.player.DefaultPlayer;
 import com.snakeindustry.snakemultiplayer.generalApp.player.Player;
+import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.SocketServerThread;
 import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.client.Client;
 import com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.RoomServer;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +42,7 @@ public class AppSingleton {
     private GameThread currenGameTread;
     private Client client;
     private RoomServer roomServer;
+    private SocketServerThread socketServerThread;
   //  private PlayerDAO db;
 
     //APPLICATION'S PARAMETERS
@@ -52,6 +56,7 @@ public class AppSingleton {
         this.currenGameTread=null;
         this.client=null;
         this.roomServer=null;
+        this.socketServerThread=null;
 
         System.out.println("INITIALISATION ok");
         //System.out.println("AAAAAAAA "+this.getAvailabeGames());
@@ -238,4 +243,50 @@ public class AppSingleton {
     public void setRoomServer(RoomServer roomServer) {
         this.roomServer = roomServer;
     }
+
+
+    public void closeServerAndConnections() {
+        if(socketServerThread!=null){
+
+            boolean retry=true;
+            socketServerThread.setRunning(false);
+            while (retry){
+                try {
+                    socketServerThread.join();
+                    retry=false;
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            //close sockets
+            this.getRoomServer().clean();
+
+            //serverSocket
+            retry=true;
+            while (retry){
+                try {
+                    socketServerThread.getServerSocket().close();
+                    retry=false;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+
+
+
+
+
+
+
+
+
+
+        }
+
+
+    }
+
 }

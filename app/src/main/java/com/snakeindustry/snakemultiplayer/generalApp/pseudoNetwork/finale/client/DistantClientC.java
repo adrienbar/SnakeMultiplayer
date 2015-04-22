@@ -35,7 +35,6 @@ public class DistantClientC extends Thread implements DistantClientI {
         ArrayList a = new ArrayList<String>();
         a.add(AppSingleton.getInstance().getPlayer().getName());
 
-
         AppSingleton.getInstance().getCurrentGame().getGameState().configure(a);
         lastGameState=AppSingleton.getInstance().getCurrentGame().getGameState();
         running=true;
@@ -141,19 +140,36 @@ public class DistantClientC extends Thread implements DistantClientI {
 
 
     public void end() {
-        try {
-            if(getSocket()!=null){
-                getSocket().close();
-            }
+        this.setRunning(false);
 
-        } catch (IOException e) {
-            e.printStackTrace();
+        boolean retry=true;
+
+        while (retry){
+            try {
+                this.join();
+                retry=false;
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
-        try {
-            this.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
+        retry=true;
+          while (retry){
+              try {
+                  if(getSocket()!=null){
+                      getSocket().close();
+                      retry=false;
+                  }
+                  else {
+                      retry=false;
+                  }
+              } catch (IOException e) {
+                  e.printStackTrace();
+              }
+
+          }
+
+
 
     }
 

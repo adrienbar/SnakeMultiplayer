@@ -30,7 +30,7 @@ public class MyClientTask extends AsyncTask<Void,Void,Void> {
 
     MyClientTask(String addr, int port,ClientConnectActivity clientConnectActivity){
         dstAddress = addr;
-        dstPort = SocketServerThread.SocketServerPORT;
+        dstPort = port;
         this.clientConnectActivity = clientConnectActivity;
     }
 
@@ -39,35 +39,40 @@ public class MyClientTask extends AsyncTask<Void,Void,Void> {
     @Override
     protected Void doInBackground(Void... arg0) {
 
+        boolean hostOk=true;
         try {
             socket = new Socket(dstAddress, dstPort);
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+            response=e.getMessage();
+            hostOk=false;
+        } catch (IOException e) {
+            e.printStackTrace();
+            response=e.getMessage();
+            hostOk=false;
+        }
 
-            System.out.println("MY CLIENT TASK "+dstAddress+":"+dstPort);
+        if(hostOk){
+            try {
+                out = new PrintWriter(socket.getOutputStream());
+                in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                System.out.println("MY CLIENT TASK in-out");
+                out.println(AppSingleton.getInstance().getPlayer().getName());
+                out.println(AppSingleton.getInstance().getCurrentGame().getName());
+                out.flush();
+                System.out.println("MY CLIENT TASK out");
 
-            out = new PrintWriter(socket.getOutputStream());
-            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-
-
-            out.println(AppSingleton.getInstance().getPlayer().getName());
-            out.println(AppSingleton.getInstance().getCurrentGame().getName());
-            out.flush();
-
-            response=in.readLine();
-            System.out.println("MY CLIENT TASK "+response);
-
-            if(response.equals(RoomServer.START_COMMAND)){
-                DistantClientC dc= new DistantClientC(socket);
-                dc.start();
-                AppSingleton.getInstance().setClient(new DistantClientC(socket));
+               // clientConnectActivity.textResponse.setText("Request sent, waiting for server response");
+                response=in.readLine();
+                System.out.println("MY CLIENT TASK "+response);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
 
 
-
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+
+
         return null;
     }
 
@@ -76,7 +81,9 @@ public class MyClientTask extends AsyncTask<Void,Void,Void> {
     @Override
     protected void onPostExecute(Void result) {
         super.onPostExecute(result);
-        clientConnectActivity.textResponse.setText(response);
         clientConnectActivity.setSocket(socket);
+        clientConnectActivity.textResponse.setText(response);
+
+
     }
 }

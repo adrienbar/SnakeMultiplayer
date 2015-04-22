@@ -3,6 +3,8 @@ package com.snakeindustry.snakemultiplayer.generalApp.pseudoNetwork.finale.clien
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -59,6 +61,29 @@ public class ClientConnectActivity extends ActionBarActivity {
             }});
 
 
+        textResponse.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(s.toString().equals(RoomServer.START_COMMAND)){
+                    DistantClientC dc= new DistantClientC(socket);
+                    AppSingleton.getInstance().setClient(dc);
+                    dc.start();
+                    ClientConnectActivity.this.startActivity(new Intent(ClientConnectActivity.this, GamePlayActivity.class));
+                }
+
+            }
+        });
+
 
 
     }
@@ -69,6 +94,9 @@ public class ClientConnectActivity extends ActionBarActivity {
                 @Override
                 public void onClick(View arg0) {
 
+
+
+                    /*
                     System.out.println("MY CLIENT TASK clik");
 
                     PrintWriter out;
@@ -114,18 +142,29 @@ public class ClientConnectActivity extends ActionBarActivity {
 
 
                     /*
-
-
+*/
 
                     myClientTask = new MyClientTask(
                             editTextAddress.getText().toString(),
                             Integer.parseInt(editTextPort.getText().toString()),
-                    ClientRealActivityCopy.this);
+                    ClientConnectActivity.this);
                     myClientTask.execute();
-*/
+
                 }};
 
 
+
+public void onResume(){
+    super.onResume();
+    if(AppSingleton.getInstance().getClient() instanceof DistantClientC){
+        ((DistantClientC) AppSingleton.getInstance().getClient()).end();
+    }
+
+    if(((DistantClientC) AppSingleton.getInstance().getClient()).isAlive()){
+        ((DistantClientC) AppSingleton.getInstance().getClient()).end();
+    }
+
+}
 
 
     public TextView getTextResponse() {
