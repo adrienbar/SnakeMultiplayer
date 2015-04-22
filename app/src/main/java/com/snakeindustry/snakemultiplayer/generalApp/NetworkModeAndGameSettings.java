@@ -50,8 +50,10 @@ public class NetworkModeAndGameSettings extends ActionBarActivity {
 
                 AppSingleton.getInstance().setServer(true);
                 AppSingleton.getInstance().setCurrenGameTread(new GameThread());
+                AppSingleton.getInstance().setRoomServer(new RoomServer());
+                AppSingleton.getInstance().setClient(new LocalClient(null,AppSingleton.getInstance().getCurrentGame().getGameState()));
 
-                Intent myIntent = new Intent(v.getContext(), RoomActivity.class);
+                Intent myIntent = new Intent(v.getContext(), ServerRoomActivity.class);
                 v.getContext().startActivity(myIntent);
             }
         });
@@ -63,43 +65,13 @@ public class NetworkModeAndGameSettings extends ActionBarActivity {
 
                 AppSingleton.getInstance().setServer(false);
                 AppSingleton.getInstance().setCurrenGameTread(new GameThread());
-
-                Intent myIntent = new Intent(v.getContext(), RoomActivityClient.class);
-                v.getContext().startActivity(myIntent);
-            }
-        });
-
-
-
-        Button serverTest = (Button) findViewById(R.id.testServer);
-        serverTest.setText("ServerTEST");
-        serverTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                AppSingleton.getInstance().setServer(true);
-                AppSingleton.getInstance().setCurrenGameTread(new GameThread());
-                AppSingleton.getInstance().setRoomServer(new RoomServer());
-                AppSingleton.getInstance().setClient(new LocalClient(null,AppSingleton.getInstance().getCurrentGame().getGameState()));
-
-                Intent myIntent = new Intent(v.getContext(), ServerRoomActivity.class);
-                v.getContext().startActivity(myIntent);
-            }
-        });
-
-        Button clientTest = (Button) findViewById(R.id.testClient);
-        clientTest.setText("ClientTEST");
-        clientTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                AppSingleton.getInstance().setServer(false);
-                AppSingleton.getInstance().setCurrenGameTread(new GameThread());
                 AppSingleton.getInstance().setClient(new DistantClientC());
                 Intent myIntent = new Intent(v.getContext(), ClientConnectActivity.class);
                 v.getContext().startActivity(myIntent);
             }
         });
+
+
 
     }
 
@@ -110,6 +82,7 @@ public class NetworkModeAndGameSettings extends ActionBarActivity {
         TextView bestScore = (TextView) findViewById(R.id.bestScore);
         SimpleStats bestScore1 = AppSingleton.getInstance().getPlayer().getStats().getStatsForOneGame(AppSingleton.getInstance().getCurrentGame()).getBestScore();
         bestScore.setText(bestScore1.getDescription() + " " + bestScore1.getValue() + " "+ bestScore1.getUnit());
+        AppSingleton.getInstance().getCurrentGame().resetGameState();
     }
 
     @Override

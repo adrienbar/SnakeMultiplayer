@@ -43,6 +43,8 @@ public class AppSingleton {
     private Client client;
     private RoomServer roomServer;
     private SocketServerThread socketServerThread;
+
+    private String lasteIP="";
   //  private PlayerDAO db;
 
     //APPLICATION'S PARAMETERS
@@ -275,18 +277,16 @@ public class AppSingleton {
             }
 
 
-
-
-
-
-
-
-
-
-
         }
 
 
     }
 
+    public String getLasteIP() {
+        return lasteIP;
+    }
+
+    public void setLasteIP(String lasteIP) {
+        this.lasteIP = lasteIP;
+    }
 }

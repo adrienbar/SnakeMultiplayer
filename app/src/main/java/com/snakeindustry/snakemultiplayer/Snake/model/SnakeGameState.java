@@ -154,10 +154,10 @@ public class SnakeGameState extends GameState {
                     else if(sb.getTarget()== target.all){
 
                         for (Snake targeted : snakes) {
-                              sb.getState().setBody(targeted.getState().getBody());
-                              sb.getState().setCurrentDirection(targeted.getState().getCurrentDirection());
-                              targeted.setState(sb.getState());
-                             // targets.add(s.getPlayer());
+                            sb.getState().setBody(targeted.getState().getBody());
+                            sb.getState().setCurrentDirection(targeted.getState().getCurrentDirection());
+                            targeted.setState(sb.getState());
+                            targets.add(s.getPlayer());
                         }
                         timer=new Timer();
                         timer.schedule(new CancelBonusTask(targets,sb), sb.getDuration() * 1000);
@@ -168,7 +168,7 @@ public class SnakeGameState extends GameState {
                                 sb.getState().setBody(targeted.getState().getBody());
                                 sb.getState().setCurrentDirection(targeted.getState().getCurrentDirection());
                                 targeted.setState(sb.getState());
-                                //targets.add(s.getPlayer());
+                                targets.add(s.getPlayer());
                             }
                         }
                         timer=new Timer();

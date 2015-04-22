@@ -8,6 +8,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.snakeindustry.snakemultiplayer.R;
@@ -32,7 +33,7 @@ public class ClientConnectActivity extends ActionBarActivity {
 
 
     TextView textResponse;
-    EditText editTextAddress, editTextPort;
+    EditText editTextAddress;
 
 
     Button buttonConnect, buttonClear;
@@ -45,9 +46,7 @@ public class ClientConnectActivity extends ActionBarActivity {
         setContentView(R.layout.activity_client_real);
 
         editTextAddress = (EditText)findViewById(R.id.address);
-        editTextAddress.setText("192.168.56.101");
-        editTextPort = (EditText)findViewById(R.id.port);
-        editTextPort.setText(""+ SocketServerThread.SocketServerPORT);
+        editTextAddress.setText(AppSingleton.getInstance().getLasteIP());
         buttonConnect = (Button)findViewById(R.id.connect);
         buttonClear = (Button)findViewById(R.id.clear);
         textResponse = (TextView)findViewById(R.id.response);
@@ -84,7 +83,11 @@ public class ClientConnectActivity extends ActionBarActivity {
             }
         });
 
+        TextView gameTitle = (TextView) findViewById(R.id.titlenetworkandsettings);
+        gameTitle.setText(AppSingleton.getInstance().getCurrentGame().getName());
 
+        ImageView gameIcon =  (ImageView) findViewById((R.id.gameiconnetworkandsettings));
+        gameIcon.setImageResource(AppSingleton.getInstance().getCurrentGame().getIdIcon());
 
     }
 
@@ -146,7 +149,7 @@ public class ClientConnectActivity extends ActionBarActivity {
 
                     myClientTask = new MyClientTask(
                             editTextAddress.getText().toString(),
-                            Integer.parseInt(editTextPort.getText().toString()),
+                            SocketServerThread.SocketServerPORT,
                     ClientConnectActivity.this);
                     myClientTask.execute();
 

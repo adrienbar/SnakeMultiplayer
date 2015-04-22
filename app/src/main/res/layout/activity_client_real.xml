@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,36 +9,77 @@
     android:orientation="vertical"
     tools:context=".MainActivity" >
 
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:autoLink="web"
-        android:text="http://android-er.blogspot.com/"
-        android:textStyle="bold" />
+        android:layout_marginTop="5dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/linearLayout">
+        <ImageView
+            android:id="@+id/gameiconnetworkandsettings"
+
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="10dp" >
+
+        </ImageView>
+        <TextView
+            android:id="@+id/titlenetworkandsettings"
+            android:text="game's title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:textColor="@color/material_blue_grey_900">
+        </TextView>
+    </LinearLayout>
+
+
     <EditText
         android:id="@+id/address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="dstAddress" />
-    <EditText
-        android:id="@+id/port"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="dstPort" />
+        android:hint="dstAddress"
+        android:layout_below="@+id/linearLayout"
+        android:layout_marginTop="139dp"
+        android:text="IP adress of the server" />
+
     <Button
         android:id="@+id/connect"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Connect..."/>
+        android:text="Connect..."
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/response"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/clear"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
     <Button
         android:id="@+id/clear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Clear"/>
-    <TextView
-        android:id="@+id/response"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:text="Medium Text"
+        android:layout_below="@+id/connect"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
-</LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Connexion"
+        android:id="@+id/textView2"
+        android:layout_below="@+id/linearLayout"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

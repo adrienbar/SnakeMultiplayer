@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -55,6 +56,13 @@ public class ServerRoomActivity extends ActionBarActivity {
         playersListVew = (ListView) findViewById(R.id.playersListView);
         adapter=new ArrayAdapter(this,android.R.layout.simple_list_item_1,getRoomServer().getAllPlayer().toArray());
         playersListVew.setAdapter(adapter);
+
+
+        TextView gameTitle = (TextView) findViewById(R.id.titlenetworkandsettings);
+        gameTitle.setText(AppSingleton.getInstance().getCurrentGame().getName());
+
+        ImageView gameIcon =  (ImageView) findViewById((R.id.gameiconnetworkandsettings));
+        gameIcon.setImageResource(AppSingleton.getInstance().getCurrentGame().getIdIcon());
 
 
 
@@ -208,5 +216,6 @@ public class ServerRoomActivity extends ActionBarActivity {
         ListView players= (ListView) findViewById(R.id.playersListView);
         adapter=new ArrayAdapter(this,android.R.layout.simple_list_item_1, AppSingleton.getInstance().getRoomServer().getAllPlayer());
         players.setAdapter(adapter);
+        System.out.println("ADAPTER NOTIFIED");
     }
 }

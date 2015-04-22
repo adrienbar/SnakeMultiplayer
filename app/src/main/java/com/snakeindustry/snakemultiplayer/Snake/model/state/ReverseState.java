@@ -20,7 +20,6 @@ public class ReverseState extends State{
     }
 
     public void turnRight(){
-
         super.turnLeft();
     }
 

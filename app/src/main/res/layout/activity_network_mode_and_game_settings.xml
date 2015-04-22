@@ -46,8 +46,8 @@
         android:layout_height="wrap_content"
         android:drawablePadding="16dp"
         android:layout_above="@+id/joinagame"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:id="@+id/joinagame"
@@ -57,31 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawablePadding="6dp"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <Button
-        android:id="@+id/testServer"
-        android:text="Test server"
-        android:drawableLeft="@drawable/ic_action_arrow_right"
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawablePadding="6dp"
-        android:layout_below="@+id/joinagame"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        android:id="@+id/testClient"
-        android:text="Test client"
-        android:drawableLeft="@drawable/ic_action_arrow_right"
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawablePadding="6dp"
-        android:layout_above="@+id/statsbutton"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -93,9 +69,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawablePadding="16dp"
-        android:layout_above="@+id/settings"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 
     <Button
@@ -106,9 +82,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawablePadding="16dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_below="@+id/statsbutton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"

@@ -23,6 +23,15 @@ public abstract class SnakeBonus extends EatableObject implements Serializable {
         this.state=state;
         this.id=UUID.randomUUID();
         this.duration=5;
+
+        int i = (int) (Math.random()* 2);
+        switch (i){
+           // case 0:this.target= target.all;break;
+            case 0:this.target= target.self;break;
+            case 1:this.target= target.others;break;
+             default:this.target= target.self;
+
+        }
     }
 
     public static SnakeBonus SnakeBonusFactory (String name, double x, double y, double width, double height){

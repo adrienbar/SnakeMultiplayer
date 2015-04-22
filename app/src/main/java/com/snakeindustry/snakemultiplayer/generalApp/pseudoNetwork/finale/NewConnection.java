@@ -37,8 +37,6 @@ public class NewConnection extends Thread {
             name=in.readLine();
             String game=in.readLine();
 
-
-
             String responseToClient="";
             serverLog=name+"@"+socket.getInetAddress()+" is connected";
             boolean canJoin=true;

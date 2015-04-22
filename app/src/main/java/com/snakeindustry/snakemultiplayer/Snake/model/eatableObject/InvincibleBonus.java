@@ -13,7 +13,7 @@ public class InvincibleBonus extends SnakeBonus {
 
     public InvincibleBonus(double x, double y, double width, double height){
         super(x, y, width, height,new InvincibleState(width,height));
-        this.target=target.self;
+       this.target=target.self;
 
     }
 
