@@ -154,10 +154,10 @@ public class SnakeGameState extends GameState {
                     else if(sb.getTarget()== target.all){
 
                         for (Snake targeted : snakes) {
-                              sb.getState().setBody(s.getState().getBody());
-                              sb.getState().setCurrentDirection(s.getState().getCurrentDirection());
+                              sb.getState().setBody(targeted.getState().getBody());
+                              sb.getState().setCurrentDirection(targeted.getState().getCurrentDirection());
                               targeted.setState(sb.getState());
-                              targets.add(s.getPlayer());
+                             // targets.add(s.getPlayer());
                         }
                         timer=new Timer();
                         timer.schedule(new CancelBonusTask(targets,sb), sb.getDuration() * 1000);
@@ -165,10 +165,10 @@ public class SnakeGameState extends GameState {
                     else if(sb.getTarget()== target.others){
                         for (Snake targeted : snakes) {
                             if(!targeted.equals(s)) {
-                                sb.getState().setBody(s.getState().getBody());
-                                sb.getState().setCurrentDirection(s.getState().getCurrentDirection());
+                                sb.getState().setBody(targeted.getState().getBody());
+                                sb.getState().setCurrentDirection(targeted.getState().getCurrentDirection());
                                 targeted.setState(sb.getState());
-                                targets.add(s.getPlayer());
+                                //targets.add(s.getPlayer());
                             }
                         }
                         timer=new Timer();
@@ -367,7 +367,6 @@ public class SnakeGameState extends GameState {
     private void performeActionCode(Snake snake,String commande) {
         if(commande!=null) {
             switch (commande) {
-
                 case SNAKE_GO_DOWN: snake.getState().moveDown();break;
                 case SNAKE_GO_UP: snake.getState().moveUp();break;
                 case SNAKE_GO_RIGHT: snake.getState().moveRight();break;
